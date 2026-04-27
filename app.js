@@ -107,6 +107,11 @@
   $meta.textContent = `Last updated: ${formatDate(META.last_updated)} · Polling window: ${META.polling_window} · ${PRED.election.total_seats.toLocaleString("en-GB")} seats up across ${PRED.election.councils} councils`;
   $version.textContent = META.data_version;
 
+  const $scopeNote = document.getElementById("scope-note");
+  if ($scopeNote && PRED.election.scope) {
+    $scopeNote.innerHTML = `<strong>Scope:</strong> ${escape(PRED.election.scope)} <em>${escape(PRED.election.national_note || "")}</em>`;
+  }
+
   // ---- Chart ----
 
   function buildChart() {

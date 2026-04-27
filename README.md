@@ -22,6 +22,17 @@ The site is fully static. Open `index.html` directly from the file system (`file
 
 ---
 
+## Scope
+
+The dataset covers the **5,066 principal-authority council seats** contested across 136 English local authorities on 7 May 2026.
+
+**Out of scope (not in the figures):**
+- The 6 directly-elected English mayoralties on the same day (e.g. Tower Hamlets, Hackney, Lewisham, Newham, Watford, Bedford).
+- The 2 council by-elections in Wales.
+- Any parish / town council contests held alongside.
+
+**National vs regional reconciliation.** The site shows six views: National (England) plus five regions (London, South, Midlands, North, East). The National column is computed as the **sum of the five regional projections** so every view reconciles. As a result, the National central for a given method may sit a few percent above or below that forecaster's published aggregate headline. The published aggregate is linked from each method card.
+
 ## What it shows
 
 - **Interactive grouped bar chart** of seats predicted by each method, per party.

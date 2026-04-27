@@ -7,7 +7,9 @@ window.UKE_DATA = {
       "total_seats": 5066,
       "councils": 136,
       "wards": 2969,
-      "country": "England (with 2 by-elections in Wales)"
+      "country": "England (with 2 by-elections in Wales)",
+      "scope": "Principal-authority council seats only. Excludes the 6 directly-elected mayoralties in England, the 2 Welsh council by-elections, and any parish/town council contests held the same day.",
+      "national_note": "National (England) figures are the sum of the five regional projections, so totals reconcile across views. They may differ by a few percent from each forecaster's published aggregate headline."
     },
     "parties": [
       {
@@ -234,34 +236,34 @@ window.UKE_DATA = {
       "ELECTIONS_ETC": {
         "NAT": {
           "LAB": {
-            "low": 230,
-            "central": 296,
-            "high": 380
+            "low": 620,
+            "central": 775,
+            "high": 955
           },
           "CON": {
-            "low": 80,
-            "central": 124,
-            "high": 180
+            "low": 185,
+            "central": 285,
+            "high": 415
           },
           "LD": {
-            "low": 780,
-            "central": 863,
-            "high": 960
+            "low": 720,
+            "central": 875,
+            "high": 1070
           },
           "GRN": {
-            "low": 480,
+            "low": 460,
             "central": 600,
-            "high": 720
+            "high": 770
           },
           "REF": {
-            "low": 2050,
-            "central": 2310,
-            "high": 2580
+            "low": 1620,
+            "central": 1950,
+            "high": 2280
           },
           "OTH": {
-            "low": 770,
-            "central": 873,
-            "high": 980
+            "low": 480,
+            "central": 581,
+            "high": 705
           }
         },
         "LDN": {
@@ -428,34 +430,34 @@ window.UKE_DATA = {
       "POLLCHECK_MC": {
         "NAT": {
           "LAB": {
-            "low": 280,
-            "central": 380,
-            "high": 480
+            "low": 726,
+            "central": 920,
+            "high": 1135
           },
           "CON": {
-            "low": 180,
-            "central": 250,
-            "high": 340
+            "low": 360,
+            "central": 495,
+            "high": 660
           },
           "LD": {
-            "low": 650,
-            "central": 770,
-            "high": 920
+            "low": 665,
+            "central": 820,
+            "high": 990
           },
           "GRN": {
-            "low": 350,
-            "central": 480,
-            "high": 620
+            "low": 385,
+            "central": 520,
+            "high": 690
           },
           "REF": {
-            "low": 1750,
-            "central": 2080,
-            "high": 2400
+            "low": 1355,
+            "central": 1680,
+            "high": 2015
           },
           "OTH": {
-            "low": 950,
-            "central": 1106,
-            "high": 1250
+            "low": 528,
+            "central": 631,
+            "high": 755
           }
         },
         "LDN": {
@@ -622,34 +624,34 @@ window.UKE_DATA = {
       "YOUGOV_MRP": {
         "NAT": {
           "LAB": {
-            "low": 280,
-            "central": 420,
-            "high": 560
+            "low": 601,
+            "central": 880,
+            "high": 1190
           },
           "CON": {
-            "low": 190,
-            "central": 280,
-            "high": 380
+            "low": 335,
+            "central": 480,
+            "high": 670
           },
           "LD": {
-            "low": 580,
-            "central": 720,
-            "high": 870
+            "low": 645,
+            "central": 840,
+            "high": 1060
           },
           "GRN": {
             "low": 520,
-            "central": 700,
-            "high": 880
+            "central": 710,
+            "high": 930
           },
           "REF": {
-            "low": 1700,
-            "central": 2050,
-            "high": 2380
+            "low": 1345,
+            "central": 1650,
+            "high": 1985
           },
           "OTH": {
-            "low": 760,
-            "central": 896,
-            "high": 1040
+            "low": 425,
+            "central": 506,
+            "high": 620
           }
         },
         "LDN": {
@@ -816,34 +818,34 @@ window.UKE_DATA = {
       "EC_STRONG": {
         "NAT": {
           "LAB": {
-            "low": 410,
-            "central": 510,
-            "high": 620
+            "low": 860,
+            "central": 1070,
+            "high": 1305
           },
           "CON": {
-            "low": 300,
-            "central": 380,
-            "high": 470
+            "low": 525,
+            "central": 690,
+            "high": 885
           },
           "LD": {
-            "low": 600,
-            "central": 690,
-            "high": 790
+            "low": 620,
+            "central": 770,
+            "high": 945
           },
           "GRN": {
-            "low": 360,
-            "central": 460,
-            "high": 560
+            "low": 370,
+            "central": 495,
+            "high": 655
           },
           "REF": {
-            "low": 1560,
-            "central": 1820,
-            "high": 2090
+            "low": 1205,
+            "central": 1500,
+            "high": 1820
           },
           "OTH": {
-            "low": 1080,
-            "central": 1206,
-            "high": 1340
+            "low": 448,
+            "central": 541,
+            "high": 660
           }
         },
         "LDN": {
@@ -1010,34 +1012,34 @@ window.UKE_DATA = {
       "BBC_PNS": {
         "NAT": {
           "LAB": {
-            "low": 270,
-            "central": 350,
-            "high": 440
+            "low": 661,
+            "central": 855,
+            "high": 1070
           },
           "CON": {
-            "low": 210,
-            "central": 280,
-            "high": 360
+            "low": 400,
+            "central": 545,
+            "high": 730
           },
           "LD": {
-            "low": 700,
-            "central": 800,
-            "high": 910
+            "low": 660,
+            "central": 825,
+            "high": 1010
           },
           "GRN": {
-            "low": 440,
-            "central": 540,
-            "high": 650
+            "low": 465,
+            "central": 605,
+            "high": 780
           },
           "REF": {
-            "low": 1900,
-            "central": 2150,
-            "high": 2410
+            "low": 1415,
+            "central": 1720,
+            "high": 2050
           },
           "OTH": {
-            "low": 850,
-            "central": 946,
-            "high": 1060
+            "low": 430,
+            "central": 516,
+            "high": 630
           }
         },
         "LDN": {
@@ -1204,34 +1206,34 @@ window.UKE_DATA = {
       "RT_NEV": {
         "NAT": {
           "LAB": {
-            "low": 330,
-            "central": 410,
-            "high": 500
+            "low": 738,
+            "central": 945,
+            "high": 1170
           },
           "CON": {
-            "low": 230,
-            "central": 300,
-            "high": 380
+            "low": 415,
+            "central": 575,
+            "high": 765
           },
           "LD": {
-            "low": 680,
-            "central": 770,
-            "high": 875
+            "low": 645,
+            "central": 805,
+            "high": 990
           },
           "GRN": {
-            "low": 410,
-            "central": 510,
-            "high": 620
+            "low": 435,
+            "central": 575,
+            "high": 750
           },
           "REF": {
-            "low": 1820,
-            "central": 2070,
-            "high": 2330
+            "low": 1320,
+            "central": 1635,
+            "high": 1955
           },
           "OTH": {
-            "low": 910,
-            "central": 1006,
-            "high": 1110
+            "low": 440,
+            "central": 531,
+            "high": 650
           }
         },
         "LDN": {
@@ -1398,34 +1400,34 @@ window.UKE_DATA = {
       "UNS": {
         "NAT": {
           "LAB": {
-            "low": 700,
-            "central": 1066,
-            "high": 1430
+            "low": 1055,
+            "central": 1520,
+            "high": 2025
           },
           "CON": {
-            "low": 520,
-            "central": 720,
-            "high": 920
+            "low": 485,
+            "central": 715,
+            "high": 970
           },
           "LD": {
-            "low": 340,
-            "central": 453,
-            "high": 580
+            "low": 345,
+            "central": 495,
+            "high": 685
           },
           "GRN": {
-            "low": 290,
-            "central": 425,
-            "high": 580
+            "low": 305,
+            "central": 485,
+            "high": 705
           },
           "REF": {
-            "low": 420,
-            "central": 625,
-            "high": 850
+            "low": 390,
+            "central": 595,
+            "high": 855
           },
           "OTH": {
-            "low": 1450,
-            "central": 1777,
-            "high": 2100
+            "low": 910,
+            "central": 1256,
+            "high": 1660
           }
         },
         "LDN": {
@@ -1592,34 +1594,34 @@ window.UKE_DATA = {
       "BY_ELECTION": {
         "NAT": {
           "LAB": {
-            "low": 180,
-            "central": 276,
-            "high": 410
+            "low": 512,
+            "central": 752,
+            "high": 1050
           },
           "CON": {
-            "low": 350,
-            "central": 464,
-            "high": 600
+            "low": 505,
+            "central": 720,
+            "high": 990
           },
           "LD": {
-            "low": 760,
-            "central": 913,
-            "high": 1080
+            "low": 735,
+            "central": 920,
+            "high": 1145
           },
           "GRN": {
-            "low": 230,
-            "central": 350,
-            "high": 490
+            "low": 285,
+            "central": 435,
+            "high": 640
           },
           "REF": {
-            "low": 1480,
-            "central": 1915,
-            "high": 2380
+            "low": 1070,
+            "central": 1395,
+            "high": 1770
           },
           "OTH": {
-            "low": 1000,
-            "central": 1148,
-            "high": 1310
+            "low": 688,
+            "central": 844,
+            "high": 1040
           }
         },
         "LDN": {
