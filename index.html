@@ -32,16 +32,36 @@
           <option value="ALL">All parties</option>
         </select>
       </div>
+      <div class="control-row">
+        <label for="view-mode">View</label>
+        <select id="view-mode">
+          <option value="grouped">Grouped bars (by party)</option>
+          <option value="dotrows" selected>Dot rows (one row per party)</option>
+        </select>
+      </div>
       <div class="control-row toggle">
         <label><input type="checkbox" id="show-outliers" checked> Show outlier methods <span class="info" data-tip="Methods flagged as outliers (e.g. Uniform National Swing) are kept in the chart but rendered with reduced opacity.">i</span></label>
       </div>
     </section>
 
     <section id="chart-section">
-      <h2>Predicted seats by method <span class="info" data-tip="Bars show each method's central seat estimate per party. Whiskers show the low–high confidence range — the band within which the method considers the true result likely to fall.">i</span></h2>
-      <div id="chart" role="img" aria-label="Bar chart of seat predictions per method per party"></div>
-      <p class="caption">Hover for exact figures. Click a method in the legend to toggle it.</p>
+      <h2 id="chart-title">Predicted seats by method <span class="info" data-tip="Each row is one party. Each dot is a method's central estimate. The light bar shows that method's low–high range; the darker shaded band is the inter-quartile range across all visible methods (25th–75th percentile of central estimates). The diamond marks the median across non-outlier methods. The triangle marks seats defended from the last comparable round.">i</span></h2>
+
+      <div id="method-chips" class="chips" role="group" aria-label="Quick filters">
+        <button type="button" data-preset="all"   class="chip preset">All</button>
+        <button type="button" data-preset="none"  class="chip preset">None</button>
+        <button type="button" data-preset="top3"  class="chip preset">Top 3</button>
+        <button type="button" data-preset="bottom3" class="chip preset">Bottom 3</button>
+        <button type="button" data-preset="mrp"   class="chip preset">MRP only</button>
+        <span class="chips-divider"></span>
+        <span id="method-chip-list"></span>
+      </div>
+
+      <div id="chart" role="img" aria-label="Chart of seat predictions per method per party"></div>
+      <p class="caption">Hover any dot for exact figures. Click a chip above to toggle a method.</p>
       <p class="caption" id="scope-note"></p>
+
+      <div id="summary-stats" class="summary"></div>
     </section>
 
     <section id="ranking-section">

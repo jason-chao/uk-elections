@@ -84,6 +84,61 @@ h2 {
 }
 .caption { font-size: 0.85rem; color: var(--muted); margin: 0.5rem 0 0; }
 
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  align-items: center;
+  margin: 0 0 0.85rem;
+}
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.28rem 0.7rem;
+  font-size: 0.82rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--paper);
+  color: var(--ink);
+  cursor: pointer;
+  font-family: inherit;
+  transition: opacity 0.12s ease, background-color 0.12s ease;
+}
+.chip:hover { background: var(--sand); }
+.chip.preset { font-weight: 600; }
+.chip.method-chip .swatch {
+  display: inline-block;
+  width: 0.65rem;
+  height: 0.65rem;
+  border-radius: 50%;
+}
+.chip.method-chip.off { opacity: 0.35; text-decoration: line-through; }
+.chip.method-chip .mae {
+  font-size: 0.7rem;
+  color: var(--muted);
+  font-weight: 500;
+}
+.chips-divider {
+  width: 1px;
+  height: 1.2rem;
+  background: var(--line);
+  margin: 0 0.25rem;
+}
+
+.summary {
+  margin-top: 0.9rem;
+  padding: 0.8rem 0.9rem;
+  background: var(--sand);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  font-size: 0.88rem;
+  line-height: 1.55;
+}
+.summary .summary-head { font-weight: 600; margin-bottom: 0.25rem; }
+.summary .summary-row { display: block; }
+.summary .party-name { font-weight: 600; }
+
 table {
   width: 100%;
   border-collapse: collapse;

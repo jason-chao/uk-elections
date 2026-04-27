@@ -26,22 +26,50 @@
     nev:                  "National Equivalent Vote — Rallings & Thrasher's estimate, in the Sunday Times, of the national vote share weighted to a uniform contest pattern.",
     uns:                  "Uniform National Swing — applies the change in national vote share equally to every ward. A baseline; often inaccurate when swings vary by area or party.",
     differential_swing:   "When the change in vote share differs across regions or types of seat — the failure mode that breaks Uniform National Swing.",
+    iqr:                  "Inter-quartile range — the middle 50% of values (25th to 75th percentile). A robust measure of how much the methods agree.",
+    consensus:            "Median of the visible non-outlier methods' central estimates. A robust 'middle-of-pack' figure.",
   };
 
-  // Element refs
-  const $region   = document.getElementById("region");
-  const $party    = document.getElementById("party-filter");
-  const $outliers = document.getElementById("show-outliers");
-  const $chart    = document.getElementById("chart");
-  const $tableBody = document.querySelector("#ranking-table tbody");
-  const $cards    = document.getElementById("methods-cards");
-  const $glossary = document.getElementById("glossary");
-  const $sources  = document.getElementById("sources-list");
-  const $meta     = document.getElementById("meta-line");
-  const $version  = document.getElementById("data-version");
-  const $tooltip  = document.getElementById("tooltip");
+  // Build helpful lookups -----------------------------------------------------
 
-  // ---- Populate static UI ----
+  const accuracyByMethod = Object.fromEntries(ACC.ranking.map(r => [r.method_id, r]));
+  const methodById = Object.fromEntries(METHODS.map(m => [m.id, m]));
+
+  // Sort methods so dot-row legend reads best-→-worst.
+  const METHODS_SORTED = METHODS.slice().sort((a, b) => {
+    const ar = (accuracyByMethod[a.id] || {}).rank || 99;
+    const br = (accuracyByMethod[b.id] || {}).rank || 99;
+    return ar - br;
+  });
+
+  // State ---------------------------------------------------------------------
+
+  const state = {
+    region: "NAT",
+    party: "ALL",
+    view: "dotrows",
+    showOutliers: true,
+    enabled: new Set(METHODS.map(m => m.id)),  // method ids currently visible
+  };
+
+  // Element refs --------------------------------------------------------------
+
+  const $region    = document.getElementById("region");
+  const $party     = document.getElementById("party-filter");
+  const $view      = document.getElementById("view-mode");
+  const $outliers  = document.getElementById("show-outliers");
+  const $chart     = document.getElementById("chart");
+  const $tableBody = document.querySelector("#ranking-table tbody");
+  const $cards     = document.getElementById("methods-cards");
+  const $glossary  = document.getElementById("glossary");
+  const $sources   = document.getElementById("sources-list");
+  const $meta      = document.getElementById("meta-line");
+  const $version   = document.getElementById("data-version");
+  const $tooltip   = document.getElementById("tooltip");
+  const $chipList  = document.getElementById("method-chip-list");
+  const $summary   = document.getElementById("summary-stats");
+
+  // ---- Static UI ------------------------------------------------------------
 
   REGIONS.forEach(r => {
     const opt = document.createElement("option");
@@ -57,7 +85,7 @@
     $party.appendChild(opt);
   });
 
-  // Methods cards
+  // Method cards (full descriptions)
   METHODS.forEach(m => {
     const card = document.createElement("div");
     card.className = "method-card" + (m.outlier ? " outlier" : "");
@@ -70,8 +98,55 @@
     $cards.appendChild(card);
   });
 
+  // Method chips (legend + toggle)
+  METHODS_SORTED.forEach((m, idx) => {
+    const acc = accuracyByMethod[m.id];
+    const chip = document.createElement("button");
+    chip.type = "button";
+    chip.className = "chip method-chip";
+    chip.dataset.methodId = m.id;
+    chip.title = `${m.name} — rank #${acc ? acc.rank : "?"}, score ${acc ? acc.score : "?"}`;
+    chip.setAttribute("data-tip", `${m.name}. Historical accuracy rank #${acc ? acc.rank : "?"} (composite ${acc ? acc.score : "?"}/100).`);
+    chip.innerHTML = `<span class="swatch" style="background:${methodColour(m.id)}"></span>${escape(m.short)}<span class="mae">#${acc ? acc.rank : "?"}</span>`;
+    chip.addEventListener("click", () => {
+      if (state.enabled.has(m.id)) state.enabled.delete(m.id);
+      else state.enabled.add(m.id);
+      syncChips();
+      buildChart();
+    });
+    $chipList.appendChild(chip);
+  });
+
+  // Preset chip handlers
+  document.querySelectorAll(".chip.preset").forEach(btn => {
+    btn.addEventListener("click", () => applyPreset(btn.dataset.preset));
+  });
+
+  function applyPreset(preset) {
+    if (preset === "all") {
+      state.enabled = new Set(METHODS.map(m => m.id));
+    } else if (preset === "none") {
+      state.enabled = new Set();
+    } else if (preset === "top3") {
+      const top = ACC.ranking.slice().sort((a, b) => a.rank - b.rank).slice(0, 3).map(r => r.method_id);
+      state.enabled = new Set(top);
+    } else if (preset === "bottom3") {
+      const bot = ACC.ranking.slice().sort((a, b) => b.rank - a.rank).slice(0, 3).map(r => r.method_id);
+      state.enabled = new Set(bot);
+    } else if (preset === "mrp") {
+      state.enabled = new Set(["YOUGOV_MRP"]);
+    }
+    syncChips();
+    buildChart();
+  }
+
+  function syncChips() {
+    document.querySelectorAll(".chip.method-chip").forEach(el => {
+      el.classList.toggle("off", !state.enabled.has(el.dataset.methodId));
+    });
+  }
+
   // Accuracy table
-  const methodById = Object.fromEntries(METHODS.map(m => [m.id, m]));
   ACC.ranking.forEach(row => {
     const tr = document.createElement("tr");
     const m = methodById[row.method_id] || {};
@@ -104,64 +179,212 @@
     $sources.appendChild(li);
   });
 
+  // Meta line + scope note
   $meta.textContent = `Last updated: ${formatDate(META.last_updated)} · Polling window: ${META.polling_window} · ${PRED.election.total_seats.toLocaleString("en-GB")} seats up across ${PRED.election.councils} councils`;
   $version.textContent = META.data_version;
-
   const $scopeNote = document.getElementById("scope-note");
   if ($scopeNote && PRED.election.scope) {
     $scopeNote.innerHTML = `<strong>Scope:</strong> ${escape(PRED.election.scope)} <em>${escape(PRED.election.national_note || "")}</em>`;
   }
 
-  // ---- Chart ----
+  // ---- Chart dispatcher -----------------------------------------------------
 
   function buildChart() {
-    const regionId = $region.value;
-    const partyHighlight = $party.value;
-    const showOutliers = $outliers.checked;
+    if (state.view === "dotrows") buildDotRowChart();
+    else buildGroupedChart();
+    renderSummary();
+  }
 
-    const partiesToShow = partyHighlight === "ALL" ? PARTIES : PARTIES.filter(p => p.id === partyHighlight);
+  // ---- View 1: dot rows (one row per party) ---------------------------------
+
+  function buildDotRowChart() {
+    const partiesShown = state.party === "ALL" ? PARTIES : PARTIES.filter(p => p.id === state.party);
+    const methodsShown = METHODS_SORTED.filter(m => state.enabled.has(m.id) && (state.showOutliers || !m.outlier));
 
     const traces = [];
-    METHODS.forEach((method, idx) => {
-      if (method.outlier && !showOutliers) return;
-      const byParty = PRED.predictions[method.id][regionId];
-      if (!byParty) return;
+    const yLabels = partiesShown.map(p => p.name);
 
+    // Compute global x-axis cap from data
+    let maxX = 0;
+    PARTIES.forEach(p => {
+      METHODS.forEach(m => {
+        const v = PRED.predictions[m.id]?.[state.region]?.[p.id];
+        if (v) maxX = Math.max(maxX, v.high);
+      });
+    });
+    maxX = Math.ceil(maxX / 100) * 100;
+
+    // For each party row: IQR band + range bars + dots + consensus + defending
+    partiesShown.forEach((party, rowIdx) => {
+      const yVal = party.name;
+
+      // 1. Cross-method IQR band (25th-75th of central estimates among non-outlier visible methods)
+      const nonOutlierCentrals = methodsShown
+        .filter(m => !m.outlier)
+        .map(m => PRED.predictions[m.id][state.region][party.id].central)
+        .sort((a, b) => a - b);
+      if (nonOutlierCentrals.length >= 3) {
+        const q1 = quantile(nonOutlierCentrals, 0.25);
+        const q3 = quantile(nonOutlierCentrals, 0.75);
+        const median = quantile(nonOutlierCentrals, 0.5);
+        traces.push({
+          type: "bar",
+          orientation: "h",
+          name: "IQR (25th–75th)",
+          legendgroup: "iqr",
+          showlegend: rowIdx === 0,
+          y: [yVal],
+          x: [q3 - q1],
+          base: [q1],
+          marker: { color: "rgba(20, 33, 61, 0.14)" },
+          width: 0.55,
+          hovertemplate: `<b>${escape(party.name)}</b><br>IQR (across non-outlier methods)<br>${q1}–${q3} seats<br>Median: ${median}<extra></extra>`,
+        });
+        // Consensus diamond (median)
+        traces.push({
+          type: "scatter",
+          mode: "markers",
+          name: "Consensus median",
+          legendgroup: "consensus",
+          showlegend: rowIdx === 0,
+          y: [yVal],
+          x: [median],
+          marker: { symbol: "diamond", size: 12, color: "#14213D", line: { color: "#FFFFFF", width: 1.2 } },
+          hovertemplate: `<b>${escape(party.name)}</b><br>Median (non-outlier methods): ${median} seats<extra></extra>`,
+        });
+      }
+
+      // 2. Per-method range bars (low–high), drawn as thin horizontal segments
+      methodsShown.forEach(m => {
+        const band = PRED.predictions[m.id][state.region][party.id];
+        const colour = methodColour(m.id);
+        traces.push({
+          type: "scatter",
+          mode: "lines",
+          legendgroup: m.id,
+          showlegend: false,
+          x: [band.low, band.high],
+          y: [yVal, yVal],
+          line: { color: hexToRgba(colour, m.outlier ? 0.18 : 0.32), width: 7 },
+          hoverinfo: "skip",
+        });
+      });
+
+      // 3. Per-method dots at central estimate
+      methodsShown.forEach(m => {
+        const band = PRED.predictions[m.id][state.region][party.id];
+        const colour = methodColour(m.id);
+        const acc = accuracyByMethod[m.id];
+        traces.push({
+          type: "scatter",
+          mode: "markers",
+          name: m.short + (m.outlier ? " · outlier" : ""),
+          legendgroup: m.id,
+          showlegend: rowIdx === 0,
+          x: [band.central],
+          y: [yVal],
+          marker: {
+            color: colour,
+            size: m.outlier ? 9 : 11,
+            opacity: m.outlier ? 0.55 : 1,
+            line: { color: "#FFFFFF", width: 1.2 },
+            symbol: m.outlier ? "circle-open" : "circle",
+          },
+          customdata: [[band.low, band.high, acc ? acc.rank : "?", acc ? acc.score : "?"]],
+          hovertemplate:
+            `<b>${escape(m.name)}</b> (rank #%{customdata[2]})<br>` +
+            `${escape(party.name)}: <b>%{x}</b> seats<br>` +
+            `Range: %{customdata[0]}–%{customdata[1]}` +
+            `<extra></extra>`,
+        });
+      });
+
+      // 4. Defending baseline marker (triangle)
+      const baseline = PRED.baseline_2022?.[state.region]?.[party.id];
+      if (baseline != null) {
+        traces.push({
+          type: "scatter",
+          mode: "markers",
+          name: "Defending baseline",
+          legendgroup: "baseline",
+          showlegend: rowIdx === 0,
+          x: [baseline],
+          y: [yVal],
+          marker: { symbol: "triangle-right", size: 14, color: party.colour, line: { color: "#14213D", width: 1 } },
+          hovertemplate: `<b>${escape(party.name)}</b><br>Seats defended (last comparable round): ${baseline}<extra></extra>`,
+        });
+      }
+    });
+
+    const region = REGIONS.find(r => r.id === state.region);
+    const layout = {
+      barmode: "overlay",
+      margin: { l: 110, r: 24, t: 20, b: 50 },
+      xaxis: {
+        title: { text: "Predicted seats", standoff: 6 },
+        gridcolor: "#E2E2DC", zerolinecolor: "#C0BCB3",
+        range: [0, maxX],
+      },
+      yaxis: {
+        autorange: "reversed",
+        tickfont: { size: 12 },
+      },
+      legend: { orientation: "h", y: -0.15, font: { size: 11 } },
+      paper_bgcolor: "#FFFFFF",
+      plot_bgcolor: "#FFFFFF",
+      hoverlabel: { bgcolor: "#14213D", font: { color: "#FFFFFF" } },
+      annotations: [{
+        text: `${region.name} · ${region.total_seats.toLocaleString("en-GB")} seats`,
+        showarrow: false, x: 0, xref: "paper", y: 1.04, yref: "paper",
+        xanchor: "left", font: { size: 12, color: "#5A5A5A" }
+      }],
+      bargap: 0.4,
+      height: Math.max(400, 78 * partiesShown.length + 130),
+    };
+
+    Plotly.react($chart, traces, layout, {
+      displaylogo: false,
+      responsive: true,
+      modeBarButtonsToRemove: ["lasso2d", "select2d", "autoScale2d"],
+    });
+  }
+
+  // ---- View 2: grouped bars (original) --------------------------------------
+
+  function buildGroupedChart() {
+    const partiesToShow = state.party === "ALL" ? PARTIES : PARTIES.filter(p => p.id === state.party);
+    const methodsShown = METHODS_SORTED.filter(m => state.enabled.has(m.id) && (state.showOutliers || !m.outlier));
+
+    const traces = [];
+    methodsShown.forEach(method => {
+      const byParty = PRED.predictions[method.id][state.region];
       const x = partiesToShow.map(p => p.name);
       const y = partiesToShow.map(p => byParty[p.id].central);
       const errPlus  = partiesToShow.map(p => byParty[p.id].high - byParty[p.id].central);
       const errMinus = partiesToShow.map(p => byParty[p.id].central - byParty[p.id].low);
-
-      const colour = methodColour(idx);
       traces.push({
         type: "bar",
         name: method.short + (method.outlier ? " · outlier" : ""),
-        x: x,
-        y: y,
+        x, y,
         error_y: {
-          type: "data",
-          symmetric: false,
-          array: errPlus,
-          arrayminus: errMinus,
-          color: "rgba(20, 33, 61, 0.65)",
-          thickness: 1.5,
-          width: 4,
+          type: "data", symmetric: false,
+          array: errPlus, arrayminus: errMinus,
+          color: "rgba(20, 33, 61, 0.65)", thickness: 1.5, width: 4,
         },
         marker: {
-          color: colour,
+          color: methodColour(method.id),
           opacity: method.outlier ? 0.55 : 0.92,
           line: { color: "#14213D", width: 0.5 },
         },
         hovertemplate:
           `<b>${escape(method.name)}</b><br>` +
           "%{x}: <b>%{y}</b> seats<br>" +
-          "Range: %{customdata[0]}–%{customdata[1]} seats" +
-          "<extra></extra>",
+          "Range: %{customdata[0]}–%{customdata[1]} seats<extra></extra>",
         customdata: partiesToShow.map(p => [byParty[p.id].low, byParty[p.id].high]),
       });
     });
 
-    const region = REGIONS.find(r => r.id === regionId);
+    const region = REGIONS.find(r => r.id === state.region);
     const layout = {
       barmode: "group",
       margin: { l: 56, r: 16, t: 18, b: 56 },
@@ -176,8 +399,8 @@
         showarrow: false, x: 0, xref: "paper", y: 1.05, yref: "paper",
         xanchor: "left", font: { size: 12, color: "#5A5A5A" }
       }],
+      height: 540,
     };
-
     Plotly.react($chart, traces, layout, {
       displaylogo: false,
       responsive: true,
@@ -185,15 +408,32 @@
     });
   }
 
-  function methodColour(idx) {
-    const palette = [
-      "#0B4F9C", "#02A95B", "#7E3FBF", "#C97800",
-      "#A8123E", "#117A8B", "#586673", "#7C4D2A",
-    ];
-    return palette[idx % palette.length];
+  // ---- Summary stats block --------------------------------------------------
+
+  function renderSummary() {
+    const methodsShown = METHODS_SORTED.filter(m => state.enabled.has(m.id) && (state.showOutliers || !m.outlier));
+    if (methodsShown.length === 0) {
+      $summary.innerHTML = "<em>No methods selected.</em>";
+      return;
+    }
+    const partiesShown = state.party === "ALL" ? PARTIES : PARTIES.filter(p => p.id === state.party);
+    const partyLines = partiesShown.map(party => {
+      const centrals = methodsShown
+        .map(m => PRED.predictions[m.id][state.region][party.id].central)
+        .sort((a, b) => a - b);
+      const lo = centrals[0], hi = centrals[centrals.length - 1];
+      const q1 = quantile(centrals, 0.25);
+      const q3 = quantile(centrals, 0.75);
+      return `<span class="summary-row"><span class="party-name" style="color:${party.colour}">${escape(party.name)}</span>: ${formatNum(lo)}–${formatNum(hi)} (spread ${formatNum(hi - lo)}) · IQR ${formatNum(q1)}–${formatNum(q3)}</span>`;
+    }).join("");
+    const region = REGIONS.find(r => r.id === state.region);
+    $summary.innerHTML = `
+      <div class="summary-head">${methodsShown.length} method${methodsShown.length === 1 ? "" : "s"} visible · ${escape(region.name)}</div>
+      ${partyLines}
+    `;
   }
 
-  // ---- Tooltip system ----
+  // ---- Tooltip system -------------------------------------------------------
 
   document.addEventListener("mouseover", e => {
     const t = e.target.closest("[data-tip]");
@@ -201,9 +441,7 @@
     showTooltip(t.getAttribute("data-tip"), e.clientX, e.clientY);
   });
   document.addEventListener("mousemove", e => {
-    if ($tooltip.classList.contains("visible")) {
-      positionTooltip(e.clientX, e.clientY);
-    }
+    if ($tooltip.classList.contains("visible")) positionTooltip(e.clientX, e.clientY);
   });
   document.addEventListener("mouseout", e => {
     if (e.target.closest("[data-tip]")) hideTooltip();
@@ -229,13 +467,54 @@
     $tooltip.style.top  = top + "px";
   }
 
-  // ---- Wire-up ----
+  // ---- Wire-up --------------------------------------------------------------
 
-  [$region, $party, $outliers].forEach(el => el.addEventListener("change", buildChart));
-  $region.value = "NAT";
+  $region.addEventListener("change",   e => { state.region = e.target.value; buildChart(); });
+  $party.addEventListener("change",    e => { state.party = e.target.value;  buildChart(); });
+  $view.addEventListener("change",     e => { state.view  = e.target.value;  buildChart(); });
+  $outliers.addEventListener("change", e => { state.showOutliers = e.target.checked; buildChart(); });
+
+  $region.value = state.region;
+  $view.value   = state.view;
+  syncChips();
   buildChart();
 
-  // ---- Utils ----
+  // ---- Utils ---------------------------------------------------------------
+
+  function methodColour(idOrIdx) {
+    const palette = {
+      POLLCHECK_MC:  "#0B4F9C",
+      YOUGOV_MRP:    "#02A95B",
+      RT_NEV:        "#7E3FBF",
+      BBC_PNS:       "#117A8B",
+      EC_STRONG:     "#A8123E",
+      ELECTIONS_ETC: "#C97800",
+      BY_ELECTION:   "#7C4D2A",
+      UNS:           "#586673",
+    };
+    return palette[idOrIdx] || "#586673";
+  }
+
+  function hexToRgba(hex, a) {
+    const h = hex.replace("#", "");
+    const r = parseInt(h.substring(0, 2), 16);
+    const g = parseInt(h.substring(2, 4), 16);
+    const b = parseInt(h.substring(4, 6), 16);
+    return `rgba(${r}, ${g}, ${b}, ${a})`;
+  }
+
+  function quantile(sortedArr, q) {
+    if (sortedArr.length === 0) return null;
+    if (sortedArr.length === 1) return sortedArr[0];
+    const pos = (sortedArr.length - 1) * q;
+    const base = Math.floor(pos);
+    const rest = pos - base;
+    const next = sortedArr[base + 1];
+    return next !== undefined ? Math.round(sortedArr[base] + rest * (next - sortedArr[base]))
+                              : sortedArr[base];
+  }
+
+  function formatNum(n) { return n.toLocaleString("en-GB"); }
 
   function escape(s) {
     return String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));
