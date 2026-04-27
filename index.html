@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UK Local Elections, May 2026 — Forecast Comparator</title>
+  <link rel="stylesheet" href="styles.css">
+  <!-- Plotly via CDN; falls back gracefully if offline -->
+  <script src="https://cdn.plot.ly/plotly-2.35.2.min.js" charset="utf-8"></script>
+  <!-- Bundled local data so the site works from file:// -->
+  <script src="data/data.js"></script>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>UK Local Elections — 7 May 2026</h1>
+      <p class="subtitle">Comparing established forecasting methods, with confidence ranges and historical accuracy.</p>
+      <p class="meta" id="meta-line"></p>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <section id="controls" aria-label="Chart controls">
+      <div class="control-row">
+        <label for="region">Region</label>
+        <select id="region"></select>
+      </div>
+      <div class="control-row">
+        <label for="party-filter">Highlight party</label>
+        <select id="party-filter">
+          <option value="ALL">All parties</option>
+        </select>
+      </div>
+      <div class="control-row toggle">
+        <label><input type="checkbox" id="show-outliers" checked> Show outlier methods <span class="info" data-tip="Methods flagged as outliers (e.g. Uniform National Swing) are kept in the chart but rendered with reduced opacity.">i</span></label>
+      </div>
+    </section>
+
+    <section id="chart-section">
+      <h2>Predicted seats by method <span class="info" data-tip="Bars show each method's central seat estimate per party. Whiskers show the low–high confidence range — the band within which the method considers the true result likely to fall.">i</span></h2>
+      <div id="chart" role="img" aria-label="Bar chart of seat predictions per method per party"></div>
+      <p class="caption">Hover for exact figures. Click a method in the legend to toggle it.</p>
+    </section>
+
+    <section id="ranking-section">
+      <h2>How accurate is each method, historically?</h2>
+      <p>Composite score combines mean absolute seat error per council, council-control hit rate, and consistency across recent local-election cycles. Higher is better.</p>
+      <table id="ranking-table">
+        <thead>
+          <tr>
+            <th>Rank</th>
+            <th>Method</th>
+            <th>Score <span class="info" data-tip="Composite 0–100 score across recent local-election cycles. Blends mean absolute seat error, council-control hit rate and consistency.">i</span></th>
+            <th>Mean abs. seat error / council <span class="info" data-tip="Average difference, in seats, between the method's predicted seats per council and the actual outcome.">i</span></th>
+            <th>Council-control hit rate <span class="info" data-tip="Share of councils for which the method correctly predicted which party (or NOC) would have most seats.">i</span></th>
+            <th>Strengths</th>
+            <th>Weaknesses</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+
+    <section id="methods-section">
+      <h2>Methods in this comparison</h2>
+      <div id="methods-cards"></div>
+    </section>
+
+    <section id="glossary-section">
+      <h2>Glossary</h2>
+      <dl id="glossary"></dl>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>Sources:</p>
+      <ul id="sources-list"></ul>
+      <p class="small">Build: <span id="data-version"></span>. Refresh by running the <code>refresh-uk-elections-data</code> Claude skill or <code>scripts/build_data_js.py</code>. British English. Code released under the MIT License.</p>
+    </div>
+  </footer>
+
+  <div id="tooltip" role="tooltip" aria-hidden="true"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>

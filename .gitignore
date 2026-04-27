@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+.DS_Store
+.idea/
+.vscode/
+*.log
+
+# Editor swap files
+*.swp
+*~

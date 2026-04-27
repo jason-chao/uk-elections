@@ -1,0 +1,184 @@
+/* UK Local Elections 2026 forecast comparator. */
+
+:root {
+  --ink: #14213D;
+  --paper: #FFFFFF;
+  --sand: #F4F1EC;
+  --line: #D8D4CC;
+  --muted: #5A5A5A;
+  --accent: #E4003B;
+  --link: #0B4F9C;
+  --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.04);
+  --radius: 6px;
+  --max-width: 1200px;
+}
+
+* { box-sizing: border-box; }
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color: var(--ink);
+  background: var(--sand);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
+header {
+  background: var(--ink);
+  color: var(--paper);
+  padding: 1.75rem 0 1.5rem;
+  border-bottom: 4px solid var(--accent);
+}
+header h1 { margin: 0 0 0.25rem; font-size: 1.65rem; font-weight: 700; letter-spacing: -0.01em; }
+header .subtitle { margin: 0 0 0.5rem; color: #CBD5E1; font-size: 1rem; }
+header .meta { margin: 0; font-size: 0.85rem; color: #94A3B8; }
+
+main { padding: 1.5rem 0 2rem; }
+
+section {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1.25rem 1.25rem 1.5rem;
+  margin: 0 0 1.25rem;
+  box-shadow: var(--shadow);
+}
+
+h2 {
+  font-size: 1.15rem;
+  margin: 0 0 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+#controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  align-items: flex-end;
+}
+.control-row { display: flex; flex-direction: column; gap: 0.25rem; }
+.control-row.toggle { flex-direction: row; align-items: center; }
+.control-row label { font-size: 0.85rem; color: var(--muted); font-weight: 600; }
+.control-row select {
+  font-size: 1rem;
+  padding: 0.4rem 0.55rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--paper);
+  min-width: 220px;
+}
+
+#chart {
+  width: 100%;
+  height: 540px;
+  min-height: 480px;
+}
+.caption { font-size: 0.85rem; color: var(--muted); margin: 0.5rem 0 0; }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+}
+th, td {
+  text-align: left;
+  padding: 0.55rem 0.6rem;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+th { font-weight: 600; background: var(--sand); }
+tbody tr:hover { background: rgba(11, 79, 156, 0.04); }
+td.score-cell { font-variant-numeric: tabular-nums; font-weight: 600; }
+
+#methods-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 1rem;
+}
+.method-card {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 0.85rem 0.95rem;
+  background: var(--sand);
+}
+.method-card h3 {
+  font-size: 1rem;
+  margin: 0 0 0.25rem;
+}
+.method-card .author { font-size: 0.8rem; color: var(--muted); margin-bottom: 0.5rem; }
+.method-card p { margin: 0 0 0.4rem; font-size: 0.88rem; }
+.method-card a { font-size: 0.85rem; }
+.method-card.outlier { border-left: 3px solid #C97800; }
+
+#glossary dl { display: grid; grid-template-columns: minmax(140px, max-content) 1fr; gap: 0.4rem 1rem; }
+#glossary dt { font-weight: 600; }
+#glossary dd { margin: 0; color: var(--muted); }
+
+a { color: var(--link); }
+a:hover { text-decoration: underline; }
+
+.info {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  background: var(--ink);
+  color: var(--paper);
+  font-size: 0.65rem;
+  font-weight: 700;
+  cursor: help;
+  font-style: normal;
+  vertical-align: middle;
+}
+
+#tooltip {
+  position: fixed;
+  z-index: 1000;
+  background: #14213D;
+  color: #FFFFFF;
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius);
+  font-size: 0.85rem;
+  max-width: 320px;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: opacity 0.12s ease;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+}
+#tooltip.visible { opacity: 1; }
+
+footer {
+  background: var(--paper);
+  border-top: 1px solid var(--line);
+  padding: 1.25rem 0 2rem;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+footer ul { padding-left: 1.25rem; margin: 0.25rem 0 0.75rem; }
+footer .small { font-size: 0.8rem; }
+code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  background: var(--sand);
+  padding: 0.05rem 0.35rem;
+  border-radius: 3px;
+  font-size: 0.85em;
+}
+
+@media (max-width: 640px) {
+  header h1 { font-size: 1.35rem; }
+  #chart { height: 460px; }
+  table { font-size: 0.82rem; }
+  th, td { padding: 0.4rem 0.4rem; }
+}

@@ -1,0 +1,289 @@
+method_id,method_name,region_id,region_name,party_id,party_name,seats_low,seats_central,seats_high
+ELECTIONS_ETC,Elections Etc Bespoke Regression,NAT,National (England),LAB,Labour,230,296,380
+ELECTIONS_ETC,Elections Etc Bespoke Regression,NAT,National (England),CON,Conservative,80,124,180
+ELECTIONS_ETC,Elections Etc Bespoke Regression,NAT,National (England),LD,Liberal Democrat,780,863,960
+ELECTIONS_ETC,Elections Etc Bespoke Regression,NAT,National (England),GRN,Green,480,600,720
+ELECTIONS_ETC,Elections Etc Bespoke Regression,NAT,National (England),REF,Reform UK,2050,2310,2580
+ELECTIONS_ETC,Elections Etc Bespoke Regression,NAT,National (England),OTH,Others / Independents,770,873,980
+ELECTIONS_ETC,Elections Etc Bespoke Regression,LDN,London,LAB,Labour,480,560,640
+ELECTIONS_ETC,Elections Etc Bespoke Regression,LDN,London,CON,Conservative,120,175,230
+ELECTIONS_ETC,Elections Etc Bespoke Regression,LDN,London,LD,Liberal Democrat,150,190,240
+ELECTIONS_ETC,Elections Etc Bespoke Regression,LDN,London,GRN,Green,260,320,390
+ELECTIONS_ETC,Elections Etc Bespoke Regression,LDN,London,REF,Reform UK,280,360,450
+ELECTIONS_ETC,Elections Etc Bespoke Regression,LDN,London,OTH,Others / Independents,175,220,270
+ELECTIONS_ETC,Elections Etc Bespoke Regression,STH,South of England,LAB,Labour,15,25,40
+ELECTIONS_ETC,Elections Etc Bespoke Regression,STH,South of England,CON,Conservative,25,40,60
+ELECTIONS_ETC,Elections Etc Bespoke Regression,STH,South of England,LD,Liberal Democrat,175,210,250
+ELECTIONS_ETC,Elections Etc Bespoke Regression,STH,South of England,GRN,Green,40,55,75
+ELECTIONS_ETC,Elections Etc Bespoke Regression,STH,South of England,REF,Reform UK,110,140,170
+ELECTIONS_ETC,Elections Etc Bespoke Regression,STH,South of England,OTH,Others / Independents,15,21,30
+ELECTIONS_ETC,Elections Etc Bespoke Regression,MID,Midlands,LAB,Labour,30,45,65
+ELECTIONS_ETC,Elections Etc Bespoke Regression,MID,Midlands,CON,Conservative,15,25,45
+ELECTIONS_ETC,Elections Etc Bespoke Regression,MID,Midlands,LD,Liberal Democrat,120,140,170
+ELECTIONS_ETC,Elections Etc Bespoke Regression,MID,Midlands,GRN,Green,50,70,95
+ELECTIONS_ETC,Elections Etc Bespoke Regression,MID,Midlands,REF,Reform UK,340,410,480
+ELECTIONS_ETC,Elections Etc Bespoke Regression,MID,Midlands,OTH,Others / Independents,50,60,75
+ELECTIONS_ETC,Elections Etc Bespoke Regression,NTH,North of England,LAB,Labour,80,120,170
+ELECTIONS_ETC,Elections Etc Bespoke Regression,NTH,North of England,CON,Conservative,15,25,40
+ELECTIONS_ETC,Elections Etc Bespoke Regression,NTH,North of England,LD,Liberal Democrat,200,240,290
+ELECTIONS_ETC,Elections Etc Bespoke Regression,NTH,North of England,GRN,Green,80,110,145
+ELECTIONS_ETC,Elections Etc Bespoke Regression,NTH,North of England,REF,Reform UK,480,560,640
+ELECTIONS_ETC,Elections Etc Bespoke Regression,NTH,North of England,OTH,Others / Independents,215,245,280
+ELECTIONS_ETC,Elections Etc Bespoke Regression,EST,East of England,LAB,Labour,15,25,40
+ELECTIONS_ETC,Elections Etc Bespoke Regression,EST,East of England,CON,Conservative,10,20,40
+ELECTIONS_ETC,Elections Etc Bespoke Regression,EST,East of England,LD,Liberal Democrat,75,95,120
+ELECTIONS_ETC,Elections Etc Bespoke Regression,EST,East of England,GRN,Green,30,45,65
+ELECTIONS_ETC,Elections Etc Bespoke Regression,EST,East of England,REF,Reform UK,410,480,540
+ELECTIONS_ETC,Elections Etc Bespoke Regression,EST,East of England,OTH,Others / Independents,25,35,50
+POLLCHECK_MC,PollCheck Ward Monte Carlo,NAT,National (England),LAB,Labour,280,380,480
+POLLCHECK_MC,PollCheck Ward Monte Carlo,NAT,National (England),CON,Conservative,180,250,340
+POLLCHECK_MC,PollCheck Ward Monte Carlo,NAT,National (England),LD,Liberal Democrat,650,770,920
+POLLCHECK_MC,PollCheck Ward Monte Carlo,NAT,National (England),GRN,Green,350,480,620
+POLLCHECK_MC,PollCheck Ward Monte Carlo,NAT,National (England),REF,Reform UK,1750,2080,2400
+POLLCHECK_MC,PollCheck Ward Monte Carlo,NAT,National (England),OTH,Others / Independents,950,1106,1250
+POLLCHECK_MC,PollCheck Ward Monte Carlo,LDN,London,LAB,Labour,540,640,740
+POLLCHECK_MC,PollCheck Ward Monte Carlo,LDN,London,CON,Conservative,190,240,300
+POLLCHECK_MC,PollCheck Ward Monte Carlo,LDN,London,LD,Liberal Democrat,150,195,240
+POLLCHECK_MC,PollCheck Ward Monte Carlo,LDN,London,GRN,Green,230,300,380
+POLLCHECK_MC,PollCheck Ward Monte Carlo,LDN,London,REF,Reform UK,190,255,330
+POLLCHECK_MC,PollCheck Ward Monte Carlo,LDN,London,OTH,Others / Independents,160,195,240
+POLLCHECK_MC,PollCheck Ward Monte Carlo,STH,South of England,LAB,Labour,18,30,45
+POLLCHECK_MC,PollCheck Ward Monte Carlo,STH,South of England,CON,Conservative,50,70,95
+POLLCHECK_MC,PollCheck Ward Monte Carlo,STH,South of England,LD,Liberal Democrat,160,195,230
+POLLCHECK_MC,PollCheck Ward Monte Carlo,STH,South of England,GRN,Green,30,45,65
+POLLCHECK_MC,PollCheck Ward Monte Carlo,STH,South of England,REF,Reform UK,95,125,160
+POLLCHECK_MC,PollCheck Ward Monte Carlo,STH,South of England,OTH,Others / Independents,18,26,35
+POLLCHECK_MC,PollCheck Ward Monte Carlo,MID,Midlands,LAB,Labour,40,60,85
+POLLCHECK_MC,PollCheck Ward Monte Carlo,MID,Midlands,CON,Conservative,35,55,80
+POLLCHECK_MC,PollCheck Ward Monte Carlo,MID,Midlands,LD,Liberal Democrat,110,135,165
+POLLCHECK_MC,PollCheck Ward Monte Carlo,MID,Midlands,GRN,Green,40,55,75
+POLLCHECK_MC,PollCheck Ward Monte Carlo,MID,Midlands,REF,Reform UK,300,370,440
+POLLCHECK_MC,PollCheck Ward Monte Carlo,MID,Midlands,OTH,Others / Independents,60,75,90
+POLLCHECK_MC,PollCheck Ward Monte Carlo,NTH,North of England,LAB,Labour,110,160,215
+POLLCHECK_MC,PollCheck Ward Monte Carlo,NTH,North of England,CON,Conservative,50,75,105
+POLLCHECK_MC,PollCheck Ward Monte Carlo,NTH,North of England,LD,Liberal Democrat,180,215,255
+POLLCHECK_MC,PollCheck Ward Monte Carlo,NTH,North of England,GRN,Green,60,85,115
+POLLCHECK_MC,PollCheck Ward Monte Carlo,NTH,North of England,REF,Reform UK,420,510,600
+POLLCHECK_MC,PollCheck Ward Monte Carlo,NTH,North of England,OTH,Others / Independents,225,255,290
+POLLCHECK_MC,PollCheck Ward Monte Carlo,EST,East of England,LAB,Labour,18,30,50
+POLLCHECK_MC,PollCheck Ward Monte Carlo,EST,East of England,CON,Conservative,35,55,80
+POLLCHECK_MC,PollCheck Ward Monte Carlo,EST,East of England,LD,Liberal Democrat,65,80,100
+POLLCHECK_MC,PollCheck Ward Monte Carlo,EST,East of England,GRN,Green,25,35,55
+POLLCHECK_MC,PollCheck Ward Monte Carlo,EST,East of England,REF,Reform UK,350,420,485
+POLLCHECK_MC,PollCheck Ward Monte Carlo,EST,East of England,OTH,Others / Independents,65,80,100
+YOUGOV_MRP,YouGov MRP,NAT,National (England),LAB,Labour,280,420,560
+YOUGOV_MRP,YouGov MRP,NAT,National (England),CON,Conservative,190,280,380
+YOUGOV_MRP,YouGov MRP,NAT,National (England),LD,Liberal Democrat,580,720,870
+YOUGOV_MRP,YouGov MRP,NAT,National (England),GRN,Green,520,700,880
+YOUGOV_MRP,YouGov MRP,NAT,National (England),REF,Reform UK,1700,2050,2380
+YOUGOV_MRP,YouGov MRP,NAT,National (England),OTH,Others / Independents,760,896,1040
+YOUGOV_MRP,YouGov MRP,LDN,London,LAB,Labour,420,580,740
+YOUGOV_MRP,YouGov MRP,LDN,London,CON,Conservative,190,260,340
+YOUGOV_MRP,YouGov MRP,LDN,London,LD,Liberal Democrat,150,210,280
+YOUGOV_MRP,YouGov MRP,LDN,London,GRN,Green,290,380,480
+YOUGOV_MRP,YouGov MRP,LDN,London,REF,Reform UK,160,230,310
+YOUGOV_MRP,YouGov MRP,LDN,London,OTH,Others / Independents,140,165,200
+YOUGOV_MRP,YouGov MRP,STH,South of England,LAB,Labour,18,30,50
+YOUGOV_MRP,YouGov MRP,STH,South of England,CON,Conservative,40,60,90
+YOUGOV_MRP,YouGov MRP,STH,South of England,LD,Liberal Democrat,150,195,240
+YOUGOV_MRP,YouGov MRP,STH,South of England,GRN,Green,50,75,100
+YOUGOV_MRP,YouGov MRP,STH,South of England,REF,Reform UK,85,110,145
+YOUGOV_MRP,YouGov MRP,STH,South of England,OTH,Others / Independents,15,21,30
+YOUGOV_MRP,YouGov MRP,MID,Midlands,LAB,Labour,35,60,90
+YOUGOV_MRP,YouGov MRP,MID,Midlands,CON,Conservative,35,50,75
+YOUGOV_MRP,YouGov MRP,MID,Midlands,LD,Liberal Democrat,110,140,175
+YOUGOV_MRP,YouGov MRP,MID,Midlands,GRN,Green,60,85,115
+YOUGOV_MRP,YouGov MRP,MID,Midlands,REF,Reform UK,290,350,420
+YOUGOV_MRP,YouGov MRP,MID,Midlands,OTH,Others / Independents,55,65,80
+YOUGOV_MRP,YouGov MRP,NTH,North of England,LAB,Labour,110,175,250
+YOUGOV_MRP,YouGov MRP,NTH,North of England,CON,Conservative,40,65,95
+YOUGOV_MRP,YouGov MRP,NTH,North of England,LD,Liberal Democrat,175,215,260
+YOUGOV_MRP,YouGov MRP,NTH,North of England,GRN,Green,85,120,160
+YOUGOV_MRP,YouGov MRP,NTH,North of England,REF,Reform UK,410,495,580
+YOUGOV_MRP,YouGov MRP,NTH,North of England,OTH,Others / Independents,205,230,265
+YOUGOV_MRP,YouGov MRP,EST,East of England,LAB,Labour,18,35,60
+YOUGOV_MRP,YouGov MRP,EST,East of England,CON,Conservative,30,45,70
+YOUGOV_MRP,YouGov MRP,EST,East of England,LD,Liberal Democrat,60,80,105
+YOUGOV_MRP,YouGov MRP,EST,East of England,GRN,Green,35,50,75
+YOUGOV_MRP,YouGov MRP,EST,East of England,REF,Reform UK,400,465,530
+YOUGOV_MRP,YouGov MRP,EST,East of England,OTH,Others / Independents,10,25,45
+EC_STRONG,Electoral Calculus Strong Transition,NAT,National (England),LAB,Labour,410,510,620
+EC_STRONG,Electoral Calculus Strong Transition,NAT,National (England),CON,Conservative,300,380,470
+EC_STRONG,Electoral Calculus Strong Transition,NAT,National (England),LD,Liberal Democrat,600,690,790
+EC_STRONG,Electoral Calculus Strong Transition,NAT,National (England),GRN,Green,360,460,560
+EC_STRONG,Electoral Calculus Strong Transition,NAT,National (England),REF,Reform UK,1560,1820,2090
+EC_STRONG,Electoral Calculus Strong Transition,NAT,National (England),OTH,Others / Independents,1080,1206,1340
+EC_STRONG,Electoral Calculus Strong Transition,LDN,London,LAB,Labour,600,700,800
+EC_STRONG,Electoral Calculus Strong Transition,LDN,London,CON,Conservative,260,325,400
+EC_STRONG,Electoral Calculus Strong Transition,LDN,London,LD,Liberal Democrat,150,190,235
+EC_STRONG,Electoral Calculus Strong Transition,LDN,London,GRN,Green,210,270,340
+EC_STRONG,Electoral Calculus Strong Transition,LDN,London,REF,Reform UK,150,210,280
+EC_STRONG,Electoral Calculus Strong Transition,LDN,London,OTH,Others / Independents,110,130,160
+EC_STRONG,Electoral Calculus Strong Transition,STH,South of England,LAB,Labour,25,40,60
+EC_STRONG,Electoral Calculus Strong Transition,STH,South of England,CON,Conservative,80,105,135
+EC_STRONG,Electoral Calculus Strong Transition,STH,South of England,LD,Liberal Democrat,140,170,205
+EC_STRONG,Electoral Calculus Strong Transition,STH,South of England,GRN,Green,35,50,70
+EC_STRONG,Electoral Calculus Strong Transition,STH,South of England,REF,Reform UK,75,95,120
+EC_STRONG,Electoral Calculus Strong Transition,STH,South of England,OTH,Others / Independents,18,31,45
+EC_STRONG,Electoral Calculus Strong Transition,MID,Midlands,LAB,Labour,60,85,115
+EC_STRONG,Electoral Calculus Strong Transition,MID,Midlands,CON,Conservative,55,80,110
+EC_STRONG,Electoral Calculus Strong Transition,MID,Midlands,LD,Liberal Democrat,105,130,160
+EC_STRONG,Electoral Calculus Strong Transition,MID,Midlands,GRN,Green,40,55,75
+EC_STRONG,Electoral Calculus Strong Transition,MID,Midlands,REF,Reform UK,260,325,390
+EC_STRONG,Electoral Calculus Strong Transition,MID,Midlands,OTH,Others / Independents,60,75,95
+EC_STRONG,Electoral Calculus Strong Transition,NTH,North of England,LAB,Labour,150,205,270
+EC_STRONG,Electoral Calculus Strong Transition,NTH,North of England,CON,Conservative,80,110,145
+EC_STRONG,Electoral Calculus Strong Transition,NTH,North of England,LD,Liberal Democrat,170,205,245
+EC_STRONG,Electoral Calculus Strong Transition,NTH,North of England,GRN,Green,60,85,115
+EC_STRONG,Electoral Calculus Strong Transition,NTH,North of England,REF,Reform UK,380,460,545
+EC_STRONG,Electoral Calculus Strong Transition,NTH,North of England,OTH,Others / Independents,205,235,270
+EC_STRONG,Electoral Calculus Strong Transition,EST,East of England,LAB,Labour,25,40,60
+EC_STRONG,Electoral Calculus Strong Transition,EST,East of England,CON,Conservative,50,70,95
+EC_STRONG,Electoral Calculus Strong Transition,EST,East of England,LD,Liberal Democrat,55,75,100
+EC_STRONG,Electoral Calculus Strong Transition,EST,East of England,GRN,Green,25,35,55
+EC_STRONG,Electoral Calculus Strong Transition,EST,East of England,REF,Reform UK,340,410,485
+EC_STRONG,Electoral Calculus Strong Transition,EST,East of England,OTH,Others / Independents,55,70,90
+BBC_PNS,BBC Projected National Share,NAT,National (England),LAB,Labour,270,350,440
+BBC_PNS,BBC Projected National Share,NAT,National (England),CON,Conservative,210,280,360
+BBC_PNS,BBC Projected National Share,NAT,National (England),LD,Liberal Democrat,700,800,910
+BBC_PNS,BBC Projected National Share,NAT,National (England),GRN,Green,440,540,650
+BBC_PNS,BBC Projected National Share,NAT,National (England),REF,Reform UK,1900,2150,2410
+BBC_PNS,BBC Projected National Share,NAT,National (England),OTH,Others / Independents,850,946,1060
+BBC_PNS,BBC Projected National Share,LDN,London,LAB,Labour,480,580,680
+BBC_PNS,BBC Projected National Share,LDN,London,CON,Conservative,210,275,355
+BBC_PNS,BBC Projected National Share,LDN,London,LD,Liberal Democrat,140,185,235
+BBC_PNS,BBC Projected National Share,LDN,London,GRN,Green,270,340,420
+BBC_PNS,BBC Projected National Share,LDN,London,REF,Reform UK,210,285,370
+BBC_PNS,BBC Projected National Share,LDN,London,OTH,Others / Independents,135,160,195
+BBC_PNS,BBC Projected National Share,STH,South of England,LAB,Labour,18,30,45
+BBC_PNS,BBC Projected National Share,STH,South of England,CON,Conservative,55,75,100
+BBC_PNS,BBC Projected National Share,STH,South of England,LD,Liberal Democrat,165,200,240
+BBC_PNS,BBC Projected National Share,STH,South of England,GRN,Green,40,55,75
+BBC_PNS,BBC Projected National Share,STH,South of England,REF,Reform UK,95,120,150
+BBC_PNS,BBC Projected National Share,STH,South of England,OTH,Others / Independents,5,11,20
+BBC_PNS,BBC Projected National Share,MID,Midlands,LAB,Labour,35,55,80
+BBC_PNS,BBC Projected National Share,MID,Midlands,CON,Conservative,40,60,85
+BBC_PNS,BBC Projected National Share,MID,Midlands,LD,Liberal Democrat,115,140,170
+BBC_PNS,BBC Projected National Share,MID,Midlands,GRN,Green,50,65,85
+BBC_PNS,BBC Projected National Share,MID,Midlands,REF,Reform UK,300,360,425
+BBC_PNS,BBC Projected National Share,MID,Midlands,OTH,Others / Independents,60,70,85
+BBC_PNS,BBC Projected National Share,NTH,North of England,LAB,Labour,110,160,215
+BBC_PNS,BBC Projected National Share,NTH,North of England,CON,Conservative,55,80,110
+BBC_PNS,BBC Projected National Share,NTH,North of England,LD,Liberal Democrat,180,220,260
+BBC_PNS,BBC Projected National Share,NTH,North of England,GRN,Green,75,105,140
+BBC_PNS,BBC Projected National Share,NTH,North of England,REF,Reform UK,430,510,595
+BBC_PNS,BBC Projected National Share,NTH,North of England,OTH,Others / Independents,195,225,260
+BBC_PNS,BBC Projected National Share,EST,East of England,LAB,Labour,18,30,50
+BBC_PNS,BBC Projected National Share,EST,East of England,CON,Conservative,40,55,80
+BBC_PNS,BBC Projected National Share,EST,East of England,LD,Liberal Democrat,60,80,105
+BBC_PNS,BBC Projected National Share,EST,East of England,GRN,Green,30,40,60
+BBC_PNS,BBC Projected National Share,EST,East of England,REF,Reform UK,380,445,510
+BBC_PNS,BBC Projected National Share,EST,East of England,OTH,Others / Independents,35,50,70
+RT_NEV,Rallings & Thrasher NEV,NAT,National (England),LAB,Labour,330,410,500
+RT_NEV,Rallings & Thrasher NEV,NAT,National (England),CON,Conservative,230,300,380
+RT_NEV,Rallings & Thrasher NEV,NAT,National (England),LD,Liberal Democrat,680,770,875
+RT_NEV,Rallings & Thrasher NEV,NAT,National (England),GRN,Green,410,510,620
+RT_NEV,Rallings & Thrasher NEV,NAT,National (England),REF,Reform UK,1820,2070,2330
+RT_NEV,Rallings & Thrasher NEV,NAT,National (England),OTH,Others / Independents,910,1006,1110
+RT_NEV,Rallings & Thrasher NEV,LDN,London,LAB,Labour,520,620,720
+RT_NEV,Rallings & Thrasher NEV,LDN,London,CON,Conservative,220,290,370
+RT_NEV,Rallings & Thrasher NEV,LDN,London,LD,Liberal Democrat,140,185,235
+RT_NEV,Rallings & Thrasher NEV,LDN,London,GRN,Green,250,320,400
+RT_NEV,Rallings & Thrasher NEV,LDN,London,REF,Reform UK,190,265,340
+RT_NEV,Rallings & Thrasher NEV,LDN,London,OTH,Others / Independents,120,145,175
+RT_NEV,Rallings & Thrasher NEV,STH,South of England,LAB,Labour,18,30,45
+RT_NEV,Rallings & Thrasher NEV,STH,South of England,CON,Conservative,55,80,110
+RT_NEV,Rallings & Thrasher NEV,STH,South of England,LD,Liberal Democrat,160,195,235
+RT_NEV,Rallings & Thrasher NEV,STH,South of England,GRN,Green,35,50,70
+RT_NEV,Rallings & Thrasher NEV,STH,South of England,REF,Reform UK,85,115,145
+RT_NEV,Rallings & Thrasher NEV,STH,South of England,OTH,Others / Independents,15,21,30
+RT_NEV,Rallings & Thrasher NEV,MID,Midlands,LAB,Labour,40,65,90
+RT_NEV,Rallings & Thrasher NEV,MID,Midlands,CON,Conservative,40,60,85
+RT_NEV,Rallings & Thrasher NEV,MID,Midlands,LD,Liberal Democrat,110,135,165
+RT_NEV,Rallings & Thrasher NEV,MID,Midlands,GRN,Green,45,60,80
+RT_NEV,Rallings & Thrasher NEV,MID,Midlands,REF,Reform UK,290,355,420
+RT_NEV,Rallings & Thrasher NEV,MID,Midlands,OTH,Others / Independents,60,75,95
+RT_NEV,Rallings & Thrasher NEV,NTH,North of England,LAB,Labour,140,195,260
+RT_NEV,Rallings & Thrasher NEV,NTH,North of England,CON,Conservative,60,85,115
+RT_NEV,Rallings & Thrasher NEV,NTH,North of England,LD,Liberal Democrat,175,210,250
+RT_NEV,Rallings & Thrasher NEV,NTH,North of England,GRN,Green,75,105,140
+RT_NEV,Rallings & Thrasher NEV,NTH,North of England,REF,Reform UK,400,480,565
+RT_NEV,Rallings & Thrasher NEV,NTH,North of England,OTH,Others / Independents,195,225,265
+RT_NEV,Rallings & Thrasher NEV,EST,East of England,LAB,Labour,20,35,55
+RT_NEV,Rallings & Thrasher NEV,EST,East of England,CON,Conservative,40,60,85
+RT_NEV,Rallings & Thrasher NEV,EST,East of England,LD,Liberal Democrat,60,80,105
+RT_NEV,Rallings & Thrasher NEV,EST,East of England,GRN,Green,30,40,60
+RT_NEV,Rallings & Thrasher NEV,EST,East of England,REF,Reform UK,355,420,485
+RT_NEV,Rallings & Thrasher NEV,EST,East of England,OTH,Others / Independents,50,65,85
+UNS,Uniform National Swing,NAT,National (England),LAB,Labour,700,1066,1430
+UNS,Uniform National Swing,NAT,National (England),CON,Conservative,520,720,920
+UNS,Uniform National Swing,NAT,National (England),LD,Liberal Democrat,340,453,580
+UNS,Uniform National Swing,NAT,National (England),GRN,Green,290,425,580
+UNS,Uniform National Swing,NAT,National (England),REF,Reform UK,420,625,850
+UNS,Uniform National Swing,NAT,National (England),OTH,Others / Independents,1450,1777,2100
+UNS,Uniform National Swing,LDN,London,LAB,Labour,650,910,1170
+UNS,Uniform National Swing,LDN,London,CON,Conservative,150,215,290
+UNS,Uniform National Swing,LDN,London,LD,Liberal Democrat,80,120,170
+UNS,Uniform National Swing,LDN,London,GRN,Green,120,195,280
+UNS,Uniform National Swing,LDN,London,REF,Reform UK,50,85,140
+UNS,Uniform National Swing,LDN,London,OTH,Others / Independents,210,300,400
+UNS,Uniform National Swing,STH,South of England,LAB,Labour,35,60,95
+UNS,Uniform National Swing,STH,South of England,CON,Conservative,75,110,150
+UNS,Uniform National Swing,STH,South of England,LD,Liberal Democrat,75,100,135
+UNS,Uniform National Swing,STH,South of England,GRN,Green,30,50,75
+UNS,Uniform National Swing,STH,South of England,REF,Reform UK,40,60,85
+UNS,Uniform National Swing,STH,South of England,OTH,Others / Independents,80,111,150
+UNS,Uniform National Swing,MID,Midlands,LAB,Labour,110,160,220
+UNS,Uniform National Swing,MID,Midlands,CON,Conservative,75,110,150
+UNS,Uniform National Swing,MID,Midlands,LD,Liberal Democrat,50,75,105
+UNS,Uniform National Swing,MID,Midlands,GRN,Green,50,80,120
+UNS,Uniform National Swing,MID,Midlands,REF,Reform UK,80,120,170
+UNS,Uniform National Swing,MID,Midlands,OTH,Others / Independents,140,205,280
+UNS,Uniform National Swing,NTH,North of England,LAB,Labour,230,340,460
+UNS,Uniform National Swing,NTH,North of England,CON,Conservative,110,170,230
+UNS,Uniform National Swing,NTH,North of England,LD,Liberal Democrat,100,140,190
+UNS,Uniform National Swing,NTH,North of England,GRN,Green,80,120,170
+UNS,Uniform National Swing,NTH,North of England,REF,Reform UK,140,210,290
+UNS,Uniform National Swing,NTH,North of England,OTH,Others / Independents,230,320,420
+UNS,Uniform National Swing,EST,East of England,LAB,Labour,30,50,80
+UNS,Uniform National Swing,EST,East of England,CON,Conservative,75,110,150
+UNS,Uniform National Swing,EST,East of England,LD,Liberal Democrat,40,60,85
+UNS,Uniform National Swing,EST,East of England,GRN,Green,25,40,60
+UNS,Uniform National Swing,EST,East of England,REF,Reform UK,80,120,170
+UNS,Uniform National Swing,EST,East of England,OTH,Others / Independents,250,320,410
+BY_ELECTION,Council By-Election Extrapolation,NAT,National (England),LAB,Labour,180,276,410
+BY_ELECTION,Council By-Election Extrapolation,NAT,National (England),CON,Conservative,350,464,600
+BY_ELECTION,Council By-Election Extrapolation,NAT,National (England),LD,Liberal Democrat,760,913,1080
+BY_ELECTION,Council By-Election Extrapolation,NAT,National (England),GRN,Green,230,350,490
+BY_ELECTION,Council By-Election Extrapolation,NAT,National (England),REF,Reform UK,1480,1915,2380
+BY_ELECTION,Council By-Election Extrapolation,NAT,National (England),OTH,Others / Independents,1000,1148,1310
+BY_ELECTION,Council By-Election Extrapolation,LDN,London,LAB,Labour,380,520,680
+BY_ELECTION,Council By-Election Extrapolation,LDN,London,CON,Conservative,230,310,410
+BY_ELECTION,Council By-Election Extrapolation,LDN,London,LD,Liberal Democrat,160,210,270
+BY_ELECTION,Council By-Election Extrapolation,LDN,London,GRN,Green,160,230,330
+BY_ELECTION,Council By-Election Extrapolation,LDN,London,REF,Reform UK,140,210,300
+BY_ELECTION,Council By-Election Extrapolation,LDN,London,OTH,Others / Independents,280,345,420
+BY_ELECTION,Council By-Election Extrapolation,STH,South of England,LAB,Labour,12,22,40
+BY_ELECTION,Council By-Election Extrapolation,STH,South of England,CON,Conservative,75,105,140
+BY_ELECTION,Council By-Election Extrapolation,STH,South of England,LD,Liberal Democrat,175,215,265
+BY_ELECTION,Council By-Election Extrapolation,STH,South of England,GRN,Green,25,40,60
+BY_ELECTION,Council By-Election Extrapolation,STH,South of England,REF,Reform UK,70,95,130
+BY_ELECTION,Council By-Election Extrapolation,STH,South of England,OTH,Others / Independents,3,14,30
+BY_ELECTION,Council By-Election Extrapolation,MID,Midlands,LAB,Labour,25,45,75
+BY_ELECTION,Council By-Election Extrapolation,MID,Midlands,CON,Conservative,60,90,130
+BY_ELECTION,Council By-Election Extrapolation,MID,Midlands,LD,Liberal Democrat,130,160,195
+BY_ELECTION,Council By-Election Extrapolation,MID,Midlands,GRN,Green,30,50,75
+BY_ELECTION,Council By-Election Extrapolation,MID,Midlands,REF,Reform UK,230,290,360
+BY_ELECTION,Council By-Election Extrapolation,MID,Midlands,OTH,Others / Independents,90,115,145
+BY_ELECTION,Council By-Election Extrapolation,NTH,North of England,LAB,Labour,80,140,210
+BY_ELECTION,Council By-Election Extrapolation,NTH,North of England,CON,Conservative,90,140,200
+BY_ELECTION,Council By-Election Extrapolation,NTH,North of England,LD,Liberal Democrat,195,240,290
+BY_ELECTION,Council By-Election Extrapolation,NTH,North of England,GRN,Green,50,80,120
+BY_ELECTION,Council By-Election Extrapolation,NTH,North of England,REF,Reform UK,340,430,530
+BY_ELECTION,Council By-Election Extrapolation,NTH,North of England,OTH,Others / Independents,235,270,320
+BY_ELECTION,Council By-Election Extrapolation,EST,East of England,LAB,Labour,15,25,45
+BY_ELECTION,Council By-Election Extrapolation,EST,East of England,CON,Conservative,50,75,110
+BY_ELECTION,Council By-Election Extrapolation,EST,East of England,LD,Liberal Democrat,75,95,125
+BY_ELECTION,Council By-Election Extrapolation,EST,East of England,GRN,Green,20,35,55
+BY_ELECTION,Council By-Election Extrapolation,EST,East of England,REF,Reform UK,290,370,450
+BY_ELECTION,Council By-Election Extrapolation,EST,East of England,OTH,Others / Independents,80,100,125
