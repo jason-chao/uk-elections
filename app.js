@@ -85,12 +85,12 @@
     $party.appendChild(opt);
   });
 
-  // Method cards (full descriptions)
+  // Method cards (compact descriptions)
   METHODS.forEach(m => {
     const card = document.createElement("div");
     card.className = "method-card" + (m.outlier ? " outlier" : "");
     card.innerHTML = `
-      <h3>${escape(m.name)}</h3>
+      <h4>${escape(m.name)}</h4>
       <div class="author">${escape(m.author)}</div>
       <p>${escape(m.description)}</p>
       <a href="${escape(m.source_url)}" target="_blank" rel="noopener">Source ↗</a>
@@ -180,18 +180,46 @@
   });
 
   // Meta line + scope note
-  $meta.textContent = `Last updated: ${formatDate(META.last_updated)} · Polling window: ${META.polling_window} · ${PRED.election.total_seats.toLocaleString("en-GB")} seats up across ${PRED.election.councils} councils`;
+  $meta.textContent = `Updated ${formatDate(META.last_updated)} · ${PRED.election.total_seats.toLocaleString("en-GB")} council seats · ${PRED.election.councils} councils · polls ${META.polling_window}`;
   $version.textContent = META.data_version;
   const $scopeNote = document.getElementById("scope-note");
   if ($scopeNote && PRED.election.scope) {
-    $scopeNote.innerHTML = `<strong>Scope:</strong> ${escape(PRED.election.scope)} <em>${escape(PRED.election.national_note || "")}</em>`;
+    $scopeNote.innerHTML =
+      `<strong>Scope:</strong> ${escape(PRED.election.scope)}` +
+      `<br><strong>National total:</strong> ${escape(PRED.election.national_note || "")}`;
   }
+
+  // Tabs
+  document.querySelectorAll(".tab").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const target = btn.dataset.tab;
+      document.querySelectorAll(".tab").forEach(b => {
+        const on = b.dataset.tab === target;
+        b.classList.toggle("active", on);
+        b.setAttribute("aria-selected", on ? "true" : "false");
+      });
+      document.querySelectorAll(".tab-panel").forEach(p => {
+        p.classList.toggle("active", p.dataset.panel === target);
+      });
+    });
+  });
 
   // ---- Chart dispatcher -----------------------------------------------------
 
   function buildChart() {
-    if (state.view === "dotrows") buildDotRowChart();
-    else buildGroupedChart();
+    // Always tear down whatever was previously rendered — Plotly state, table DOM,
+    // or both — before drawing the new view. Avoids blank-graph and stale-state bugs.
+    try { Plotly.purge($chart); } catch (e) { /* element may not have been a plotly graph */ }
+    $chart.innerHTML = "";
+
+    if (state.view === "table") {
+      $chart.style.height = "auto";
+      renderTable();
+    } else {
+      $chart.style.height = "";
+      if (state.view === "dotrows") buildDotRowChart();
+      else buildGroupedChart();
+    }
     renderSummary();
   }
 
@@ -342,7 +370,7 @@
       height: Math.max(400, 78 * partiesShown.length + 130),
     };
 
-    Plotly.react($chart, traces, layout, {
+    Plotly.newPlot($chart, traces, layout, {
       displaylogo: false,
       responsive: true,
       modeBarButtonsToRemove: ["lasso2d", "select2d", "autoScale2d"],
@@ -401,11 +429,162 @@
       }],
       height: 540,
     };
-    Plotly.react($chart, traces, layout, {
+    Plotly.newPlot($chart, traces, layout, {
       displaylogo: false,
       responsive: true,
       modeBarButtonsToRemove: ["lasso2d", "select2d", "autoScale2d"],
     });
+  }
+
+  // ---- View 3: table -------------------------------------------------------
+
+  function renderTable() {
+    const partiesShown = state.party === "ALL" ? PARTIES : PARTIES.filter(p => p.id === state.party);
+    const methodsShown = METHODS_SORTED.filter(m => state.enabled.has(m.id) && (state.showOutliers || !m.outlier));
+
+    const tbl = document.createElement("table");
+    tbl.className = "predictions";
+
+    // Header
+    const thead = document.createElement("thead");
+    const trh = document.createElement("tr");
+    trh.appendChild(th(""));
+    partiesShown.forEach(p => {
+      const cell = th(p.name);
+      cell.style.color = p.colour;
+      trh.appendChild(cell);
+    });
+    thead.appendChild(trh);
+    tbl.appendChild(thead);
+
+    const tbody = document.createElement("tbody");
+
+    // Defending row
+    const trDef = document.createElement("tr");
+    trDef.className = "defending-row";
+    trDef.appendChild(td("Defending", "row-label", "<small>baseline seats</small>"));
+    partiesShown.forEach(p => {
+      const v = PRED.baseline_2022?.[state.region]?.[p.id];
+      trDef.appendChild(td(v != null ? formatNum(v) : "—", "num"));
+    });
+    tbody.appendChild(trDef);
+
+    // Per-method rows + per-party highest/lowest tracking
+    const centralByParty = {};                      // pid -> [{methodId, value}]
+    partiesShown.forEach(p => centralByParty[p.id] = []);
+
+    methodsShown.forEach((m, i) => {
+      const acc = accuracyByMethod[m.id];
+      const tr = document.createElement("tr");
+      const labelHtml = `${i + 1}. ${escape(m.name)}` +
+                       (m.outlier ? ` <span class="muted-small">· outlier</span>` : "") +
+                       `<small>${escape(m.author)} · rank #${acc ? acc.rank : "?"}</small>`;
+      const labelCell = td("", "row-label", labelHtml);
+      tr.appendChild(labelCell);
+
+      partiesShown.forEach(p => {
+        const band = PRED.predictions[m.id][state.region][p.id];
+        const cellHtml =
+          `<span class="central">${formatNum(band.central)}</span>` +
+          `<span class="range">${formatNum(band.low)}–${formatNum(band.high)}</span>`;
+        const cell = td("", "num", cellHtml);
+        cell.dataset.party = p.id;
+        cell.dataset.value = band.central;
+        tr.appendChild(cell);
+        if (!m.outlier) centralByParty[p.id].push({ methodId: m.id, value: band.central, cell });
+      });
+      tbody.appendChild(tr);
+    });
+
+    // Apply hi/lo shading per party (across non-outlier visible methods)
+    partiesShown.forEach(p => {
+      const list = centralByParty[p.id];
+      if (list.length < 2) return;
+      const max = Math.max(...list.map(x => x.value));
+      const min = Math.min(...list.map(x => x.value));
+      list.forEach(x => {
+        if (x.value === max) x.cell.classList.add("cell-hi");
+        if (x.value === min) x.cell.classList.add("cell-lo");
+      });
+    });
+
+    // Summary rows
+    const stats = computeStatsByParty(partiesShown, methodsShown);
+
+    pushSummaryRow(tbody, "Minimum",       partiesShown, p => formatNum(stats[p.id].min));
+    pushSummaryRow(tbody, "Maximum",       partiesShown, p => formatNum(stats[p.id].max));
+    pushSummaryRow(tbody, "Range (max−min)",partiesShown, p => formatNum(stats[p.id].max - stats[p.id].min));
+    pushSummaryRow(tbody, "Range as % of consensus", partiesShown, p => {
+      const c = stats[p.id].consensus;
+      return c > 0 ? Math.round(100 * (stats[p.id].max - stats[p.id].min) / c) + "%" : "—";
+    });
+
+    const trCons = document.createElement("tr");
+    trCons.className = "consensus-row";
+    trCons.appendChild(td("Consensus estimate", "row-label",
+      "<small>median across non-outlier methods</small>"));
+    partiesShown.forEach(p => {
+      const cell = td(formatNum(stats[p.id].consensus), "num");
+      cell.style.color = p.colour;
+      cell.style.fontWeight = "700";
+      trCons.appendChild(cell);
+    });
+    tbody.appendChild(trCons);
+
+    pushSummaryRow(tbody, "80% interval", partiesShown, p =>
+      `${formatNum(stats[p.id].q10)}–${formatNum(stats[p.id].q90)}`,
+      "<small>10th–90th percentile</small>");
+
+    tbl.appendChild(tbody);
+
+    $chart.innerHTML = "";
+    $chart.appendChild(tbl);
+
+    // Reading-the-table caption
+    const cap = document.createElement("p");
+    cap.className = "caption";
+    cap.innerHTML = `<strong>Reading:</strong> the central figure is each method's headline; the small range below is its low–high. Green-edged cells are the highest prediction for that party across non-outlier methods; red-edged are the lowest.`;
+    $chart.appendChild(cap);
+  }
+
+  function th(text) {
+    const el = document.createElement("th");
+    el.textContent = text;
+    return el;
+  }
+  function td(text, className, html) {
+    const el = document.createElement("td");
+    if (className) el.className = className;
+    if (html != null) el.innerHTML = (text ? escape(text) : "") + html;
+    else el.textContent = text;
+    return el;
+  }
+  function pushSummaryRow(tbody, label, parties, valueFn, sublabel) {
+    const tr = document.createElement("tr");
+    tr.className = "summary-row";
+    tr.appendChild(td(label, "row-label", sublabel || ""));
+    parties.forEach(p => tr.appendChild(td(valueFn(p), "num")));
+    tbody.appendChild(tr);
+  }
+
+  function computeStatsByParty(partiesShown, methodsShown) {
+    const out = {};
+    partiesShown.forEach(p => {
+      const allCentrals = methodsShown.map(m => PRED.predictions[m.id][state.region][p.id].central);
+      const nonOutCentrals = methodsShown
+        .filter(m => !m.outlier)
+        .map(m => PRED.predictions[m.id][state.region][p.id].central)
+        .sort((a, b) => a - b);
+      const sorted = allCentrals.slice().sort((a, b) => a - b);
+      out[p.id] = {
+        min: sorted[0] ?? 0,
+        max: sorted[sorted.length - 1] ?? 0,
+        consensus: nonOutCentrals.length ? quantile(nonOutCentrals, 0.5) : 0,
+        q10: sorted.length ? quantile(sorted, 0.10) : 0,
+        q90: sorted.length ? quantile(sorted, 0.90) : 0,
+      };
+    });
+    return out;
   }
 
   // ---- Summary stats block --------------------------------------------------

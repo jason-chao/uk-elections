@@ -5,16 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>UK Local Elections, May 2026 — Forecast Comparator</title>
   <link rel="stylesheet" href="styles.css">
-  <!-- Plotly via CDN; falls back gracefully if offline -->
   <script src="https://cdn.plot.ly/plotly-2.35.2.min.js" charset="utf-8"></script>
-  <!-- Bundled local data so the site works from file:// -->
   <script src="data/data.js"></script>
 </head>
 <body>
   <header>
     <div class="container">
       <h1>UK Local Elections — 7 May 2026</h1>
-      <p class="subtitle">Comparing established forecasting methods, with confidence ranges and historical accuracy.</p>
       <p class="meta" id="meta-line"></p>
     </div>
   </header>
@@ -27,7 +24,7 @@
         <select id="region"></select>
       </div>
       <div class="control-row">
-        <label for="party-filter">Highlight party</label>
+        <label for="party-filter">Party</label>
         <select id="party-filter">
           <option value="ALL">All parties</option>
         </select>
@@ -35,46 +32,48 @@
       <div class="control-row">
         <label for="view-mode">View</label>
         <select id="view-mode">
-          <option value="grouped">Grouped bars (by party)</option>
-          <option value="dotrows" selected>Dot rows (one row per party)</option>
+          <option value="dotrows" selected>Dot rows</option>
+          <option value="grouped">Grouped bars</option>
+          <option value="table">Table</option>
         </select>
       </div>
       <div class="control-row toggle">
-        <label><input type="checkbox" id="show-outliers" checked> Show outlier methods <span class="info" data-tip="Methods flagged as outliers (e.g. Uniform National Swing) are kept in the chart but rendered with reduced opacity.">i</span></label>
+        <label><input type="checkbox" id="show-outliers" checked> Outliers <span class="info" data-tip="Outlier methods (e.g. Uniform National Swing) are kept but rendered with reduced opacity.">i</span></label>
       </div>
     </section>
 
     <section id="chart-section">
-      <h2 id="chart-title">Predicted seats by method <span class="info" data-tip="Each row is one party. Each dot is a method's central estimate. The light bar shows that method's low–high range; the darker shaded band is the inter-quartile range across all visible methods (25th–75th percentile of central estimates). The diamond marks the median across non-outlier methods. The triangle marks seats defended from the last comparable round.">i</span></h2>
-
-      <div id="method-chips" class="chips" role="group" aria-label="Quick filters">
-        <button type="button" data-preset="all"   class="chip preset">All</button>
-        <button type="button" data-preset="none"  class="chip preset">None</button>
-        <button type="button" data-preset="top3"  class="chip preset">Top 3</button>
+      <div class="chips-bar">
+        <button type="button" data-preset="all"     class="chip preset">All</button>
+        <button type="button" data-preset="none"    class="chip preset">None</button>
+        <button type="button" data-preset="top3"    class="chip preset">Top 3</button>
         <button type="button" data-preset="bottom3" class="chip preset">Bottom 3</button>
-        <button type="button" data-preset="mrp"   class="chip preset">MRP only</button>
+        <button type="button" data-preset="mrp"     class="chip preset">MRP only</button>
         <span class="chips-divider"></span>
         <span id="method-chip-list"></span>
       </div>
 
       <div id="chart" role="img" aria-label="Chart of seat predictions per method per party"></div>
-      <p class="caption">Hover any dot for exact figures. Click a chip above to toggle a method.</p>
-      <p class="caption" id="scope-note"></p>
-
       <div id="summary-stats" class="summary"></div>
+      <p class="caption muted-small" id="scope-note"></p>
     </section>
 
-    <section id="ranking-section">
-      <h2>How accurate is each method, historically?</h2>
-      <p>Composite score combines mean absolute seat error per council, council-control hit rate, and consistency across recent local-election cycles. Higher is better.</p>
+    <nav class="tabs" role="tablist">
+      <button class="tab active" role="tab" data-tab="ranking" aria-selected="true">Accuracy ranking</button>
+      <button class="tab"        role="tab" data-tab="methods" aria-selected="false">Methods &amp; glossary</button>
+      <button class="tab"        role="tab" data-tab="sources" aria-selected="false">Sources &amp; about</button>
+    </nav>
+
+    <section class="tab-panel active" data-panel="ranking" role="tabpanel">
+      <p class="muted-small">Composite 0–100 score: mean absolute seat error per council, council-control hit rate, consistency across recent cycles.</p>
       <table id="ranking-table">
         <thead>
           <tr>
-            <th>Rank</th>
+            <th>#</th>
             <th>Method</th>
-            <th>Score <span class="info" data-tip="Composite 0–100 score across recent local-election cycles. Blends mean absolute seat error, council-control hit rate and consistency.">i</span></th>
-            <th>Mean abs. seat error / council <span class="info" data-tip="Average difference, in seats, between the method's predicted seats per council and the actual outcome.">i</span></th>
-            <th>Council-control hit rate <span class="info" data-tip="Share of councils for which the method correctly predicted which party (or NOC) would have most seats.">i</span></th>
+            <th>Score <span class="info" data-tip="Composite 0–100 score across recent local-election cycles.">i</span></th>
+            <th>Mean abs. error <span class="info" data-tip="Average difference, in seats per council, between the method's prediction and the actual result.">i</span></th>
+            <th>Control hit rate <span class="info" data-tip="Share of councils for which the method correctly predicted which party (or NOC) would have most seats.">i</span></th>
             <th>Strengths</th>
             <th>Weaknesses</th>
           </tr>
@@ -83,28 +82,23 @@
       </table>
     </section>
 
-    <section id="methods-section">
-      <h2>Methods in this comparison</h2>
+    <section class="tab-panel" data-panel="methods" role="tabpanel">
+      <h3>Methods</h3>
       <div id="methods-cards"></div>
+      <h3 style="margin-top:1.4rem">Glossary</h3>
+      <dl id="glossary"></dl>
     </section>
 
-    <section id="glossary-section">
-      <h2>Glossary</h2>
-      <dl id="glossary"></dl>
+    <section class="tab-panel" data-panel="sources" role="tabpanel">
+      <h3>Data sources</h3>
+      <ul id="sources-list"></ul>
+      <h3 style="margin-top:1.2rem">About</h3>
+      <p class="muted-small">Static site, opens from <code>file://</code>. Build: <span id="data-version"></span>. Refresh via the <code>refresh-uk-elections-data</code> Claude skill or <code>scripts/build_data_js.py</code>. British English. MIT licensed.</p>
     </section>
 
   </main>
 
-  <footer>
-    <div class="container">
-      <p>Sources:</p>
-      <ul id="sources-list"></ul>
-      <p class="small">Build: <span id="data-version"></span>. Refresh by running the <code>refresh-uk-elections-data</code> Claude skill or <code>scripts/build_data_js.py</code>. British English. Code released under the MIT License.</p>
-    </div>
-  </footer>
-
   <div id="tooltip" role="tooltip" aria-hidden="true"></div>
-
   <script src="app.js"></script>
 </body>
 </html>
