@@ -132,8 +132,6 @@
     } else if (preset === "bottom3") {
       const bot = ACC.ranking.slice().sort((a, b) => b.rank - a.rank).slice(0, 3).map(r => r.method_id);
       state.enabled = new Set(bot);
-    } else if (preset === "mrp") {
-      state.enabled = new Set(["YOUGOV_MRP"]);
     }
     syncChips();
     buildChart();
