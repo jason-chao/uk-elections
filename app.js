@@ -44,12 +44,15 @@
 
   // State ---------------------------------------------------------------------
 
+  const TOP_N_DEFAULT = 3;
+  const top3MethodIds = ACC.ranking.slice().sort((a, b) => a.rank - b.rank).slice(0, TOP_N_DEFAULT).map(r => r.method_id);
+
   const state = {
     region: "NAT",
     party: "ALL",
     view: "dotrows",
     showOutliers: true,
-    enabled: new Set(METHODS.map(m => m.id)),  // method ids currently visible
+    enabled: new Set(top3MethodIds),  // method ids currently visible — default to top 3 by accuracy
   };
 
   // Element refs --------------------------------------------------------------
@@ -121,25 +124,39 @@
     btn.addEventListener("click", () => applyPreset(btn.dataset.preset));
   });
 
+  function presetSet(preset) {
+    if (preset === "all")     return new Set(METHODS.map(m => m.id));
+    if (preset === "none")    return new Set();
+    if (preset === "top3")    return new Set(ACC.ranking.slice().sort((a, b) => a.rank - b.rank).slice(0, 3).map(r => r.method_id));
+    if (preset === "bottom3") return new Set(ACC.ranking.slice().sort((a, b) => b.rank - a.rank).slice(0, 3).map(r => r.method_id));
+    return null;
+  }
+
+  function setsEqual(a, b) {
+    if (a.size !== b.size) return false;
+    for (const x of a) if (!b.has(x)) return false;
+    return true;
+  }
+
   function applyPreset(preset) {
-    if (preset === "all") {
-      state.enabled = new Set(METHODS.map(m => m.id));
-    } else if (preset === "none") {
-      state.enabled = new Set();
-    } else if (preset === "top3") {
-      const top = ACC.ranking.slice().sort((a, b) => a.rank - b.rank).slice(0, 3).map(r => r.method_id);
-      state.enabled = new Set(top);
-    } else if (preset === "bottom3") {
-      const bot = ACC.ranking.slice().sort((a, b) => b.rank - a.rank).slice(0, 3).map(r => r.method_id);
-      state.enabled = new Set(bot);
-    }
+    const s = presetSet(preset);
+    if (!s) return;
+    state.enabled = s;
     syncChips();
     buildChart();
   }
 
   function syncChips() {
     document.querySelectorAll(".chip.method-chip").forEach(el => {
-      el.classList.toggle("off", !state.enabled.has(el.dataset.methodId));
+      const on = state.enabled.has(el.dataset.methodId);
+      el.classList.toggle("off", !on);
+      el.setAttribute("aria-pressed", on ? "true" : "false");
+      el.title = on ? "Click to remove from chart" : "Click to add to chart";
+    });
+    document.querySelectorAll(".chip.preset").forEach(el => {
+      const matches = setsEqual(state.enabled, presetSet(el.dataset.preset));
+      el.classList.toggle("active", matches);
+      el.setAttribute("aria-pressed", matches ? "true" : "false");
     });
   }
 

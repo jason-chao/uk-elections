@@ -128,13 +128,74 @@ h3 { font-size: 0.95rem; margin: 0 0 0.5rem; }
   transition: opacity 0.12s ease, background-color 0.12s ease;
 }
 .chip:hover { background: var(--sand); }
-.chip.preset { font-weight: 600; }
+
+/* Preset chips — clearly distinct from the round, dot-bearing method chips */
+.chips-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.18rem 0.45rem 0.18rem 0.55rem;
+  background: var(--sand);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+.chips-group-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  margin-right: 0.15rem;
+}
+.chip.preset {
+  font-weight: 600;
+  border-radius: 4px;
+  background: var(--paper);
+  border-color: var(--line);
+  padding: 0.2rem 0.55rem;
+}
+.chip.preset:hover { background: var(--sand); border-color: var(--ink); }
+.chip.preset.active {
+  background: var(--ink);
+  color: var(--paper);
+  border-color: var(--ink);
+}
+.chip.preset.active:hover { background: var(--ink); }
+.chip.preset.active::before {
+  content: "✓";
+  font-weight: 700;
+  margin-right: 0.25rem;
+  font-size: 0.78rem;
+  line-height: 1;
+}
+.chip.method-chip {
+  border-style: solid;
+  transition: opacity 0.12s ease, background-color 0.12s ease, border-color 0.12s ease;
+}
 .chip.method-chip .swatch {
   display: inline-block; width: 0.6rem; height: 0.6rem; border-radius: 50%;
+  border: 1.5px solid transparent;
+  transition: background-color 0.12s ease, border-color 0.12s ease;
 }
-.chip.method-chip.off { opacity: 0.32; text-decoration: line-through; }
+.chip.method-chip.off {
+  opacity: 0.5;
+  border-style: dashed;
+  background: transparent;
+  color: var(--muted);
+}
+.chip.method-chip.off::before {
+  content: "+";
+  font-weight: 700;
+  font-size: 0.85rem;
+  line-height: 1;
+  color: var(--muted);
+  margin-right: 0.05rem;
+}
+.chip.method-chip.off:hover { opacity: 0.95; background: var(--sand); }
+.chip.method-chip:not(.off):hover { background: var(--sand); }
 .chip.method-chip .mae { font-size: 0.66rem; color: var(--muted); font-weight: 500; }
 .chips-divider { width: 1px; height: 1.1rem; background: var(--line); margin: 0 0.2rem; }
+.chips-intro { margin: 0 0 0.45rem; }
 
 /* Summary stats */
 .summary {

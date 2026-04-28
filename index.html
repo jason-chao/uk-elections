@@ -57,11 +57,15 @@
     </section>
 
     <section id="chart-section">
+      <p class="muted-small chips-intro">Click a method to add or remove it from the chart. Showing the top 3 by historical accuracy by default.</p>
       <div class="chips-bar">
-        <button type="button" data-preset="all"     class="chip preset">All</button>
-        <button type="button" data-preset="none"    class="chip preset">None</button>
-        <button type="button" data-preset="top3"    class="chip preset">Top 3</button>
-        <button type="button" data-preset="bottom3" class="chip preset">Bottom 3</button>
+        <span class="chips-group" role="group" aria-label="Quick presets">
+          <span class="chips-group-label">Show:</span>
+          <button type="button" data-preset="all"     class="chip preset">All</button>
+          <button type="button" data-preset="none"    class="chip preset">None</button>
+          <button type="button" data-preset="top3"    class="chip preset">Top 3</button>
+          <button type="button" data-preset="bottom3" class="chip preset">Bottom 3</button>
+        </span>
         <span class="chips-divider"></span>
         <span id="method-chip-list"></span>
       </div>
