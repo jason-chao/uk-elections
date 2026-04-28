@@ -64,7 +64,6 @@
   const $glossary  = document.getElementById("glossary");
   const $sources   = document.getElementById("sources-list");
   const $meta      = document.getElementById("meta-line");
-  const $version   = document.getElementById("data-version");
   const $tooltip   = document.getElementById("tooltip");
   const $chipList  = document.getElementById("method-chip-list");
   const $summary   = document.getElementById("summary-stats");
@@ -181,7 +180,6 @@
 
   // Meta line + scope note
   $meta.textContent = `Updated ${formatDate(META.last_updated)} · ${PRED.election.total_seats.toLocaleString("en-GB")} council seats · ${PRED.election.councils} councils · polls ${META.polling_window}`;
-  $version.textContent = META.data_version;
   const $scopeNote = document.getElementById("scope-note");
   if ($scopeNote && PRED.election.scope) {
     $scopeNote.innerHTML =
