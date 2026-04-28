@@ -11,7 +11,8 @@
 <body>
   <header>
     <div class="container">
-      <h1>UK Local Elections — 7 May 2026</h1>
+      <h1>UK Local Elections — 7 May 2026 <span class="countdown" id="countdown"></span></h1>
+      <p class="subtitle">Forecast seats from eight established methods, ahead of the vote.</p>
       <p class="meta" id="meta-line"></p>
     </div>
   </header>
@@ -58,14 +59,14 @@
 
     <section id="chart-section">
       <div class="chips-bar">
-        <span class="chips-group" role="group" aria-label="Method presets by historical track record">
+        <span class="chips-group" role="group" aria-label="Method presets by track record">
           <span class="chips-group-label">
             <svg class="glyph" viewBox="0 0 16 16" aria-hidden="true"><path d="M1.5 8 C3 4.5, 5.5 3, 8 3 S13 4.5, 14.5 8 C13 11.5, 10.5 13, 8 13 S3 11.5, 1.5 8 Z" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="8" cy="8" r="2.2" fill="currentColor"/></svg>
             Show methods
           </span>
           <button type="button" data-preset="all"     class="chip preset" title="Show all 8 forecasting methods">All</button>
-          <button type="button" data-preset="top3"    class="chip preset" title="Show the 3 methods with the best historical track record">Best 3</button>
-          <button type="button" data-preset="bottom3" class="chip preset" title="Show the 3 methods with the weakest historical track record">Worst 3</button>
+          <button type="button" data-preset="top3"    class="chip preset" title="Show the 3 methods with the best track record">Best 3</button>
+          <button type="button" data-preset="bottom3" class="chip preset" title="Show the 3 methods with the weakest track record">Worst 3</button>
         </span>
         <span class="chips-divider"></span>
         <span id="method-chip-list"></span>
@@ -85,7 +86,7 @@
     <section class="tab-panel active" data-panel="ranking" role="tabpanel">
       <h2 class="panel-title">Track record across recent local-election cycles</h2>
       <p class="muted-small">Composite 0–100 score: mean absolute seat error per council, council-control hit rate, consistency across cycles.</p>
-      <p class="muted-small caveat"><strong>Read with care.</strong> This is each method's <em>past</em> performance against the 2022–2025 results — a guide to how reliable a method has tended to be, not a guarantee for May 2026. Local elections shift in character (new parties, fragmentation, low turnout), so a method that did well last year can do worse this year. No single number tells you a forecast is "right".</p>
+      <p class="muted-small caveat"><strong>Read with care.</strong> Track record is a guide to how reliable a method has tended to be — not a guarantee for May 2026. Local elections shift in character (new parties, fragmentation, low turnout), so a method that did well last year can do worse this year. No single number tells you a forecast is "right".</p>
       <table id="ranking-table">
         <thead>
           <tr>

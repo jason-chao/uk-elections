@@ -1,6 +1,6 @@
 # UK Local Elections 2026 — Forecast Comparator
 
-A static, interactive site that compares the headline forecasts for the **United Kingdom local elections on 7 May 2026**. Eight established forecasting methods, side-by-side, with confidence ranges, outlier flags, and a historical track record.
+A static, interactive site that compares the headline forecasts for the **United Kingdom local elections on 7 May 2026**. Eight established forecasting methods, side-by-side, with confidence ranges, outlier flags, and a track record.
 
 ---
 
@@ -28,21 +28,21 @@ Out of scope: the 6 directly-elected English mayoralties, the 2 Welsh council by
 
 ## What it shows
 
-- **Three chart views** — *Dot rows* (one row per party, methods plotted as dots with low–high range bars), *Grouped bars*, and *Table* (numbers with cell-level highest/lowest shading). Dot rows is the default and opens with the **3 methods with the best historical track record**; click a method chip to add or remove it, or use the **Show methods: All / Best 3 / Worst 3** preset group.
+- **Three chart views** — *Dot rows* (one row per party, methods plotted as dots with low–high range bars), *Grouped bars*, and *Table* (numbers with cell-level highest/lowest shading). Dot rows is the default and opens with the **3 methods with the best track record**; click a method chip to add or remove it, or use the **Show methods: All / Best 3 / Worst 3** preset group.
 - **Confidence ranges** drawn as whiskers or low–high text on every figure.
 - **Outlier methods** (e.g. Uniform National Swing in this fragmented multi-party cycle) are kept visible but rendered with reduced opacity and toggleable.
 - **Region selector** — National + 5 English regions.
-- **Track record** tab — composite score (mean absolute seat error per council, council-control hit rate, consistency across recent cycles), with a caveat: this is *past* performance, not a guarantee for May 2026.
+- **Track record** tab — composite score (mean absolute seat error per council, council-control hit rate, consistency across recent cycles), with a caveat: not a guarantee for May 2026.
 - **Method cards** — each forecaster's methodology summary and source link.
 - **Glossary & tooltips** — hover any stats term (`MRP`, `Monte Carlo`, `confidence interval`, `differential swing`) for a definition.
 
 ### A note on "track record"
 
-The site previously called this an "accuracy ranking". That word implies a single objective measure of correctness — but a forecast can't be evaluated against a not-yet-known result, and even post-hoc the comparison is multi-dimensional (seat error, vote-share error, control prediction, party by party). The **Track record** tab summarises how each method has performed across the 2022–2025 cycles. Treat it as a guide to reliability, not a verdict on which forecast for May 2026 is "right".
+The site previously called this an "accuracy ranking". That word implies a single objective measure of correctness — but a forecast can't be evaluated against a not-yet-known result, and even post-hoc the comparison is multi-dimensional (seat error, vote-share error, control prediction, party by party). The **Track record** tab summarises how each method performed in 2022–2025. Treat it as a guide to reliability, not a verdict on which forecast for May 2026 is "right".
 
 ## Methods
 
-Ranked by historical track record across recent local-election cycles.
+Ranked by track record across recent cycles.
 
 | Rank | Method | Type | Author |
 |-----:|--------|------|--------|

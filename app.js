@@ -194,7 +194,14 @@
   });
 
   // Meta line + scope note
-  $meta.textContent = `Updated ${formatDate(META.last_updated)} · ${PRED.election.total_seats.toLocaleString("en-GB")} council seats · ${PRED.election.councils} councils · polls ${META.polling_window}`;
+  $meta.textContent = `Updated ${formatDate(META.last_updated)} · forecasting ${PRED.election.total_seats.toLocaleString("en-GB")} seats across ${PRED.election.councils} councils · polling window ${META.polling_window}`;
+  const $countdown = document.getElementById("countdown");
+  if ($countdown && typeof META.days_to_election === "number") {
+    const d = META.days_to_election;
+    if (d > 0)       $countdown.textContent = `${d} day${d === 1 ? "" : "s"} to go`;
+    else if (d === 0) $countdown.textContent = `polling day`;
+    else              $countdown.textContent = `${-d} day${d === -1 ? "" : "s"} since polling`;
+  }
   const $scopeNote = document.getElementById("scope-note");
   if ($scopeNote && PRED.election.scope) {
     $scopeNote.innerHTML =

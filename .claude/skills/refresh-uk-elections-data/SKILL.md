@@ -10,7 +10,7 @@ Bring the data files up to date with the latest published forecasts and polls.
 ## Files this skill writes
 
 - `data/predictions.json` — methods, regions, baseline_2022, polling_2026, predictions
-- `data/track_record.json` — historical track-record ranking
+- `data/track_record.json` — track-record ranking
 - `data/metadata.json` — version + last-updated + sources
 - `data/data.js`, `data/predictions.csv` — regenerated from the JSONs
 
