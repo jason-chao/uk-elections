@@ -126,13 +126,13 @@ window.UKE_DATA = {
       }
     },
     "polling_2026": {
-      "REF": 25,
-      "CON": 19,
-      "LAB": 17,
-      "GRN": 17,
-      "LD": 13,
-      "OTH": 9,
-      "average_window": "Mid-March to mid-April 2026 (YouGov, Ipsos, Find Out Now, Techne, More in Common)"
+      "REF": 26,
+      "CON": 18,
+      "LAB": 18,
+      "GRN": 16,
+      "LD": 12,
+      "OTH": 10,
+      "average_window": "Late March to late April 2026 (Opinium, Find Out Now, YouGov, More in Common, Techne)"
     },
     "methods": [
       {
@@ -1012,34 +1012,34 @@ window.UKE_DATA = {
       "BBC_PNS": {
         "NAT": {
           "LAB": {
-            "low": 661,
-            "central": 855,
-            "high": 1070
+            "low": 675,
+            "central": 870,
+            "high": 1085
           },
           "CON": {
-            "low": 400,
-            "central": 545,
-            "high": 730
+            "low": 385,
+            "central": 525,
+            "high": 705
           },
           "LD": {
-            "low": 660,
-            "central": 825,
-            "high": 1010
+            "low": 650,
+            "central": 815,
+            "high": 1000
           },
           "GRN": {
-            "low": 465,
-            "central": 605,
-            "high": 780
+            "low": 445,
+            "central": 580,
+            "high": 750
           },
           "REF": {
-            "low": 1415,
-            "central": 1720,
-            "high": 2050
+            "low": 1440,
+            "central": 1750,
+            "high": 2080
           },
           "OTH": {
-            "low": 430,
-            "central": 516,
-            "high": 630
+            "low": 440,
+            "central": 526,
+            "high": 640
           }
         },
         "LDN": {
@@ -1206,34 +1206,34 @@ window.UKE_DATA = {
       "RT_NEV": {
         "NAT": {
           "LAB": {
-            "low": 738,
-            "central": 945,
-            "high": 1170
+            "low": 750,
+            "central": 960,
+            "high": 1185
           },
           "CON": {
-            "low": 415,
-            "central": 575,
-            "high": 765
+            "low": 405,
+            "central": 560,
+            "high": 745
           },
           "LD": {
-            "low": 645,
-            "central": 805,
-            "high": 990
+            "low": 635,
+            "central": 795,
+            "high": 980
           },
           "GRN": {
-            "low": 435,
-            "central": 575,
-            "high": 750
+            "low": 420,
+            "central": 555,
+            "high": 725
           },
           "REF": {
-            "low": 1320,
-            "central": 1635,
-            "high": 1955
+            "low": 1340,
+            "central": 1660,
+            "high": 1985
           },
           "OTH": {
-            "low": 440,
-            "central": 531,
-            "high": 650
+            "low": 450,
+            "central": 540,
+            "high": 660
           }
         },
         "LDN": {
@@ -1400,34 +1400,34 @@ window.UKE_DATA = {
       "UNS": {
         "NAT": {
           "LAB": {
-            "low": 1055,
-            "central": 1520,
-            "high": 2025
+            "low": 1075,
+            "central": 1545,
+            "high": 2055
           },
           "CON": {
-            "low": 485,
-            "central": 715,
-            "high": 970
+            "low": 470,
+            "central": 695,
+            "high": 945
           },
           "LD": {
-            "low": 345,
-            "central": 495,
-            "high": 685
+            "low": 330,
+            "central": 475,
+            "high": 660
           },
           "GRN": {
-            "low": 305,
-            "central": 485,
-            "high": 705
+            "low": 290,
+            "central": 465,
+            "high": 680
           },
           "REF": {
-            "low": 390,
-            "central": 595,
-            "high": 855
+            "low": 410,
+            "central": 625,
+            "high": 895
           },
           "OTH": {
-            "low": 910,
-            "central": 1256,
-            "high": 1660
+            "low": 925,
+            "central": 1276,
+            "high": 1685
           }
         },
         "LDN": {
@@ -1790,7 +1790,7 @@ window.UKE_DATA = {
   "accuracy": {
     "metric": "Historical accuracy of UK local-election forecasting methods",
     "scoring_notes": "Composite score (0–100) blending mean absolute seat error vs final result, council-control hit rate, and consistency across the last three local-election cycles (2022, 2023, 2024, plus 2025 partial). Higher is better. Sources cited per row.",
-    "as_of": "2026-04-27",
+    "as_of": "2026-04-28",
     "ranking": [
       {
         "rank": 1,
@@ -1875,11 +1875,11 @@ window.UKE_DATA = {
     ]
   },
   "metadata": {
-    "last_updated": "2026-04-27T00:00:00Z",
-    "data_version": "2026.04.27",
+    "last_updated": "2026-04-28T12:00:00Z",
+    "data_version": "2026.04.28",
     "election_date": "2026-05-07",
-    "days_to_election": 10,
-    "polling_window": "Mid-March to mid-April 2026",
+    "days_to_election": 9,
+    "polling_window": "Late March to late April 2026",
     "sources": [
       {
         "name": "Elections Etc",
@@ -1904,6 +1904,10 @@ window.UKE_DATA = {
       {
         "name": "Mark Pack scorecard",
         "url": "https://www.markpack.org.uk/174682/council-by-election-results-scorecard-2025-2026/"
+      },
+      {
+        "name": "Mark Pack VI tracker",
+        "url": "https://www.markpack.org.uk/voting-intention-opinion-poll-scorecard/"
       },
       {
         "name": "Wikipedia summary",

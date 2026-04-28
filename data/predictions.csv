@@ -143,12 +143,12 @@ EC_STRONG,Electoral Calculus Strong Transition,EST,East of England,LD,Liberal De
 EC_STRONG,Electoral Calculus Strong Transition,EST,East of England,GRN,Green,25,35,55
 EC_STRONG,Electoral Calculus Strong Transition,EST,East of England,REF,Reform UK,340,410,485
 EC_STRONG,Electoral Calculus Strong Transition,EST,East of England,OTH,Others / Independents,55,70,90
-BBC_PNS,BBC Projected National Share,NAT,National (England),LAB,Labour,661,855,1070
-BBC_PNS,BBC Projected National Share,NAT,National (England),CON,Conservative,400,545,730
-BBC_PNS,BBC Projected National Share,NAT,National (England),LD,Liberal Democrat,660,825,1010
-BBC_PNS,BBC Projected National Share,NAT,National (England),GRN,Green,465,605,780
-BBC_PNS,BBC Projected National Share,NAT,National (England),REF,Reform UK,1415,1720,2050
-BBC_PNS,BBC Projected National Share,NAT,National (England),OTH,Others / Independents,430,516,630
+BBC_PNS,BBC Projected National Share,NAT,National (England),LAB,Labour,675,870,1085
+BBC_PNS,BBC Projected National Share,NAT,National (England),CON,Conservative,385,525,705
+BBC_PNS,BBC Projected National Share,NAT,National (England),LD,Liberal Democrat,650,815,1000
+BBC_PNS,BBC Projected National Share,NAT,National (England),GRN,Green,445,580,750
+BBC_PNS,BBC Projected National Share,NAT,National (England),REF,Reform UK,1440,1750,2080
+BBC_PNS,BBC Projected National Share,NAT,National (England),OTH,Others / Independents,440,526,640
 BBC_PNS,BBC Projected National Share,LDN,London,LAB,Labour,480,580,680
 BBC_PNS,BBC Projected National Share,LDN,London,CON,Conservative,210,275,355
 BBC_PNS,BBC Projected National Share,LDN,London,LD,Liberal Democrat,140,185,235
@@ -179,12 +179,12 @@ BBC_PNS,BBC Projected National Share,EST,East of England,LD,Liberal Democrat,60,
 BBC_PNS,BBC Projected National Share,EST,East of England,GRN,Green,30,40,60
 BBC_PNS,BBC Projected National Share,EST,East of England,REF,Reform UK,380,445,510
 BBC_PNS,BBC Projected National Share,EST,East of England,OTH,Others / Independents,35,50,70
-RT_NEV,Rallings & Thrasher NEV,NAT,National (England),LAB,Labour,738,945,1170
-RT_NEV,Rallings & Thrasher NEV,NAT,National (England),CON,Conservative,415,575,765
-RT_NEV,Rallings & Thrasher NEV,NAT,National (England),LD,Liberal Democrat,645,805,990
-RT_NEV,Rallings & Thrasher NEV,NAT,National (England),GRN,Green,435,575,750
-RT_NEV,Rallings & Thrasher NEV,NAT,National (England),REF,Reform UK,1320,1635,1955
-RT_NEV,Rallings & Thrasher NEV,NAT,National (England),OTH,Others / Independents,440,531,650
+RT_NEV,Rallings & Thrasher NEV,NAT,National (England),LAB,Labour,750,960,1185
+RT_NEV,Rallings & Thrasher NEV,NAT,National (England),CON,Conservative,405,560,745
+RT_NEV,Rallings & Thrasher NEV,NAT,National (England),LD,Liberal Democrat,635,795,980
+RT_NEV,Rallings & Thrasher NEV,NAT,National (England),GRN,Green,420,555,725
+RT_NEV,Rallings & Thrasher NEV,NAT,National (England),REF,Reform UK,1340,1660,1985
+RT_NEV,Rallings & Thrasher NEV,NAT,National (England),OTH,Others / Independents,450,540,660
 RT_NEV,Rallings & Thrasher NEV,LDN,London,LAB,Labour,520,620,720
 RT_NEV,Rallings & Thrasher NEV,LDN,London,CON,Conservative,220,290,370
 RT_NEV,Rallings & Thrasher NEV,LDN,London,LD,Liberal Democrat,140,185,235
@@ -215,12 +215,12 @@ RT_NEV,Rallings & Thrasher NEV,EST,East of England,LD,Liberal Democrat,60,80,105
 RT_NEV,Rallings & Thrasher NEV,EST,East of England,GRN,Green,30,40,60
 RT_NEV,Rallings & Thrasher NEV,EST,East of England,REF,Reform UK,355,420,485
 RT_NEV,Rallings & Thrasher NEV,EST,East of England,OTH,Others / Independents,50,65,85
-UNS,Uniform National Swing,NAT,National (England),LAB,Labour,1055,1520,2025
-UNS,Uniform National Swing,NAT,National (England),CON,Conservative,485,715,970
-UNS,Uniform National Swing,NAT,National (England),LD,Liberal Democrat,345,495,685
-UNS,Uniform National Swing,NAT,National (England),GRN,Green,305,485,705
-UNS,Uniform National Swing,NAT,National (England),REF,Reform UK,390,595,855
-UNS,Uniform National Swing,NAT,National (England),OTH,Others / Independents,910,1256,1660
+UNS,Uniform National Swing,NAT,National (England),LAB,Labour,1075,1545,2055
+UNS,Uniform National Swing,NAT,National (England),CON,Conservative,470,695,945
+UNS,Uniform National Swing,NAT,National (England),LD,Liberal Democrat,330,475,660
+UNS,Uniform National Swing,NAT,National (England),GRN,Green,290,465,680
+UNS,Uniform National Swing,NAT,National (England),REF,Reform UK,410,625,895
+UNS,Uniform National Swing,NAT,National (England),OTH,Others / Independents,925,1276,1685
 UNS,Uniform National Swing,LDN,London,LAB,Labour,650,910,1170
 UNS,Uniform National Swing,LDN,London,CON,Conservative,150,215,290
 UNS,Uniform National Swing,LDN,London,LD,Liberal Democrat,80,120,170
