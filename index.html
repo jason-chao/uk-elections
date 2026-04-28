@@ -58,14 +58,14 @@
 
     <section id="chart-section">
       <div class="chips-bar">
-        <span class="chips-group" role="group" aria-label="Quick presets">
+        <span class="chips-group" role="group" aria-label="Method presets by historical track record">
           <span class="chips-group-label">
             <svg class="glyph" viewBox="0 0 16 16" aria-hidden="true"><path d="M1.5 8 C3 4.5, 5.5 3, 8 3 S13 4.5, 14.5 8 C13 11.5, 10.5 13, 8 13 S3 11.5, 1.5 8 Z" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="8" cy="8" r="2.2" fill="currentColor"/></svg>
-            Show
+            Show methods
           </span>
-          <button type="button" data-preset="all"     class="chip preset">All</button>
-          <button type="button" data-preset="top3"    class="chip preset">Top 3</button>
-          <button type="button" data-preset="bottom3" class="chip preset">Bottom 3</button>
+          <button type="button" data-preset="all"     class="chip preset" title="Show all 8 forecasting methods">All</button>
+          <button type="button" data-preset="top3"    class="chip preset" title="Show the 3 methods with the best historical track record">Best 3</button>
+          <button type="button" data-preset="bottom3" class="chip preset" title="Show the 3 methods with the weakest historical track record">Worst 3</button>
         </span>
         <span class="chips-divider"></span>
         <span id="method-chip-list"></span>

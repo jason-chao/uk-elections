@@ -28,7 +28,7 @@ Out of scope: the 6 directly-elected English mayoralties, the 2 Welsh council by
 
 ## What it shows
 
-- **Three chart views** — *Dot rows* (one row per party, methods plotted as dots with low–high range bars), *Grouped bars*, and *Table* (numbers with cell-level highest/lowest shading). Dot rows is the default and opens with the **Top 3 methods by historical track record**; click a method chip to add or remove it, or use the **Show: All / Top 3 / Bottom 3** preset group.
+- **Three chart views** — *Dot rows* (one row per party, methods plotted as dots with low–high range bars), *Grouped bars*, and *Table* (numbers with cell-level highest/lowest shading). Dot rows is the default and opens with the **3 methods with the best historical track record**; click a method chip to add or remove it, or use the **Show methods: All / Best 3 / Worst 3** preset group.
 - **Confidence ranges** drawn as whiskers or low–high text on every figure.
 - **Outlier methods** (e.g. Uniform National Swing in this fragmented multi-party cycle) are kept visible but rendered with reduced opacity and toggleable.
 - **Region selector** — National + 5 English regions.
