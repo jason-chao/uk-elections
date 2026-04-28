@@ -1,8 +1,6 @@
 # UK Local Elections 2026 — Forecast Comparator
 
-A static, interactive site that compares the headline forecasts for the **United Kingdom local elections on 7 May 2026**. Eight established forecasting methods, side-by-side, with confidence ranges, outlier flags, and a historical-accuracy ranking.
-
-Open `index.html` from the file system (`file://`) — no build, no server, no install. Plotly loads from a CDN; everything else works offline.
+A static, interactive site that compares the headline forecasts for the **United Kingdom local elections on 7 May 2026**. Eight established forecasting methods, side-by-side, with confidence ranges, outlier flags, and a historical track record.
 
 ---
 
@@ -30,15 +28,21 @@ Out of scope: the 6 directly-elected English mayoralties, the 2 Welsh council by
 
 ## What it shows
 
-- **Three chart views** — *Dot rows* (one row per party, methods plotted as dots with low–high range bars), *Grouped bars*, and *Table* (numbers with cell-level highest/lowest shading).
+- **Three chart views** — *Dot rows* (one row per party, methods plotted as dots with low–high range bars), *Grouped bars*, and *Table* (numbers with cell-level highest/lowest shading). Dot rows is the default and opens with the **Top 3 methods by historical track record**; click a method chip to add or remove it, or use the **Show: All / Top 3 / Bottom 3** preset group.
 - **Confidence ranges** drawn as whiskers or low–high text on every figure.
 - **Outlier methods** (e.g. Uniform National Swing in this fragmented multi-party cycle) are kept visible but rendered with reduced opacity and toggleable.
 - **Region selector** — National + 5 English regions.
-- **Accuracy ranking** — composite score (mean absolute seat error per council, council-control hit rate, consistency across recent cycles).
+- **Track record** tab — composite score (mean absolute seat error per council, council-control hit rate, consistency across recent cycles), with a caveat: this is *past* performance, not a guarantee for May 2026.
 - **Method cards** — each forecaster's methodology summary and source link.
 - **Glossary & tooltips** — hover any stats term (`MRP`, `Monte Carlo`, `confidence interval`, `differential swing`) for a definition.
 
+### A note on "track record"
+
+The site previously called this an "accuracy ranking". That word implies a single objective measure of correctness — but a forecast can't be evaluated against a not-yet-known result, and even post-hoc the comparison is multi-dimensional (seat error, vote-share error, control prediction, party by party). The **Track record** tab summarises how each method has performed across the 2022–2025 cycles. Treat it as a guide to reliability, not a verdict on which forecast for May 2026 is "right".
+
 ## Methods
+
+Ranked by historical track record across recent local-election cycles.
 
 | Rank | Method | Type | Author |
 |-----:|--------|------|--------|
@@ -53,16 +57,18 @@ Out of scope: the 6 directly-elected English mayoralties, the 2 Welsh council by
 
 ## Quick start
 
+The site is fully static — no build step, no server, no install. Just open `index.html` from the file system (`file://`):
+
 ```bash
-git clone https://github.com/<your-username>/uk-elections-2026.git
-cd uk-elections-2026
+git clone https://github.com/jason-chao/uk-local-elections.git
+cd uk-local-elections
 
 open index.html       # macOS
 xdg-open index.html   # Linux
 start index.html      # Windows
 ```
 
-If the browser blocks the Plotly CDN, the chart will not render — connect to the internet, or replace the `<script src="https://cdn.plot.ly/...">` line in `index.html` with a local copy of Plotly.
+Plotly loads from a CDN; the rest works offline. If your browser blocks the CDN the chart will not render — connect to the internet, or replace the `<script src="https://cdn.plot.ly/...">` line in `index.html` with a local copy of Plotly.
 
 ## Refreshing the data
 
@@ -100,7 +106,7 @@ uk-elections-2026/
 ├── app.js                     # Chart, controls, tooltips
 ├── data/
 │   ├── predictions.json       # Source of truth: methods, regions, baseline_2022, predictions
-│   ├── accuracy.json          # Historical accuracy ranking
+│   ├── accuracy.json          # Track-record ranking
 │   ├── metadata.json          # Version, last-updated, sources
 │   ├── predictions.csv        # Flat CSV export
 │   └── data.js                # Auto-generated JSON bundle (for file:// loading)
@@ -128,7 +134,7 @@ uk-elections-2026/
 - **`methods`** — `id`, `name`, `short`, `author`, `description`, `source_url`, `outlier`.
 - **`predictions`** — `method_id → region_id → party_id → { low, central, high }`.
 
-`data/accuracy.json` ranks methods with composite `score`, `mean_abs_seat_error_per_council`, `control_hit_rate`, and one-line `strengths` / `weaknesses`.
+`data/accuracy.json` ranks methods (track-record table) with composite `score`, `mean_abs_seat_error_per_council`, `control_hit_rate`, and one-line `strengths` / `weaknesses`. The file name is historical; the on-screen label is **Track record**.
 
 `data/metadata.json` carries `data_version` (`YYYY.MM.DD`), `last_updated` (ISO), `polling_window`, and the sources list.
 
