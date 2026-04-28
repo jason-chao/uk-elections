@@ -31,7 +31,7 @@ html, body {
 .container { max-width: var(--max-width); margin: 0 auto; padding: 0 1.25rem; }
 
 header {
-  background: var(--ink);
+  background: linear-gradient(135deg, #1A2B4F 0%, #14213D 55%, #0E1A33 100%);
   color: var(--paper);
   padding: 1.1rem 0 1rem;
   border-bottom: 3px solid var(--accent);
@@ -61,17 +61,42 @@ h3 { font-size: 0.95rem; margin: 0 0 0.5rem; }
   align-items: flex-end;
   padding: 0.7rem 1rem 0.8rem;
 }
-.control-row { display: flex; flex-direction: column; gap: 0.2rem; }
+.control-row { display: flex; flex-direction: column; gap: 0.25rem; }
 .control-row.toggle { flex-direction: row; align-items: center; }
-.control-row label { font-size: 0.78rem; color: var(--muted); font-weight: 600; }
+.control-row label {
+  font-size: 0.78rem;
+  color: var(--muted);
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.control-row.toggle label { text-transform: none; letter-spacing: 0; gap: 0.4rem; }
+.control-row .glyph {
+  width: 14px;
+  height: 14px;
+  color: var(--ink);
+  flex-shrink: 0;
+}
 .control-row select {
-  font-size: 0.92rem;
-  padding: 0.32rem 0.5rem;
+  font-size: 0.95rem;
+  padding: 0.4rem 0.6rem;
   border: 1px solid var(--line);
   border-radius: var(--radius);
   background: var(--paper);
-  min-width: 180px;
+  min-width: 200px;
+  cursor: pointer;
+  transition: border-color 0.12s ease, box-shadow 0.12s ease;
 }
+.control-row select:hover { border-color: var(--ink); }
+.control-row select:focus {
+  outline: none;
+  border-color: var(--link);
+  box-shadow: 0 0 0 2px rgba(11, 79, 156, 0.18);
+}
+.control-row.toggle .glyph { color: var(--muted); }
 
 #chart {
   width: 100%;

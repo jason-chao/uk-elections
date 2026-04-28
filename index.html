@@ -20,25 +20,39 @@
 
     <section id="controls" aria-label="Chart controls">
       <div class="control-row">
-        <label for="region">Region</label>
+        <label for="region">
+          <svg class="glyph" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M1.5 8 H14.5 M8 1.5 V14.5 M3 4 Q8 6 13 4 M3 12 Q8 10 13 12" stroke="currentColor" stroke-width="1" fill="none"/></svg>
+          Region
+        </label>
         <select id="region"></select>
       </div>
       <div class="control-row">
-        <label for="party-filter">Party</label>
+        <label for="party-filter">
+          <svg class="glyph" viewBox="0 0 16 16" aria-hidden="true"><rect x="2.5" y="3.5" width="11" height="9" rx="1" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M5 7 H11 M5 9.5 H9" stroke="currentColor" stroke-width="1.4" fill="none"/><path d="M3.5 5 L13 14" stroke="currentColor" stroke-width="1.2" fill="none" stroke-linecap="round"/></svg>
+          Party
+        </label>
         <select id="party-filter">
           <option value="ALL">All parties</option>
         </select>
       </div>
       <div class="control-row">
-        <label for="view-mode">View</label>
+        <label for="view-mode">
+          <svg class="glyph" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 13 V3 M2 13 H14" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round"/><rect x="4" y="8" width="2" height="4" fill="currentColor"/><rect x="7" y="5" width="2" height="7" fill="currentColor"/><rect x="10" y="9" width="2" height="3" fill="currentColor"/></svg>
+          View
+        </label>
         <select id="view-mode">
-          <option value="dotrows" selected>Dot rows</option>
-          <option value="grouped">Grouped bars</option>
-          <option value="table">Table</option>
+          <option value="dotrows" selected>● Dot rows</option>
+          <option value="grouped">▦ Grouped bars</option>
+          <option value="table">⊞ Table</option>
         </select>
       </div>
       <div class="control-row toggle">
-        <label><input type="checkbox" id="show-outliers" checked> Outliers <span class="info" data-tip="Outlier methods (e.g. Uniform National Swing) are kept but rendered with reduced opacity.">i</span></label>
+        <label>
+          <input type="checkbox" id="show-outliers" checked>
+          <svg class="glyph" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 3 H14 L10 8.5 V13 L6 12 V8.5 Z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+          Outliers
+          <span class="info" data-tip="Outlier methods (e.g. Uniform National Swing) are kept but rendered with reduced opacity.">i</span>
+        </label>
       </div>
     </section>
 
