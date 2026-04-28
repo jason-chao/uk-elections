@@ -89,13 +89,21 @@ Claude pulls the latest forecasts, recomputes the derived methods (BBC PNS, R&T 
 
 ### Option B — Manual
 
-1. Edit `data/predictions.json`, `data/accuracy.json`, `data/metadata.json`.
-2. Regenerate the bundles:
+1. Snapshot the current data (so the previous version is always recoverable):
+
+   ```bash
+   python3 scripts/archive_data.py
+   ```
+
+2. Edit `data/predictions.json`, `data/track_record.json`, `data/metadata.json`. Bump `data_version` in `metadata.json` to today (`YYYY.MM.DD`).
+3. Regenerate the bundles:
 
    ```bash
    python3 scripts/build_data_js.py
    python3 scripts/export_csv.py
    ```
+
+Every refresh leaves a dated snapshot under `data/archive/<data_version>/`. The archive is append-only — never delete from it.
 
 ## Project structure
 
@@ -106,13 +114,16 @@ uk-elections-2026/
 ├── app.js                     # Chart, controls, tooltips
 ├── data/
 │   ├── predictions.json       # Source of truth: methods, regions, baseline_2022, predictions
-│   ├── accuracy.json          # Track-record ranking
+│   ├── track_record.json      # Track-record ranking
 │   ├── metadata.json          # Version, last-updated, sources
 │   ├── predictions.csv        # Flat CSV export
-│   └── data.js                # Auto-generated JSON bundle (for file:// loading)
+│   ├── data.js                # Auto-generated JSON bundle (for file:// loading)
+│   └── archive/               # Dated snapshots of every previous data version
+│       └── 2026.04.27/        # …with ARCHIVE_INFO.json + the three JSONs
 ├── scripts/
 │   ├── build_data_js.py       # JSON → data.js bundler
-│   └── export_csv.py          # JSON → CSV exporter
+│   ├── export_csv.py          # JSON → CSV exporter
+│   └── archive_data.py        # Snapshot data/*.json into data/archive/<version>/
 ├── .claude/
 │   └── skills/
 │       └── refresh-uk-elections-data/
@@ -134,7 +145,7 @@ uk-elections-2026/
 - **`methods`** — `id`, `name`, `short`, `author`, `description`, `source_url`, `outlier`.
 - **`predictions`** — `method_id → region_id → party_id → { low, central, high }`.
 
-`data/accuracy.json` ranks methods (track-record table) with composite `score`, `mean_abs_seat_error_per_council`, `control_hit_rate`, and one-line `strengths` / `weaknesses`. The file name is historical; the on-screen label is **Track record**.
+`data/track_record.json` ranks methods with composite `score`, `mean_abs_seat_error_per_council`, `control_hit_rate`, and one-line `strengths` / `weaknesses`.
 
 `data/metadata.json` carries `data_version` (`YYYY.MM.DD`), `last_updated` (ISO), `polling_window`, and the sources list.
 

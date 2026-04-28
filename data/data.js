@@ -1787,8 +1787,8 @@ window.UKE_DATA = {
       }
     }
   },
-  "accuracy": {
-    "metric": "Historical accuracy of UK local-election forecasting methods",
+  "track_record": {
+    "metric": "Historical track record of UK local-election forecasting methods",
     "scoring_notes": "Composite score (0–100) blending mean absolute seat error vs final result, council-control hit rate, and consistency across the last three local-election cycles (2022, 2023, 2024, plus 2025 partial). Higher is better. Sources cited per row.",
     "as_of": "2026-04-28",
     "ranking": [

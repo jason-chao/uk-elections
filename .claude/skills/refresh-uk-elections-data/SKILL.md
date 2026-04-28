@@ -10,11 +10,21 @@ Bring the data files up to date with the latest published forecasts and polls.
 ## Files this skill writes
 
 - `data/predictions.json` — methods, regions, baseline_2022, polling_2026, predictions
-- `data/accuracy.json` — historical accuracy ranking
+- `data/track_record.json` — historical track-record ranking
 - `data/metadata.json` — version + last-updated + sources
 - `data/data.js`, `data/predictions.csv` — regenerated from the JSONs
 
 Do not edit `index.html`, `app.js`, or `styles.css`. Do not rename any existing top-level keys.
+
+## Step 0 — Archive the current data first
+
+**Always snapshot the existing data files before overwriting them.** Run from the project root:
+
+```bash
+python3 scripts/archive_data.py
+```
+
+This copies the current `predictions.json`, `track_record.json` and `metadata.json` into `data/archive/<data_version>/` along with a small `ARCHIVE_INFO.json` describing when the snapshot was taken. Refuses to overwrite an existing snapshot unless you pass `--force`. If the resulting refresh ends up with the same `data_version` (e.g. you re-ran on the same day), bump the version in the new `metadata.json` so the next archive lands in a different folder. **Never delete files from `data/archive/`** — they are the only record of what each previous build said.
 
 ## Step 1 — Pull the latest sources
 
@@ -50,14 +60,16 @@ For methods without a published forecast, recompute from the polling average aga
 
 Keep central estimates within ±15% of the previous version unless the polling average has moved by more than 3 points for that party — flag any larger move in the final summary.
 
-## Step 3 — Update the accuracy ranking
+## Step 3 — Update the track-record ranking
 
 If a method publishes a new backtest or a new local-election cycle has been added, update `score`, `mean_abs_seat_error_per_council` and `control_hit_rate`. Otherwise leave ranks unchanged. Never invent figures.
 
 ## Step 4 — Write the files
 
+(You should already have run `scripts/archive_data.py` in Step 0. If not, do it now before any of the writes below.)
+
 1. Overwrite `data/predictions.json` (same key order; change values only).
-2. Overwrite `data/accuracy.json`.
+2. Overwrite `data/track_record.json`.
 3. Overwrite `data/metadata.json`: set `last_updated` to the current ISO time, bump `data_version` to `YYYY.MM.DD`, recompute `days_to_election` from `2026-05-07`, refresh `polling_window`.
 4. Regenerate the bundles:
 
@@ -69,7 +81,7 @@ If a method publishes a new backtest or a new local-election cycle has been adde
 5. Validate:
 
    ```bash
-   python3 -c "import json; [json.load(open(f'data/{f}.json')) for f in ['predictions','accuracy','metadata']]; print('JSON OK')"
+   python3 -c "import json; [json.load(open(f'data/{f}.json')) for f in ['predictions','track_record','metadata']]; print('JSON OK')"
    node --check app.js
    ```
 

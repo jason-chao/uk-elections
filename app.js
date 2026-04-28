@@ -9,7 +9,7 @@
   }
 
   const PRED   = DATA.predictions;
-  const ACC    = DATA.accuracy;
+  const ACC    = DATA.track_record;
   const META   = DATA.metadata;
 
   const PARTIES = PRED.parties;
@@ -108,7 +108,7 @@
     chip.className = "chip method-chip";
     chip.dataset.methodId = m.id;
     chip.title = `${m.name} — rank #${acc ? acc.rank : "?"}, score ${acc ? acc.score : "?"}`;
-    chip.setAttribute("data-tip", `${m.name}. Historical accuracy rank #${acc ? acc.rank : "?"} (composite ${acc ? acc.score : "?"}/100).`);
+    chip.setAttribute("data-tip", `${m.name}. Track-record rank #${acc ? acc.rank : "?"} (composite ${acc ? acc.score : "?"}/100).`);
     chip.innerHTML = `<span class="swatch" style="background:${methodColour(m.id)}"></span>${escape(m.short)}<span class="mae">#${acc ? acc.rank : "?"}</span>`;
     chip.addEventListener("click", () => {
       if (state.enabled.has(m.id)) state.enabled.delete(m.id);
