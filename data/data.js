@@ -1875,10 +1875,10 @@ window.UKE_DATA = {
     ]
   },
   "metadata": {
-    "last_updated": "2026-04-28T12:00:00Z",
-    "data_version": "2026.04.28",
+    "last_updated": "2026-04-30T00:00:00Z",
+    "data_version": "2026.04.30",
     "election_date": "2026-05-07",
-    "days_to_election": 9,
+    "days_to_election": 7,
     "polling_window": "Late March to late April 2026",
     "sources": [
       {

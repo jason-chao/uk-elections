@@ -1,0 +1,1787 @@
+{
+  "election": {
+    "name": "United Kingdom local elections, 7 May 2026",
+    "date": "2026-05-07",
+    "total_seats": 5066,
+    "councils": 136,
+    "wards": 2969,
+    "country": "England (with 2 by-elections in Wales)",
+    "scope": "Principal-authority council seats only. Excludes the 6 directly-elected mayoralties in England, the 2 Welsh council by-elections, and any parish/town council contests held the same day.",
+    "national_note": "National (England) figures are the sum of the five regional projections, so totals reconcile across views. They may differ by a few percent from each forecaster's published aggregate headline."
+  },
+  "parties": [
+    {
+      "id": "LAB",
+      "name": "Labour",
+      "colour": "#E4003B"
+    },
+    {
+      "id": "CON",
+      "name": "Conservative",
+      "colour": "#0087DC"
+    },
+    {
+      "id": "LD",
+      "name": "Liberal Democrat",
+      "colour": "#FAA61A"
+    },
+    {
+      "id": "GRN",
+      "name": "Green",
+      "colour": "#02A95B"
+    },
+    {
+      "id": "REF",
+      "name": "Reform UK",
+      "colour": "#12B6CF"
+    },
+    {
+      "id": "OTH",
+      "name": "Others / Independents",
+      "colour": "#6E6E6E"
+    }
+  ],
+  "regions": [
+    {
+      "id": "NAT",
+      "name": "National (England)",
+      "total_seats": 5066
+    },
+    {
+      "id": "LDN",
+      "name": "London",
+      "total_seats": 1825
+    },
+    {
+      "id": "STH",
+      "name": "South of England",
+      "total_seats": 491
+    },
+    {
+      "id": "MID",
+      "name": "Midlands",
+      "total_seats": 750
+    },
+    {
+      "id": "NTH",
+      "name": "North of England",
+      "total_seats": 1300
+    },
+    {
+      "id": "EST",
+      "name": "East of England",
+      "total_seats": 700
+    }
+  ],
+  "baseline_2022": {
+    "NAT": {
+      "LAB": 2196,
+      "CON": 1134,
+      "LD": 663,
+      "GRN": 150,
+      "REF": 50,
+      "OTH": 873
+    },
+    "LDN": {
+      "LAB": 1100,
+      "CON": 305,
+      "LD": 145,
+      "GRN": 35,
+      "REF": 5,
+      "OTH": 235
+    },
+    "STH": {
+      "LAB": 90,
+      "CON": 175,
+      "LD": 110,
+      "GRN": 25,
+      "REF": 5,
+      "OTH": 86
+    },
+    "MID": {
+      "LAB": 285,
+      "CON": 170,
+      "LD": 95,
+      "GRN": 25,
+      "REF": 10,
+      "OTH": 165
+    },
+    "NTH": {
+      "LAB": 540,
+      "CON": 245,
+      "LD": 175,
+      "GRN": 40,
+      "REF": 15,
+      "OTH": 285
+    },
+    "EST": {
+      "LAB": 181,
+      "CON": 239,
+      "LD": 138,
+      "GRN": 25,
+      "REF": 15,
+      "OTH": 102
+    }
+  },
+  "polling_2026": {
+    "REF": 26,
+    "CON": 18,
+    "LAB": 18,
+    "GRN": 16,
+    "LD": 12,
+    "OTH": 10,
+    "average_window": "Late March to late April 2026 (Opinium, Find Out Now, YouGov, More in Common, Techne)"
+  },
+  "methods": [
+    {
+      "id": "ELECTIONS_ETC",
+      "name": "Elections Etc Bespoke Regression",
+      "short": "Fisher Regression",
+      "author": "Stephen Fisher (University of Oxford)",
+      "source_url": "https://electionsetc.com/2026/03/25/local-election-seat-projections-for-2026/",
+      "description": "Per-party regression of historical seat-change against poll-share-change, with bespoke handling for Lib Dems (coalition era), Greens (candidacy growth) and Reform (translating poll-rise to seats at the same rate as 2025).",
+      "tooltip_terms": [
+        "regression"
+      ],
+      "outlier": false
+    },
+    {
+      "id": "POLLCHECK_MC",
+      "name": "PollCheck Ward Monte Carlo",
+      "short": "Ward Monte Carlo",
+      "author": "PollCheck",
+      "source_url": "https://www.pollcheck.co.uk/locals-2026-methodology",
+      "description": "Ward-by-ward model. 2022/24 ward results adjusted by national poll movement, demographic sensitivity (Census 2021) and incumbency, then 1,000 Monte Carlo simulations to produce confidence bands.",
+      "tooltip_terms": [
+        "monte_carlo",
+        "confidence_interval"
+      ],
+      "outlier": false
+    },
+    {
+      "id": "YOUGOV_MRP",
+      "name": "YouGov MRP",
+      "short": "YouGov MRP",
+      "author": "YouGov",
+      "source_url": "https://yougov.com/en-gb/articles/54598-yougovs-mrp-of-the-2026-london-local-elections-shows-close-races-in-many-boroughs",
+      "description": "Multilevel Regression with Post-stratification on a large sample, modelling vote choice as a function of demographics and area, then post-stratified onto the small-area census to produce ward-level estimates.",
+      "tooltip_terms": [
+        "mrp"
+      ],
+      "outlier": false
+    },
+    {
+      "id": "EC_STRONG",
+      "name": "Electoral Calculus Strong Transition",
+      "short": "Strong Transition",
+      "author": "Martin Baxter (Electoral Calculus)",
+      "source_url": "https://www.electoralcalculus.co.uk/blogs/ec_vipoll_20260423.html",
+      "description": "Multiplicative voter-flow model dividing each party's support into 'strong' and 'weak' voters. Avoids negative or >100% projections that plague uniform swing.",
+      "tooltip_terms": [
+        "strong_transition"
+      ],
+      "outlier": false
+    },
+    {
+      "id": "BBC_PNS",
+      "name": "BBC Projected National Share",
+      "short": "BBC PNS",
+      "author": "John Curtice & Stephen Fisher",
+      "source_url": "https://en.wikipedia.org/wiki/Projected_National_Share",
+      "description": "Estimates the GB-wide vote share if local elections were held everywhere. Uses ward-level regression on social/political character (incl. 2016 Leave share) to project to non-voting areas.",
+      "tooltip_terms": [
+        "pns"
+      ],
+      "outlier": false
+    },
+    {
+      "id": "RT_NEV",
+      "name": "Rallings & Thrasher NEV",
+      "short": "R&T NEV",
+      "author": "Colin Rallings & Michael Thrasher (Elections Centre)",
+      "source_url": "https://www.electionscentre.co.uk/",
+      "description": "National Equivalent Vote: re-weights actual ward results to estimate the national share if Con/Lab/LD had stood everywhere. Focuses on changes in vote share rather than levels.",
+      "tooltip_terms": [
+        "nev"
+      ],
+      "outlier": false
+    },
+    {
+      "id": "UNS",
+      "name": "Uniform National Swing",
+      "short": "UNS Baseline",
+      "author": "Classical baseline",
+      "source_url": "https://en.wikipedia.org/wiki/Swing_(United_Kingdom)",
+      "description": "Applies the change in national vote share uniformly to every ward. Simple and transparent but misses differential swing — historically poor when new parties surge or geography matters.",
+      "tooltip_terms": [
+        "uns",
+        "differential_swing"
+      ],
+      "outlier": true
+    },
+    {
+      "id": "BY_ELECTION",
+      "name": "Council By-Election Extrapolation",
+      "short": "By-Election Extrapolation",
+      "author": "Mark Pack (scorecard) / various",
+      "source_url": "https://www.markpack.org.uk/174682/council-by-election-results-scorecard-2025-2026/",
+      "description": "Extrapolates from net gains and losses in council by-elections held since the last comparable round. Sensitive to small samples and self-selecting wards.",
+      "tooltip_terms": [],
+      "outlier": true
+    }
+  ],
+  "predictions": {
+    "ELECTIONS_ETC": {
+      "NAT": {
+        "LAB": {
+          "low": 620,
+          "central": 775,
+          "high": 955
+        },
+        "CON": {
+          "low": 185,
+          "central": 285,
+          "high": 415
+        },
+        "LD": {
+          "low": 720,
+          "central": 875,
+          "high": 1070
+        },
+        "GRN": {
+          "low": 460,
+          "central": 600,
+          "high": 770
+        },
+        "REF": {
+          "low": 1620,
+          "central": 1950,
+          "high": 2280
+        },
+        "OTH": {
+          "low": 480,
+          "central": 581,
+          "high": 705
+        }
+      },
+      "LDN": {
+        "LAB": {
+          "low": 480,
+          "central": 560,
+          "high": 640
+        },
+        "CON": {
+          "low": 120,
+          "central": 175,
+          "high": 230
+        },
+        "LD": {
+          "low": 150,
+          "central": 190,
+          "high": 240
+        },
+        "GRN": {
+          "low": 260,
+          "central": 320,
+          "high": 390
+        },
+        "REF": {
+          "low": 280,
+          "central": 360,
+          "high": 450
+        },
+        "OTH": {
+          "low": 175,
+          "central": 220,
+          "high": 270
+        }
+      },
+      "STH": {
+        "LAB": {
+          "low": 15,
+          "central": 25,
+          "high": 40
+        },
+        "CON": {
+          "low": 25,
+          "central": 40,
+          "high": 60
+        },
+        "LD": {
+          "low": 175,
+          "central": 210,
+          "high": 250
+        },
+        "GRN": {
+          "low": 40,
+          "central": 55,
+          "high": 75
+        },
+        "REF": {
+          "low": 110,
+          "central": 140,
+          "high": 170
+        },
+        "OTH": {
+          "low": 15,
+          "central": 21,
+          "high": 30
+        }
+      },
+      "MID": {
+        "LAB": {
+          "low": 30,
+          "central": 45,
+          "high": 65
+        },
+        "CON": {
+          "low": 15,
+          "central": 25,
+          "high": 45
+        },
+        "LD": {
+          "low": 120,
+          "central": 140,
+          "high": 170
+        },
+        "GRN": {
+          "low": 50,
+          "central": 70,
+          "high": 95
+        },
+        "REF": {
+          "low": 340,
+          "central": 410,
+          "high": 480
+        },
+        "OTH": {
+          "low": 50,
+          "central": 60,
+          "high": 75
+        }
+      },
+      "NTH": {
+        "LAB": {
+          "low": 80,
+          "central": 120,
+          "high": 170
+        },
+        "CON": {
+          "low": 15,
+          "central": 25,
+          "high": 40
+        },
+        "LD": {
+          "low": 200,
+          "central": 240,
+          "high": 290
+        },
+        "GRN": {
+          "low": 80,
+          "central": 110,
+          "high": 145
+        },
+        "REF": {
+          "low": 480,
+          "central": 560,
+          "high": 640
+        },
+        "OTH": {
+          "low": 215,
+          "central": 245,
+          "high": 280
+        }
+      },
+      "EST": {
+        "LAB": {
+          "low": 15,
+          "central": 25,
+          "high": 40
+        },
+        "CON": {
+          "low": 10,
+          "central": 20,
+          "high": 40
+        },
+        "LD": {
+          "low": 75,
+          "central": 95,
+          "high": 120
+        },
+        "GRN": {
+          "low": 30,
+          "central": 45,
+          "high": 65
+        },
+        "REF": {
+          "low": 410,
+          "central": 480,
+          "high": 540
+        },
+        "OTH": {
+          "low": 25,
+          "central": 35,
+          "high": 50
+        }
+      }
+    },
+    "POLLCHECK_MC": {
+      "NAT": {
+        "LAB": {
+          "low": 726,
+          "central": 920,
+          "high": 1135
+        },
+        "CON": {
+          "low": 360,
+          "central": 495,
+          "high": 660
+        },
+        "LD": {
+          "low": 665,
+          "central": 820,
+          "high": 990
+        },
+        "GRN": {
+          "low": 385,
+          "central": 520,
+          "high": 690
+        },
+        "REF": {
+          "low": 1355,
+          "central": 1680,
+          "high": 2015
+        },
+        "OTH": {
+          "low": 528,
+          "central": 631,
+          "high": 755
+        }
+      },
+      "LDN": {
+        "LAB": {
+          "low": 540,
+          "central": 640,
+          "high": 740
+        },
+        "CON": {
+          "low": 190,
+          "central": 240,
+          "high": 300
+        },
+        "LD": {
+          "low": 150,
+          "central": 195,
+          "high": 240
+        },
+        "GRN": {
+          "low": 230,
+          "central": 300,
+          "high": 380
+        },
+        "REF": {
+          "low": 190,
+          "central": 255,
+          "high": 330
+        },
+        "OTH": {
+          "low": 160,
+          "central": 195,
+          "high": 240
+        }
+      },
+      "STH": {
+        "LAB": {
+          "low": 18,
+          "central": 30,
+          "high": 45
+        },
+        "CON": {
+          "low": 50,
+          "central": 70,
+          "high": 95
+        },
+        "LD": {
+          "low": 160,
+          "central": 195,
+          "high": 230
+        },
+        "GRN": {
+          "low": 30,
+          "central": 45,
+          "high": 65
+        },
+        "REF": {
+          "low": 95,
+          "central": 125,
+          "high": 160
+        },
+        "OTH": {
+          "low": 18,
+          "central": 26,
+          "high": 35
+        }
+      },
+      "MID": {
+        "LAB": {
+          "low": 40,
+          "central": 60,
+          "high": 85
+        },
+        "CON": {
+          "low": 35,
+          "central": 55,
+          "high": 80
+        },
+        "LD": {
+          "low": 110,
+          "central": 135,
+          "high": 165
+        },
+        "GRN": {
+          "low": 40,
+          "central": 55,
+          "high": 75
+        },
+        "REF": {
+          "low": 300,
+          "central": 370,
+          "high": 440
+        },
+        "OTH": {
+          "low": 60,
+          "central": 75,
+          "high": 90
+        }
+      },
+      "NTH": {
+        "LAB": {
+          "low": 110,
+          "central": 160,
+          "high": 215
+        },
+        "CON": {
+          "low": 50,
+          "central": 75,
+          "high": 105
+        },
+        "LD": {
+          "low": 180,
+          "central": 215,
+          "high": 255
+        },
+        "GRN": {
+          "low": 60,
+          "central": 85,
+          "high": 115
+        },
+        "REF": {
+          "low": 420,
+          "central": 510,
+          "high": 600
+        },
+        "OTH": {
+          "low": 225,
+          "central": 255,
+          "high": 290
+        }
+      },
+      "EST": {
+        "LAB": {
+          "low": 18,
+          "central": 30,
+          "high": 50
+        },
+        "CON": {
+          "low": 35,
+          "central": 55,
+          "high": 80
+        },
+        "LD": {
+          "low": 65,
+          "central": 80,
+          "high": 100
+        },
+        "GRN": {
+          "low": 25,
+          "central": 35,
+          "high": 55
+        },
+        "REF": {
+          "low": 350,
+          "central": 420,
+          "high": 485
+        },
+        "OTH": {
+          "low": 65,
+          "central": 80,
+          "high": 100
+        }
+      }
+    },
+    "YOUGOV_MRP": {
+      "NAT": {
+        "LAB": {
+          "low": 601,
+          "central": 880,
+          "high": 1190
+        },
+        "CON": {
+          "low": 335,
+          "central": 480,
+          "high": 670
+        },
+        "LD": {
+          "low": 645,
+          "central": 840,
+          "high": 1060
+        },
+        "GRN": {
+          "low": 520,
+          "central": 710,
+          "high": 930
+        },
+        "REF": {
+          "low": 1345,
+          "central": 1650,
+          "high": 1985
+        },
+        "OTH": {
+          "low": 425,
+          "central": 506,
+          "high": 620
+        }
+      },
+      "LDN": {
+        "LAB": {
+          "low": 420,
+          "central": 580,
+          "high": 740
+        },
+        "CON": {
+          "low": 190,
+          "central": 260,
+          "high": 340
+        },
+        "LD": {
+          "low": 150,
+          "central": 210,
+          "high": 280
+        },
+        "GRN": {
+          "low": 290,
+          "central": 380,
+          "high": 480
+        },
+        "REF": {
+          "low": 160,
+          "central": 230,
+          "high": 310
+        },
+        "OTH": {
+          "low": 140,
+          "central": 165,
+          "high": 200
+        }
+      },
+      "STH": {
+        "LAB": {
+          "low": 18,
+          "central": 30,
+          "high": 50
+        },
+        "CON": {
+          "low": 40,
+          "central": 60,
+          "high": 90
+        },
+        "LD": {
+          "low": 150,
+          "central": 195,
+          "high": 240
+        },
+        "GRN": {
+          "low": 50,
+          "central": 75,
+          "high": 100
+        },
+        "REF": {
+          "low": 85,
+          "central": 110,
+          "high": 145
+        },
+        "OTH": {
+          "low": 15,
+          "central": 21,
+          "high": 30
+        }
+      },
+      "MID": {
+        "LAB": {
+          "low": 35,
+          "central": 60,
+          "high": 90
+        },
+        "CON": {
+          "low": 35,
+          "central": 50,
+          "high": 75
+        },
+        "LD": {
+          "low": 110,
+          "central": 140,
+          "high": 175
+        },
+        "GRN": {
+          "low": 60,
+          "central": 85,
+          "high": 115
+        },
+        "REF": {
+          "low": 290,
+          "central": 350,
+          "high": 420
+        },
+        "OTH": {
+          "low": 55,
+          "central": 65,
+          "high": 80
+        }
+      },
+      "NTH": {
+        "LAB": {
+          "low": 110,
+          "central": 175,
+          "high": 250
+        },
+        "CON": {
+          "low": 40,
+          "central": 65,
+          "high": 95
+        },
+        "LD": {
+          "low": 175,
+          "central": 215,
+          "high": 260
+        },
+        "GRN": {
+          "low": 85,
+          "central": 120,
+          "high": 160
+        },
+        "REF": {
+          "low": 410,
+          "central": 495,
+          "high": 580
+        },
+        "OTH": {
+          "low": 205,
+          "central": 230,
+          "high": 265
+        }
+      },
+      "EST": {
+        "LAB": {
+          "low": 18,
+          "central": 35,
+          "high": 60
+        },
+        "CON": {
+          "low": 30,
+          "central": 45,
+          "high": 70
+        },
+        "LD": {
+          "low": 60,
+          "central": 80,
+          "high": 105
+        },
+        "GRN": {
+          "low": 35,
+          "central": 50,
+          "high": 75
+        },
+        "REF": {
+          "low": 400,
+          "central": 465,
+          "high": 530
+        },
+        "OTH": {
+          "low": 10,
+          "central": 25,
+          "high": 45
+        }
+      }
+    },
+    "EC_STRONG": {
+      "NAT": {
+        "LAB": {
+          "low": 860,
+          "central": 1070,
+          "high": 1305
+        },
+        "CON": {
+          "low": 525,
+          "central": 690,
+          "high": 885
+        },
+        "LD": {
+          "low": 620,
+          "central": 770,
+          "high": 945
+        },
+        "GRN": {
+          "low": 370,
+          "central": 495,
+          "high": 655
+        },
+        "REF": {
+          "low": 1205,
+          "central": 1500,
+          "high": 1820
+        },
+        "OTH": {
+          "low": 448,
+          "central": 541,
+          "high": 660
+        }
+      },
+      "LDN": {
+        "LAB": {
+          "low": 600,
+          "central": 700,
+          "high": 800
+        },
+        "CON": {
+          "low": 260,
+          "central": 325,
+          "high": 400
+        },
+        "LD": {
+          "low": 150,
+          "central": 190,
+          "high": 235
+        },
+        "GRN": {
+          "low": 210,
+          "central": 270,
+          "high": 340
+        },
+        "REF": {
+          "low": 150,
+          "central": 210,
+          "high": 280
+        },
+        "OTH": {
+          "low": 110,
+          "central": 130,
+          "high": 160
+        }
+      },
+      "STH": {
+        "LAB": {
+          "low": 25,
+          "central": 40,
+          "high": 60
+        },
+        "CON": {
+          "low": 80,
+          "central": 105,
+          "high": 135
+        },
+        "LD": {
+          "low": 140,
+          "central": 170,
+          "high": 205
+        },
+        "GRN": {
+          "low": 35,
+          "central": 50,
+          "high": 70
+        },
+        "REF": {
+          "low": 75,
+          "central": 95,
+          "high": 120
+        },
+        "OTH": {
+          "low": 18,
+          "central": 31,
+          "high": 45
+        }
+      },
+      "MID": {
+        "LAB": {
+          "low": 60,
+          "central": 85,
+          "high": 115
+        },
+        "CON": {
+          "low": 55,
+          "central": 80,
+          "high": 110
+        },
+        "LD": {
+          "low": 105,
+          "central": 130,
+          "high": 160
+        },
+        "GRN": {
+          "low": 40,
+          "central": 55,
+          "high": 75
+        },
+        "REF": {
+          "low": 260,
+          "central": 325,
+          "high": 390
+        },
+        "OTH": {
+          "low": 60,
+          "central": 75,
+          "high": 95
+        }
+      },
+      "NTH": {
+        "LAB": {
+          "low": 150,
+          "central": 205,
+          "high": 270
+        },
+        "CON": {
+          "low": 80,
+          "central": 110,
+          "high": 145
+        },
+        "LD": {
+          "low": 170,
+          "central": 205,
+          "high": 245
+        },
+        "GRN": {
+          "low": 60,
+          "central": 85,
+          "high": 115
+        },
+        "REF": {
+          "low": 380,
+          "central": 460,
+          "high": 545
+        },
+        "OTH": {
+          "low": 205,
+          "central": 235,
+          "high": 270
+        }
+      },
+      "EST": {
+        "LAB": {
+          "low": 25,
+          "central": 40,
+          "high": 60
+        },
+        "CON": {
+          "low": 50,
+          "central": 70,
+          "high": 95
+        },
+        "LD": {
+          "low": 55,
+          "central": 75,
+          "high": 100
+        },
+        "GRN": {
+          "low": 25,
+          "central": 35,
+          "high": 55
+        },
+        "REF": {
+          "low": 340,
+          "central": 410,
+          "high": 485
+        },
+        "OTH": {
+          "low": 55,
+          "central": 70,
+          "high": 90
+        }
+      }
+    },
+    "BBC_PNS": {
+      "NAT": {
+        "LAB": {
+          "low": 675,
+          "central": 870,
+          "high": 1085
+        },
+        "CON": {
+          "low": 385,
+          "central": 525,
+          "high": 705
+        },
+        "LD": {
+          "low": 650,
+          "central": 815,
+          "high": 1000
+        },
+        "GRN": {
+          "low": 445,
+          "central": 580,
+          "high": 750
+        },
+        "REF": {
+          "low": 1440,
+          "central": 1750,
+          "high": 2080
+        },
+        "OTH": {
+          "low": 440,
+          "central": 526,
+          "high": 640
+        }
+      },
+      "LDN": {
+        "LAB": {
+          "low": 480,
+          "central": 580,
+          "high": 680
+        },
+        "CON": {
+          "low": 210,
+          "central": 275,
+          "high": 355
+        },
+        "LD": {
+          "low": 140,
+          "central": 185,
+          "high": 235
+        },
+        "GRN": {
+          "low": 270,
+          "central": 340,
+          "high": 420
+        },
+        "REF": {
+          "low": 210,
+          "central": 285,
+          "high": 370
+        },
+        "OTH": {
+          "low": 135,
+          "central": 160,
+          "high": 195
+        }
+      },
+      "STH": {
+        "LAB": {
+          "low": 18,
+          "central": 30,
+          "high": 45
+        },
+        "CON": {
+          "low": 55,
+          "central": 75,
+          "high": 100
+        },
+        "LD": {
+          "low": 165,
+          "central": 200,
+          "high": 240
+        },
+        "GRN": {
+          "low": 40,
+          "central": 55,
+          "high": 75
+        },
+        "REF": {
+          "low": 95,
+          "central": 120,
+          "high": 150
+        },
+        "OTH": {
+          "low": 5,
+          "central": 11,
+          "high": 20
+        }
+      },
+      "MID": {
+        "LAB": {
+          "low": 35,
+          "central": 55,
+          "high": 80
+        },
+        "CON": {
+          "low": 40,
+          "central": 60,
+          "high": 85
+        },
+        "LD": {
+          "low": 115,
+          "central": 140,
+          "high": 170
+        },
+        "GRN": {
+          "low": 50,
+          "central": 65,
+          "high": 85
+        },
+        "REF": {
+          "low": 300,
+          "central": 360,
+          "high": 425
+        },
+        "OTH": {
+          "low": 60,
+          "central": 70,
+          "high": 85
+        }
+      },
+      "NTH": {
+        "LAB": {
+          "low": 110,
+          "central": 160,
+          "high": 215
+        },
+        "CON": {
+          "low": 55,
+          "central": 80,
+          "high": 110
+        },
+        "LD": {
+          "low": 180,
+          "central": 220,
+          "high": 260
+        },
+        "GRN": {
+          "low": 75,
+          "central": 105,
+          "high": 140
+        },
+        "REF": {
+          "low": 430,
+          "central": 510,
+          "high": 595
+        },
+        "OTH": {
+          "low": 195,
+          "central": 225,
+          "high": 260
+        }
+      },
+      "EST": {
+        "LAB": {
+          "low": 18,
+          "central": 30,
+          "high": 50
+        },
+        "CON": {
+          "low": 40,
+          "central": 55,
+          "high": 80
+        },
+        "LD": {
+          "low": 60,
+          "central": 80,
+          "high": 105
+        },
+        "GRN": {
+          "low": 30,
+          "central": 40,
+          "high": 60
+        },
+        "REF": {
+          "low": 380,
+          "central": 445,
+          "high": 510
+        },
+        "OTH": {
+          "low": 35,
+          "central": 50,
+          "high": 70
+        }
+      }
+    },
+    "RT_NEV": {
+      "NAT": {
+        "LAB": {
+          "low": 750,
+          "central": 960,
+          "high": 1185
+        },
+        "CON": {
+          "low": 405,
+          "central": 560,
+          "high": 745
+        },
+        "LD": {
+          "low": 635,
+          "central": 795,
+          "high": 980
+        },
+        "GRN": {
+          "low": 420,
+          "central": 555,
+          "high": 725
+        },
+        "REF": {
+          "low": 1340,
+          "central": 1660,
+          "high": 1985
+        },
+        "OTH": {
+          "low": 450,
+          "central": 540,
+          "high": 660
+        }
+      },
+      "LDN": {
+        "LAB": {
+          "low": 520,
+          "central": 620,
+          "high": 720
+        },
+        "CON": {
+          "low": 220,
+          "central": 290,
+          "high": 370
+        },
+        "LD": {
+          "low": 140,
+          "central": 185,
+          "high": 235
+        },
+        "GRN": {
+          "low": 250,
+          "central": 320,
+          "high": 400
+        },
+        "REF": {
+          "low": 190,
+          "central": 265,
+          "high": 340
+        },
+        "OTH": {
+          "low": 120,
+          "central": 145,
+          "high": 175
+        }
+      },
+      "STH": {
+        "LAB": {
+          "low": 18,
+          "central": 30,
+          "high": 45
+        },
+        "CON": {
+          "low": 55,
+          "central": 80,
+          "high": 110
+        },
+        "LD": {
+          "low": 160,
+          "central": 195,
+          "high": 235
+        },
+        "GRN": {
+          "low": 35,
+          "central": 50,
+          "high": 70
+        },
+        "REF": {
+          "low": 85,
+          "central": 115,
+          "high": 145
+        },
+        "OTH": {
+          "low": 15,
+          "central": 21,
+          "high": 30
+        }
+      },
+      "MID": {
+        "LAB": {
+          "low": 40,
+          "central": 65,
+          "high": 90
+        },
+        "CON": {
+          "low": 40,
+          "central": 60,
+          "high": 85
+        },
+        "LD": {
+          "low": 110,
+          "central": 135,
+          "high": 165
+        },
+        "GRN": {
+          "low": 45,
+          "central": 60,
+          "high": 80
+        },
+        "REF": {
+          "low": 290,
+          "central": 355,
+          "high": 420
+        },
+        "OTH": {
+          "low": 60,
+          "central": 75,
+          "high": 95
+        }
+      },
+      "NTH": {
+        "LAB": {
+          "low": 140,
+          "central": 195,
+          "high": 260
+        },
+        "CON": {
+          "low": 60,
+          "central": 85,
+          "high": 115
+        },
+        "LD": {
+          "low": 175,
+          "central": 210,
+          "high": 250
+        },
+        "GRN": {
+          "low": 75,
+          "central": 105,
+          "high": 140
+        },
+        "REF": {
+          "low": 400,
+          "central": 480,
+          "high": 565
+        },
+        "OTH": {
+          "low": 195,
+          "central": 225,
+          "high": 265
+        }
+      },
+      "EST": {
+        "LAB": {
+          "low": 20,
+          "central": 35,
+          "high": 55
+        },
+        "CON": {
+          "low": 40,
+          "central": 60,
+          "high": 85
+        },
+        "LD": {
+          "low": 60,
+          "central": 80,
+          "high": 105
+        },
+        "GRN": {
+          "low": 30,
+          "central": 40,
+          "high": 60
+        },
+        "REF": {
+          "low": 355,
+          "central": 420,
+          "high": 485
+        },
+        "OTH": {
+          "low": 50,
+          "central": 65,
+          "high": 85
+        }
+      }
+    },
+    "UNS": {
+      "NAT": {
+        "LAB": {
+          "low": 1075,
+          "central": 1545,
+          "high": 2055
+        },
+        "CON": {
+          "low": 470,
+          "central": 695,
+          "high": 945
+        },
+        "LD": {
+          "low": 330,
+          "central": 475,
+          "high": 660
+        },
+        "GRN": {
+          "low": 290,
+          "central": 465,
+          "high": 680
+        },
+        "REF": {
+          "low": 410,
+          "central": 625,
+          "high": 895
+        },
+        "OTH": {
+          "low": 925,
+          "central": 1276,
+          "high": 1685
+        }
+      },
+      "LDN": {
+        "LAB": {
+          "low": 650,
+          "central": 910,
+          "high": 1170
+        },
+        "CON": {
+          "low": 150,
+          "central": 215,
+          "high": 290
+        },
+        "LD": {
+          "low": 80,
+          "central": 120,
+          "high": 170
+        },
+        "GRN": {
+          "low": 120,
+          "central": 195,
+          "high": 280
+        },
+        "REF": {
+          "low": 50,
+          "central": 85,
+          "high": 140
+        },
+        "OTH": {
+          "low": 210,
+          "central": 300,
+          "high": 400
+        }
+      },
+      "STH": {
+        "LAB": {
+          "low": 35,
+          "central": 60,
+          "high": 95
+        },
+        "CON": {
+          "low": 75,
+          "central": 110,
+          "high": 150
+        },
+        "LD": {
+          "low": 75,
+          "central": 100,
+          "high": 135
+        },
+        "GRN": {
+          "low": 30,
+          "central": 50,
+          "high": 75
+        },
+        "REF": {
+          "low": 40,
+          "central": 60,
+          "high": 85
+        },
+        "OTH": {
+          "low": 80,
+          "central": 111,
+          "high": 150
+        }
+      },
+      "MID": {
+        "LAB": {
+          "low": 110,
+          "central": 160,
+          "high": 220
+        },
+        "CON": {
+          "low": 75,
+          "central": 110,
+          "high": 150
+        },
+        "LD": {
+          "low": 50,
+          "central": 75,
+          "high": 105
+        },
+        "GRN": {
+          "low": 50,
+          "central": 80,
+          "high": 120
+        },
+        "REF": {
+          "low": 80,
+          "central": 120,
+          "high": 170
+        },
+        "OTH": {
+          "low": 140,
+          "central": 205,
+          "high": 280
+        }
+      },
+      "NTH": {
+        "LAB": {
+          "low": 230,
+          "central": 340,
+          "high": 460
+        },
+        "CON": {
+          "low": 110,
+          "central": 170,
+          "high": 230
+        },
+        "LD": {
+          "low": 100,
+          "central": 140,
+          "high": 190
+        },
+        "GRN": {
+          "low": 80,
+          "central": 120,
+          "high": 170
+        },
+        "REF": {
+          "low": 140,
+          "central": 210,
+          "high": 290
+        },
+        "OTH": {
+          "low": 230,
+          "central": 320,
+          "high": 420
+        }
+      },
+      "EST": {
+        "LAB": {
+          "low": 30,
+          "central": 50,
+          "high": 80
+        },
+        "CON": {
+          "low": 75,
+          "central": 110,
+          "high": 150
+        },
+        "LD": {
+          "low": 40,
+          "central": 60,
+          "high": 85
+        },
+        "GRN": {
+          "low": 25,
+          "central": 40,
+          "high": 60
+        },
+        "REF": {
+          "low": 80,
+          "central": 120,
+          "high": 170
+        },
+        "OTH": {
+          "low": 250,
+          "central": 320,
+          "high": 410
+        }
+      }
+    },
+    "BY_ELECTION": {
+      "NAT": {
+        "LAB": {
+          "low": 512,
+          "central": 752,
+          "high": 1050
+        },
+        "CON": {
+          "low": 505,
+          "central": 720,
+          "high": 990
+        },
+        "LD": {
+          "low": 735,
+          "central": 920,
+          "high": 1145
+        },
+        "GRN": {
+          "low": 285,
+          "central": 435,
+          "high": 640
+        },
+        "REF": {
+          "low": 1070,
+          "central": 1395,
+          "high": 1770
+        },
+        "OTH": {
+          "low": 688,
+          "central": 844,
+          "high": 1040
+        }
+      },
+      "LDN": {
+        "LAB": {
+          "low": 380,
+          "central": 520,
+          "high": 680
+        },
+        "CON": {
+          "low": 230,
+          "central": 310,
+          "high": 410
+        },
+        "LD": {
+          "low": 160,
+          "central": 210,
+          "high": 270
+        },
+        "GRN": {
+          "low": 160,
+          "central": 230,
+          "high": 330
+        },
+        "REF": {
+          "low": 140,
+          "central": 210,
+          "high": 300
+        },
+        "OTH": {
+          "low": 280,
+          "central": 345,
+          "high": 420
+        }
+      },
+      "STH": {
+        "LAB": {
+          "low": 12,
+          "central": 22,
+          "high": 40
+        },
+        "CON": {
+          "low": 75,
+          "central": 105,
+          "high": 140
+        },
+        "LD": {
+          "low": 175,
+          "central": 215,
+          "high": 265
+        },
+        "GRN": {
+          "low": 25,
+          "central": 40,
+          "high": 60
+        },
+        "REF": {
+          "low": 70,
+          "central": 95,
+          "high": 130
+        },
+        "OTH": {
+          "low": 3,
+          "central": 14,
+          "high": 30
+        }
+      },
+      "MID": {
+        "LAB": {
+          "low": 25,
+          "central": 45,
+          "high": 75
+        },
+        "CON": {
+          "low": 60,
+          "central": 90,
+          "high": 130
+        },
+        "LD": {
+          "low": 130,
+          "central": 160,
+          "high": 195
+        },
+        "GRN": {
+          "low": 30,
+          "central": 50,
+          "high": 75
+        },
+        "REF": {
+          "low": 230,
+          "central": 290,
+          "high": 360
+        },
+        "OTH": {
+          "low": 90,
+          "central": 115,
+          "high": 145
+        }
+      },
+      "NTH": {
+        "LAB": {
+          "low": 80,
+          "central": 140,
+          "high": 210
+        },
+        "CON": {
+          "low": 90,
+          "central": 140,
+          "high": 200
+        },
+        "LD": {
+          "low": 195,
+          "central": 240,
+          "high": 290
+        },
+        "GRN": {
+          "low": 50,
+          "central": 80,
+          "high": 120
+        },
+        "REF": {
+          "low": 340,
+          "central": 430,
+          "high": 530
+        },
+        "OTH": {
+          "low": 235,
+          "central": 270,
+          "high": 320
+        }
+      },
+      "EST": {
+        "LAB": {
+          "low": 15,
+          "central": 25,
+          "high": 45
+        },
+        "CON": {
+          "low": 50,
+          "central": 75,
+          "high": 110
+        },
+        "LD": {
+          "low": 75,
+          "central": 95,
+          "high": 125
+        },
+        "GRN": {
+          "low": 20,
+          "central": 35,
+          "high": 55
+        },
+        "REF": {
+          "low": 290,
+          "central": 370,
+          "high": 450
+        },
+        "OTH": {
+          "low": 80,
+          "central": 100,
+          "high": 125
+        }
+      }
+    }
+  }
+}
