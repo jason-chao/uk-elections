@@ -2,6 +2,8 @@
 
 A static, interactive site that compares the headline forecasts for the **United Kingdom local elections on 7 May 2026**. Eight established forecasting methods, side-by-side, with confidence ranges, outlier flags, and a track record.
 
+🌐 **Live version: <https://uk-elections.jasontc.net>**
+
 ---
 
 ## Contents
