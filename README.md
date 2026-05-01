@@ -28,13 +28,11 @@ Out of scope: the 6 directly-elected English mayoralties, the 2 Welsh council by
 
 ## What it shows
 
-- **Three chart views** — *Dot rows* (one row per party, methods plotted as dots with low–high range bars), *Grouped bars*, and *Table* (numbers with cell-level highest/lowest shading). Dot rows is the default and opens with the **3 methods with the best track record**; click a method chip to add or remove it, or use the **Show methods: All / Best 3 / Worst 3** preset group.
-- **Confidence ranges** drawn as whiskers or low–high text on every figure.
-- **Outlier methods** (e.g. Uniform National Swing in this fragmented multi-party cycle) are kept visible but rendered with reduced opacity and toggleable.
-- **Region selector** — National + 5 English regions.
-- **Track record** tab — composite score (mean absolute seat error per council, council-control hit rate, consistency across recent cycles), with a caveat: not a guarantee for May 2026.
-- **Method cards** — each forecaster's methodology summary and source link.
-- **Glossary & tooltips** — hover any stats term (`MRP`, `Monte Carlo`, `confidence interval`, `differential swing`) for a definition.
+- **Forecast comparison** — three views (*Dot rows*, *Grouped bars*, *Table*) of seats predicted by each method, with low–high confidence ranges on every figure. Outliers stay visible but at reduced opacity. Defaults to the **3 methods with the best track record**; toggle individuals or use the **Show methods: All / Best 3 / Worst 3** presets.
+- **Track record** — composite score per method (mean absolute seat error, council-control hit rate, consistency across recent cycles). A guide to past reliability, not a guarantee for May 2026.
+- **Method cards** — one-paragraph summary, author, and link to each forecaster's published methodology.
+- **Region slice** — pivot any view to National (England) or one of the five English regions.
+- **Glossary & tooltips** — hover stats terms (`MRP`, `Monte Carlo`, `confidence interval`, `differential swing`) for plain-English definitions.
 
 ### A note on "track record"
 
@@ -119,7 +117,7 @@ uk-elections-2026/
 │   ├── predictions.csv        # Flat CSV export
 │   ├── data.js                # Auto-generated JSON bundle (for file:// loading)
 │   └── archive/               # Dated snapshots of every previous data version
-│       └── 2026.04.27/        # …with ARCHIVE_INFO.json + the three JSONs
+│       └── <YYYY.MM.DD>/      # …with ARCHIVE_INFO.json + the three JSONs
 ├── scripts/
 │   ├── build_data_js.py       # JSON → data.js bundler
 │   ├── export_csv.py          # JSON → CSV exporter
@@ -137,7 +135,7 @@ uk-elections-2026/
 
 `data/predictions.json` has these top-level keys:
 
-- **`election`** — name, date, total seats, councils, wards, scope, national_note.
+- **`election`** — name, ISO `date` (drives the live countdown badge), total seats, council count, ward count, `scope`, `national_note`.
 - **`parties`** — id / display name / official colour.
 - **`regions`** — id / display name / total seats up.
 - **`baseline_2022`** — seats won at the previous comparable round, by region and party. Drives the derived methods.
