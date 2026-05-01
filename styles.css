@@ -623,6 +623,27 @@ code {
   .view-btn { padding: 0.35rem 0.55rem; }
   .view-btn .vlabel { display: none; }
 
+  /* Numbers table: tighter cells + scroll wrapper so it doesn't bleed off-page */
+  #chart-section table.predictions { font-size: 0.72rem; }
+  #chart-section table.predictions th { padding: 0.28rem 0.3rem; }
+  #chart-section table.predictions td { padding: 0.28rem 0.3rem; }
+  #chart-section table.predictions td.num .central { font-size: 0.78rem; }
+  #chart-section table.predictions td.num .range { font-size: 0.62rem; }
+  #chart-section table.predictions td.row-label { font-size: 0.72rem; }
+  #chart-section table.predictions td.row-label small { font-size: 0.62rem; }
+  /* Sticky row labels so they stay visible while the user scrolls horizontally */
+  #chart-section table.predictions td.row-label,
+  #chart-section table.predictions th:first-child {
+    position: sticky;
+    left: 0;
+    background: var(--paper);
+    z-index: 1;
+    box-shadow: 1px 0 0 var(--line);
+  }
+  #chart-section table.predictions tr.summary-row td.row-label { background: #FAF8F4; }
+  #chart-section table.predictions tr.consensus-row td.row-label { background: #EEF2FA; }
+  #chart-section table.predictions tr.defending-row td.row-label { background: #FBF7E8; }
+
   /* Controls: tighter dropdowns so 4 selects fit two-up cleanly */
   #controls { gap: 0.6rem; padding: 0.55rem 0.7rem 0.6rem; }
   .control-row select { min-width: 140px; font-size: 0.88rem; padding: 0.32rem 0.5rem; }

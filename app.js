@@ -783,7 +783,13 @@
     tbl.appendChild(tbody);
 
     $chart.innerHTML = "";
-    $chart.appendChild(tbl);
+
+    // Wrap in horizontal-scroll container so the table doesn't bleed past the
+    // viewport on mobile when 6 party columns × dense cells push past the edge.
+    const scroll = document.createElement("div");
+    scroll.className = "table-scroll";
+    scroll.appendChild(tbl);
+    $chart.appendChild(scroll);
 
     // Reading-the-table caption
     const cap = document.createElement("p");
