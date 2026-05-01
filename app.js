@@ -168,10 +168,10 @@
       <td>${row.rank}</td>
       <td><strong>${escape(m.name || row.method_id)}</strong><br><span style="color:var(--muted);font-size:0.85em">${escape(m.author || "")}</span></td>
       <td class="score-cell">${row.score}</td>
-      <td>${row.mean_abs_seat_error_per_council.toFixed(1)}</td>
-      <td>${(row.control_hit_rate * 100).toFixed(0)}%</td>
-      <td>${escape(row.strengths)}</td>
-      <td>${escape(row.weaknesses)}</td>
+      <td class="num-cell">${row.mean_abs_seat_error_per_council.toFixed(1)}</td>
+      <td class="num-cell">${(row.control_hit_rate * 100).toFixed(0)}%</td>
+      <td class="col-strengths">${escape(row.strengths)}</td>
+      <td class="col-weaknesses">${escape(row.weaknesses)}</td>
     `;
     $tableBody.appendChild(tr);
   });
@@ -264,8 +264,15 @@
     const partiesShown = state.party === "ALL" ? PARTIES : PARTIES.filter(p => p.id === state.party);
     const methodsShown = METHODS_SORTED.filter(m => state.enabled.has(m.id) && (state.showOutliers || !m.outlier));
 
+    const isNarrow = window.innerWidth < 720;
+    const dotSize       = isNarrow ? 14 : 11;
+    const dotSizeOutlier = isNarrow ? 12 : 9;
+    const rangeWidth    = isNarrow ? 9 : 7;
+    const consensusSize = isNarrow ? 14 : 12;
+
     const traces = [];
-    const yLabels = partiesShown.map(p => p.name);
+    const partyLabel = p => isNarrow ? p.id : p.name;
+    const yLabels = partiesShown.map(partyLabel);
 
     // Compute global x-axis cap from data
     let maxX = 0;
@@ -279,7 +286,7 @@
 
     // For each party row: IQR band + range bars + dots + consensus + defending
     partiesShown.forEach((party, rowIdx) => {
-      const yVal = party.name;
+      const yVal = partyLabel(party);
 
       // 1. Cross-method IQR band (25th-75th of central estimates among non-outlier visible methods)
       const nonOutlierCentrals = methodsShown
@@ -295,7 +302,7 @@
           orientation: "h",
           name: "IQR (25th–75th)",
           legendgroup: "iqr",
-          showlegend: rowIdx === 0,
+          showlegend: !isNarrow && rowIdx === 0,
           y: [yVal],
           x: [q3 - q1],
           base: [q1],
@@ -309,10 +316,10 @@
           mode: "markers",
           name: "Consensus median",
           legendgroup: "consensus",
-          showlegend: rowIdx === 0,
+          showlegend: !isNarrow && rowIdx === 0,
           y: [yVal],
           x: [median],
-          marker: { symbol: "diamond", size: 12, color: "#14213D", line: { color: "#FFFFFF", width: 1.2 } },
+          marker: { symbol: "diamond", size: consensusSize, color: "#14213D", line: { color: "#FFFFFF", width: 1.2 } },
           hovertemplate: `<b>${escape(party.name)}</b><br>Median (non-outlier methods): ${median} seats<extra></extra>`,
         });
       }
@@ -328,7 +335,7 @@
           showlegend: false,
           x: [band.low, band.high],
           y: [yVal, yVal],
-          line: { color: hexToRgba(colour, m.outlier ? 0.18 : 0.32), width: 7 },
+          line: { color: hexToRgba(colour, m.outlier ? 0.18 : 0.32), width: rangeWidth },
           hoverinfo: "skip",
         });
       });
@@ -343,12 +350,12 @@
           mode: "markers",
           name: m.short + (m.outlier ? " · outlier" : ""),
           legendgroup: m.id,
-          showlegend: rowIdx === 0,
+          showlegend: !isNarrow && rowIdx === 0,
           x: [band.central],
           y: [yVal],
           marker: {
             color: colour,
-            size: m.outlier ? 9 : 11,
+            size: m.outlier ? dotSizeOutlier : dotSize,
             opacity: m.outlier ? 0.55 : 1,
             line: { color: "#FFFFFF", width: 1.2 },
             symbol: m.outlier ? "circle-open" : "circle",
@@ -370,10 +377,10 @@
           mode: "markers",
           name: "Defending baseline",
           legendgroup: "baseline",
-          showlegend: rowIdx === 0,
+          showlegend: !isNarrow && rowIdx === 0,
           x: [baseline],
           y: [yVal],
-          marker: { symbol: "triangle-right", size: 14, color: party.colour, line: { color: "#14213D", width: 1 } },
+          marker: { symbol: "triangle-right", size: isNarrow ? 16 : 14, color: party.colour, line: { color: "#14213D", width: 1 } },
           hovertemplate: `<b>${escape(party.name)}</b><br>Seats defended (last comparable round): ${baseline}<extra></extra>`,
         });
       }
@@ -382,27 +389,34 @@
     const region = REGIONS.find(r => r.id === state.region);
     const layout = {
       barmode: "overlay",
-      margin: { l: 110, r: 24, t: 20, b: 50 },
+      margin: isNarrow
+        ? { l: 38, r: 8,  t: 14, b: 44 }
+        : { l: 110, r: 24, t: 20, b: 50 },
       xaxis: {
         title: { text: "Predicted seats", standoff: 6 },
         gridcolor: "#E2E2DC", zerolinecolor: "#C0BCB3",
         range: [0, maxX],
+        nticks: isNarrow ? 4 : undefined,
+        tickfont: { size: isNarrow ? 10 : 12 },
       },
       yaxis: {
         autorange: "reversed",
-        tickfont: { size: 12 },
+        tickfont: { size: isNarrow ? 11 : 12 },
       },
       legend: { orientation: "h", y: -0.15, font: { size: 11 } },
       paper_bgcolor: "#FFFFFF",
       plot_bgcolor: "#FFFFFF",
+      hovermode: "closest",
       hoverlabel: { bgcolor: "#14213D", font: { color: "#FFFFFF" } },
       annotations: [{
         text: `${region.name} · ${region.total_seats.toLocaleString("en-GB")} seats`,
         showarrow: false, x: 0, xref: "paper", y: 1.04, yref: "paper",
-        xanchor: "left", font: { size: 12, color: "#5A5A5A" }
+        xanchor: "left", font: { size: isNarrow ? 11 : 12, color: "#5A5A5A" }
       }],
       bargap: 0.4,
-      height: Math.max(400, 78 * partiesShown.length + 130),
+      height: isNarrow
+        ? Math.max(360, 60 * partiesShown.length + 110)
+        : Math.max(400, 78 * partiesShown.length + 130),
     };
 
     Plotly.newPlot($chart, traces, layout, {
@@ -410,6 +424,16 @@
       responsive: true,
       modeBarButtonsToRemove: ["lasso2d", "select2d", "autoScale2d"],
     });
+
+    // On mobile the bottom Plotly legend is hidden (the chip strip serves as the
+    // method legend). Render an inline caption explaining the IQR / consensus /
+    // defending markers so the chart's semantics aren't lost.
+    if (isNarrow) {
+      const cap = document.createElement("p");
+      cap.className = "chart-mobile-legend";
+      cap.innerHTML = `<span class="m-iqr"></span>shaded band = IQR &nbsp; <span class="m-consensus">◆</span> consensus median &nbsp; <span class="m-defend">▶</span> seats defended`;
+      $chart.appendChild(cap);
+    }
   }
 
   // ---- View 2: grouped bars (original) --------------------------------------
@@ -417,11 +441,12 @@
   function buildGroupedChart() {
     const partiesToShow = state.party === "ALL" ? PARTIES : PARTIES.filter(p => p.id === state.party);
     const methodsShown = METHODS_SORTED.filter(m => state.enabled.has(m.id) && (state.showOutliers || !m.outlier));
+    const isNarrow = window.innerWidth < 720;
 
     const traces = [];
     methodsShown.forEach(method => {
       const byParty = PRED.predictions[method.id][state.region];
-      const x = partiesToShow.map(p => p.name);
+      const x = partiesToShow.map(p => isNarrow ? p.id : p.name);
       const y = partiesToShow.map(p => byParty[p.id].central);
       const errPlus  = partiesToShow.map(p => byParty[p.id].high - byParty[p.id].central);
       const errMinus = partiesToShow.map(p => byParty[p.id].central - byParty[p.id].low);
@@ -439,6 +464,7 @@
           opacity: method.outlier ? 0.55 : 0.92,
           line: { color: "#14213D", width: 0.5 },
         },
+        showlegend: !isNarrow,
         hovertemplate:
           `<b>${escape(method.name)}</b><br>` +
           "%{x}: <b>%{y}</b> seats<br>" +
@@ -450,19 +476,27 @@
     const region = REGIONS.find(r => r.id === state.region);
     const layout = {
       barmode: "group",
-      margin: { l: 56, r: 16, t: 18, b: 56 },
-      xaxis: { title: { text: "Party", standoff: 8 }, tickfont: { size: 12 } },
-      yaxis: { title: { text: "Predicted seats" }, gridcolor: "#E2E2DC", zerolinecolor: "#C0BCB3" },
+      margin: isNarrow ? { l: 40, r: 8, t: 14, b: 44 } : { l: 56, r: 16, t: 18, b: 56 },
+      xaxis: {
+        title: isNarrow ? null : { text: "Party", standoff: 8 },
+        tickfont: { size: isNarrow ? 11 : 12 },
+      },
+      yaxis: {
+        title: isNarrow ? null : { text: "Predicted seats" },
+        gridcolor: "#E2E2DC", zerolinecolor: "#C0BCB3",
+        tickfont: { size: isNarrow ? 10 : 12 },
+      },
       legend: { orientation: "h", y: -0.18, font: { size: 11 } },
       paper_bgcolor: "#FFFFFF",
       plot_bgcolor: "#FFFFFF",
+      hovermode: "closest",
       hoverlabel: { bgcolor: "#14213D", font: { color: "#FFFFFF" } },
       annotations: [{
         text: `${region.name} · ${region.total_seats.toLocaleString("en-GB")} seats`,
         showarrow: false, x: 0, xref: "paper", y: 1.05, yref: "paper",
-        xanchor: "left", font: { size: 12, color: "#5A5A5A" }
+        xanchor: "left", font: { size: isNarrow ? 11 : 12, color: "#5A5A5A" }
       }],
-      height: 540,
+      height: isNarrow ? 420 : 540,
     };
     Plotly.newPlot($chart, traces, layout, {
       displaylogo: false,
@@ -692,6 +726,22 @@
   $view.value   = state.view;
   syncChips();
   buildChart();
+
+  // Re-build the chart on viewport-width transitions so the mobile/desktop
+  // layout branch picks the right values. Debounced; only fires if the
+  // narrow-vs-wide threshold actually crossed since the last build.
+  let lastNarrow = window.innerWidth < 720;
+  let resizeTimer = null;
+  window.addEventListener("resize", () => {
+    if (resizeTimer) clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      const nowNarrow = window.innerWidth < 720;
+      if (nowNarrow !== lastNarrow) {
+        lastNarrow = nowNarrow;
+        if (state.view !== "table") buildChart();
+      }
+    }, 200);
+  });
 
   // ---- Utils ---------------------------------------------------------------
 

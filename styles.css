@@ -260,6 +260,15 @@ th, td {
 th { font-weight: 600; background: var(--sand); }
 tbody tr:hover { background: rgba(11, 79, 156, 0.04); }
 td.score-cell { font-variant-numeric: tabular-nums; font-weight: 600; }
+td.num-cell   { font-variant-numeric: tabular-nums; }
+
+/* Belt-and-braces: if a future column is too wide, scroll inside the panel
+   rather than bleeding into the page. */
+.table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+/* Header label variants: "full" shows on desktop, "short" on mobile. */
+#ranking-table th .short { display: none; }
+.mobile-only { display: none; }
 
 /* Predictions table view (inside chart section) */
 #chart-section table.predictions {
@@ -385,10 +394,74 @@ code {
   font-size: 0.85em;
 }
 
+/* Inline legend that replaces the hidden Plotly bottom legend on narrow viewports */
+.chart-mobile-legend {
+  margin: 0.4rem 0 0;
+  padding: 0.45rem 0.6rem;
+  background: var(--sand);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  font-size: 0.74rem;
+  color: var(--muted);
+  line-height: 1.5;
+}
+.chart-mobile-legend .m-iqr {
+  display: inline-block;
+  width: 14px;
+  height: 8px;
+  background: rgba(20, 33, 61, 0.18);
+  vertical-align: middle;
+  margin-right: 0.25rem;
+  border-radius: 2px;
+}
+.chart-mobile-legend .m-consensus { color: var(--ink); font-weight: 700; }
+.chart-mobile-legend .m-defend { color: var(--ink); font-weight: 700; }
+
 @media (max-width: 720px) {
   header h1 { font-size: 1.2rem; }
-  #chart { height: 460px; }
+  header .subtitle { font-size: 0.82rem; }
+  header .countdown { font-size: 0.65rem; padding: 0.15rem 0.45rem; }
   table, #chart-section table.predictions { font-size: 0.78rem; }
   th, td { padding: 0.32rem 0.35rem; }
-  .control-row select { min-width: 140px; }
+
+  /* Controls: tighter dropdowns so 4 selects fit two-up cleanly */
+  #controls { gap: 0.6rem; padding: 0.55rem 0.7rem 0.6rem; }
+  .control-row select { min-width: 140px; font-size: 0.88rem; padding: 0.32rem 0.5rem; }
+  .control-row label { font-size: 0.7rem; }
+
+  /* Chart section: drop fixed height (Plotly owns it), tighten section padding */
+  section { padding: 0.7rem 0.7rem 0.85rem; }
+  #chart { min-height: 320px; }
+
+  /* Chips bar: compact spacing, smaller chips, allow 2-up wrap without losing legibility */
+  .chips-bar { gap: 0.25rem; }
+  .chips-group { padding: 0.14rem 0.4rem 0.14rem 0.5rem; gap: 0.22rem; }
+  .chips-group-label { font-size: 0.66rem; }
+  .chip { font-size: 0.74rem; padding: 0.2rem 0.55rem; }
+  .chip.preset { padding: 0.18rem 0.5rem; }
+  .chip.method-chip .mae { display: none; }   /* rank still in title attr / aria */
+
+  /* Summary box: smaller text and tighter padding */
+  .summary { font-size: 0.78rem; padding: 0.5rem 0.65rem; }
+
+  /* Tabs: smaller pill so all four fit */
+  .tab { padding: 0.4rem 0.65rem; font-size: 0.78rem; }
+
+  /* Track-record table: hide the discursive Strengths and Weaknesses columns
+     (same content lives in the Methods & glossary tab as cards). Swap the
+     two longest header labels to short forms. */
+  #ranking-table .col-strengths,
+  #ranking-table .col-weaknesses { display: none; }
+  #ranking-table th .full  { display: none; }
+  #ranking-table th .short { display: inline; }
+  .mobile-only { display: block; }
+}
+
+@media (max-width: 420px) {
+  /* Phone-narrow: even tighter and stack the chips group label above the buttons */
+  header h1 { font-size: 1.1rem; }
+  header .subtitle { font-size: 0.78rem; }
+  .chips-group { flex-wrap: wrap; }
+  .chip { padding: 0.18rem 0.45rem; }
+  .control-row select { min-width: 120px; }
 }

@@ -87,20 +87,23 @@
       <h2 class="panel-title">Track record across recent local-election cycles</h2>
       <p class="muted-small">Composite 0–100 score: mean absolute seat error per council, council-control hit rate, consistency across cycles.</p>
       <p class="muted-small caveat"><strong>Read with care.</strong> Track record is a guide to how reliable a method has tended to be — not a guarantee for May 2026. Local elections shift in character (new parties, fragmentation, low turnout), so a method that did well last year can do worse this year. No single number tells you a forecast is "right".</p>
-      <table id="ranking-table">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Method</th>
-            <th>Score <span class="info" data-tip="Composite 0–100 score across recent local-election cycles.">i</span></th>
-            <th>Mean abs. error <span class="info" data-tip="Average difference, in seats per council, between the method's prediction and the actual result.">i</span></th>
-            <th>Control hit rate <span class="info" data-tip="Share of councils for which the method correctly predicted which party (or NOC) would have most seats.">i</span></th>
-            <th>Strengths</th>
-            <th>Weaknesses</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
+      <div class="table-scroll">
+        <table id="ranking-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Method</th>
+              <th>Score <span class="info" data-tip="Composite 0–100 score across recent local-election cycles.">i</span></th>
+              <th><span class="full">Mean abs. error</span><span class="short">MAE</span> <span class="info" data-tip="Mean absolute error: average difference, in seats per council, between the method's prediction and the actual result.">i</span></th>
+              <th><span class="full">Control hit rate</span><span class="short">Hit rate</span> <span class="info" data-tip="Share of councils for which the method correctly predicted which party (or NOC) would have most seats.">i</span></th>
+              <th class="col-strengths">Strengths</th>
+              <th class="col-weaknesses">Weaknesses</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <p class="muted-small mobile-only">See the <strong>Methods &amp; glossary</strong> tab for each method's strengths and weaknesses.</p>
     </section>
 
     <section class="tab-panel" data-panel="methods" role="tabpanel">
