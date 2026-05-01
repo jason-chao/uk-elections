@@ -133,6 +133,47 @@ h3 { font-size: 0.95rem; margin: 0 0 0.5rem; }
 }
 .control-row.toggle .glyph { color: var(--muted); }
 
+/* Segmented view-switch — replaces the View dropdown on wide screens */
+.control-row.view-row { flex-grow: 1; }
+.view-switch {
+  display: inline-flex;
+  align-items: stretch;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--paper);
+  overflow: hidden;
+}
+.view-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.7rem;
+  border: none;
+  border-right: 1px solid var(--line);
+  background: var(--paper);
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.86rem;
+  cursor: pointer;
+  transition: background-color 0.12s ease, color 0.12s ease;
+}
+.view-btn:last-child { border-right: none; }
+.view-btn:hover { background: var(--sand); }
+.view-btn .vg { width: 22px; height: 14px; flex-shrink: 0; color: var(--ink); }
+.view-btn .vlabel { font-weight: 500; }
+.view-btn.active {
+  background: var(--ink);
+  color: var(--paper);
+  font-weight: 600;
+}
+.view-btn.active .vg { color: var(--paper); }
+.view-btn.active .vg rect[fill="currentColor"],
+.view-btn.active .vg circle[fill="currentColor"] { fill: var(--paper); }
+.view-btn.active .vg [stroke="currentColor"] { stroke: var(--paper); }
+
+/* Hide the <select> fallback unless the screen is too narrow for the segmented row */
+.view-mode-fallback { display: none; }
+
 #chart {
   width: 100%;
   min-height: 460px;
@@ -508,6 +549,10 @@ code {
   table, #chart-section table.predictions { font-size: 0.78rem; }
   th, td { padding: 0.32rem 0.35rem; }
 
+  /* Compact segmented control: keep visible but hide labels, leave the glyph icons */
+  .view-btn { padding: 0.35rem 0.55rem; }
+  .view-btn .vlabel { display: none; }
+
   /* Controls: tighter dropdowns so 4 selects fit two-up cleanly */
   #controls { gap: 0.6rem; padding: 0.55rem 0.7rem 0.6rem; }
   .control-row select { min-width: 140px; font-size: 0.88rem; padding: 0.32rem 0.5rem; }
@@ -548,4 +593,9 @@ code {
   .chips-group { flex-wrap: wrap; }
   .chip { padding: 0.18rem 0.45rem; }
   .control-row select { min-width: 120px; }
+
+  /* Phone-narrow: collapse the segmented control to the <select> fallback. */
+  .view-switch { display: none; }
+  .view-mode-fallback { display: inline-block; }
+  .view-mode-fallback { aria-hidden: false; }
 }

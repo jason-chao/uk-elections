@@ -876,13 +876,29 @@
 
   $region.addEventListener("change",   e => { state.region = e.target.value; buildChart(); });
   $party.addEventListener("change",    e => { state.party = e.target.value;  buildChart(); });
-  $view.addEventListener("change",     e => { state.view  = e.target.value;  buildChart(); });
+  $view.addEventListener("change",     e => { setView(e.target.value); });
   $outliers.addEventListener("change", e => { state.showOutliers = e.target.checked; buildChart(); });
 
+  // Segmented view-switch buttons mirror state into the (hidden on wide screens)
+  // <select> so both controls stay in sync; only one is visible at a time per CSS.
+  document.querySelectorAll(".view-btn").forEach(btn => {
+    btn.addEventListener("click", () => setView(btn.dataset.view));
+  });
+
+  function setView(v) {
+    state.view = v;
+    $view.value = v;
+    document.querySelectorAll(".view-btn").forEach(b => {
+      const on = b.dataset.view === v;
+      b.classList.toggle("active", on);
+      b.setAttribute("aria-selected", on ? "true" : "false");
+    });
+    buildChart();
+  }
+
   $region.value = state.region;
-  $view.value   = state.view;
+  setView(state.view);
   syncChips();
-  buildChart();
 
   // Re-build the chart on viewport-width transitions so the mobile/desktop
   // layout branch picks the right values. Debounced; only fires if the
