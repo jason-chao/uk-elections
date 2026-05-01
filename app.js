@@ -614,7 +614,7 @@
     head.innerHTML =
       `${escape(region.name)} · ${region.total_seats.toLocaleString("en-GB")} seats · ` +
       `consensus across ${consensusN} method${consensusN === 1 ? "" : "s"} ` +
-      `<span class="info" data-tip="The bar shows the median seat estimate across the methods you have toggled on (excluding outliers). The range under each party shows how much they disagree. Switch to Compare methods to see every method's prediction with confidence bands.">i</span>`;
+      `<span class="info" data-tip="The bar shows the median seat estimate across the methods you have toggled on (excluding outliers). The range under each party shows how much they disagree. Switch to Method spread to see every method's prediction with confidence bands.">i</span>`;
     $chart.appendChild(head);
 
     const stripHost = document.createElement("div");
