@@ -196,11 +196,26 @@
   // Meta line + scope note
   $meta.textContent = `Updated ${formatDate(META.last_updated)} · forecasting ${PRED.election.total_seats.toLocaleString("en-GB")} seats across ${PRED.election.councils} councils · polling window ${META.polling_window}`;
   const $countdown = document.getElementById("countdown");
-  if ($countdown && typeof META.days_to_election === "number") {
-    const d = META.days_to_election;
-    if (d > 0)       $countdown.textContent = `${d} day${d === 1 ? "" : "s"} to go`;
-    else if (d === 0) $countdown.textContent = `polling day`;
-    else              $countdown.textContent = `${-d} day${d === -1 ? "" : "s"} since polling`;
+  if ($countdown && PRED.election?.date) {
+    // Compute live from today vs the election date — that way the badge stays correct
+    // between data refreshes. Both values are normalised to UTC midnight so day-count
+    // doesn't drift by timezone.
+    const electionDate = new Date(PRED.election.date + "T00:00:00Z");
+    const now = new Date();
+    const today = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()));
+    const d = Math.round((electionDate - today) / (1000 * 60 * 60 * 24));
+    const electionLabel = electionDate.toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
+
+    let label;
+    if (d > 1)       label = `${d} days until ${electionLabel}`;
+    else if (d === 1) label = `Tomorrow · ${electionLabel}`;
+    else if (d === 0) label = `Polling day · ${electionLabel}`;
+    else if (d === -1) label = `Polled yesterday · ${electionLabel}`;
+    else              label = `${-d} days since polling · ${electionLabel}`;
+
+    $countdown.textContent = label;
+    $countdown.classList.toggle("post-election", d < 0);
+    $countdown.classList.toggle("polling-day",   d === 0);
   }
   const $scopeNote = document.getElementById("scope-note");
   if ($scopeNote && PRED.election.scope) {

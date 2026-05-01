@@ -54,8 +54,15 @@ header .countdown {
   text-transform: uppercase;
   color: var(--paper);
   background: var(--accent);
-  padding: 0.18rem 0.5rem;
+  padding: 0.18rem 0.55rem;
   border-radius: 999px;
+}
+header .countdown.polling-day {
+  background: #02A95B;          /* green — vote in progress */
+}
+header .countdown.post-election {
+  background: rgba(255,255,255,0.15);
+  color: #CBD5E1;               /* muted — historical */
 }
 header .subtitle {
   margin: 0 0 0.35rem;
