@@ -50,7 +50,7 @@
   const state = {
     region: "NAT",
     party: "ALL",
-    view: "dotrows",
+    view: "strip",
     showOutliers: true,
     enabled: new Set(top3MethodIds),  // method ids currently visible — default to top 3 by accuracy
   };
@@ -220,8 +220,11 @@
   const $scopeNote = document.getElementById("scope-note");
   if ($scopeNote && PRED.election.scope) {
     $scopeNote.innerHTML =
-      `<strong>Scope:</strong> ${escape(PRED.election.scope)}` +
-      `<br><strong>National total:</strong> ${escape(PRED.election.national_note || "")}`;
+      `<details class="disclosure scope">` +
+        `<summary>Scope and reconciliation <span class="more-link">More</span></summary>` +
+        `<p><strong>Scope.</strong> ${escape(PRED.election.scope)}</p>` +
+        `<p><strong>National total.</strong> ${escape(PRED.election.national_note || "")}</p>` +
+      `</details>`;
   }
 
   // Tabs
@@ -590,7 +593,10 @@
     const head = document.createElement("p");
     head.className = "strip-header muted-small";
     const consensusN = nonOutlierMethods.length || methodsShown.length;
-    head.textContent = `${region.name} · ${region.total_seats.toLocaleString("en-GB")} seats · consensus across ${consensusN} method${consensusN === 1 ? "" : "s"}`;
+    head.innerHTML =
+      `${escape(region.name)} · ${region.total_seats.toLocaleString("en-GB")} seats · ` +
+      `consensus across ${consensusN} method${consensusN === 1 ? "" : "s"} ` +
+      `<span class="info" data-tip="The bar shows the median seat estimate across the methods you have toggled on (excluding outliers). The range under each party shows how much they disagree. Switch to Compare methods to see every method's prediction with confidence bands.">i</span>`;
     $chart.appendChild(head);
 
     const stripHost = document.createElement("div");
@@ -655,11 +661,6 @@
     });
     $chart.appendChild(wrap);
 
-    // Caption explaining the framing — matches the codebase's honesty about uncertainty.
-    const cap = document.createElement("p");
-    cap.className = "caption muted-small";
-    cap.innerHTML = `<strong>Headline view.</strong> The bar shows the median across visible non-outlier methods. The range under each party shows how much the visible methods disagree. Toggle methods using the chips above; switch to <em>Compare methods</em> to see every method's prediction with confidence bands.`;
-    $chart.appendChild(cap);
   }
 
   // ---- View 3: table -------------------------------------------------------

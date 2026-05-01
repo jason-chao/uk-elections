@@ -20,6 +20,36 @@
   <main class="container">
 
     <section id="controls" aria-label="Chart controls">
+      <div class="control-row view-row">
+        <label id="view-mode-label">
+          <svg class="glyph" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 13 V3 M2 13 H14" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round"/><rect x="4" y="8" width="2" height="4" fill="currentColor"/><rect x="7" y="5" width="2" height="7" fill="currentColor"/><rect x="10" y="9" width="2" height="3" fill="currentColor"/></svg>
+          View
+        </label>
+        <div class="view-switch" role="tablist" aria-labelledby="view-mode-label">
+          <button type="button" class="view-btn" data-view="strip" role="tab" aria-selected="true" title="Single bar showing the consensus across visible methods">
+            <svg class="vg" viewBox="0 0 18 12" aria-hidden="true"><rect x="1"  y="3" width="3" height="6" fill="#E4003B"/><rect x="4"  y="3" width="2" height="6" fill="#0087DC"/><rect x="6"  y="3" width="3" height="6" fill="#FAA61A"/><rect x="9"  y="3" width="3" height="6" fill="#02A95B"/><rect x="12" y="3" width="4" height="6" fill="#12B6CF"/><rect x="16" y="3" width="1" height="6" fill="#6E6E6E"/></svg>
+            <span class="vlabel">Headline</span>
+          </button>
+          <button type="button" class="view-btn" data-view="dotrows" role="tab" aria-selected="false" title="One row per party, with a dot per method and confidence ranges">
+            <svg class="vg" viewBox="0 0 18 12" aria-hidden="true"><line x1="2" y1="3" x2="14" y2="3" stroke="#D8D4CC" stroke-width="1.5"/><line x1="2" y1="6" x2="14" y2="6" stroke="#D8D4CC" stroke-width="1.5"/><line x1="2" y1="9" x2="14" y2="9" stroke="#D8D4CC" stroke-width="1.5"/><circle cx="5"  cy="3" r="1.6" fill="currentColor"/><circle cx="8"  cy="3" r="1.6" fill="currentColor"/><circle cx="6"  cy="6" r="1.6" fill="currentColor"/><circle cx="10" cy="6" r="1.6" fill="currentColor"/><circle cx="11" cy="9" r="1.6" fill="currentColor"/></svg>
+            <span class="vlabel">Compare methods</span>
+          </button>
+          <button type="button" class="view-btn" data-view="grouped" role="tab" aria-selected="false" title="Grouped bar chart per party">
+            <svg class="vg" viewBox="0 0 18 12" aria-hidden="true"><rect x="2"  y="4" width="2" height="6" fill="currentColor"/><rect x="4"  y="2" width="2" height="8" fill="currentColor" opacity="0.6"/><rect x="8"  y="6" width="2" height="4" fill="currentColor"/><rect x="10" y="3" width="2" height="7" fill="currentColor" opacity="0.6"/><rect x="14" y="5" width="2" height="5" fill="currentColor"/></svg>
+            <span class="vlabel">Side-by-side</span>
+          </button>
+          <button type="button" class="view-btn" data-view="table" role="tab" aria-selected="false" title="Numerical table">
+            <svg class="vg" viewBox="0 0 18 12" aria-hidden="true"><rect x="1.5" y="2" width="15" height="8" fill="none" stroke="currentColor" stroke-width="1"/><line x1="1.5" y1="5" x2="16.5" y2="5" stroke="currentColor" stroke-width="1"/><line x1="6"   y1="2" x2="6"    y2="10" stroke="currentColor" stroke-width="1"/><line x1="11"  y1="2" x2="11"   y2="10" stroke="currentColor" stroke-width="1"/></svg>
+            <span class="vlabel">Numbers</span>
+          </button>
+        </div>
+        <select id="view-mode" class="view-mode-fallback" aria-hidden="true">
+          <option value="strip" selected>Headline</option>
+          <option value="dotrows">Compare methods</option>
+          <option value="grouped">Side-by-side</option>
+          <option value="table">Numbers</option>
+        </select>
+      </div>
       <div class="control-row">
         <label for="region">
           <svg class="glyph" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M1.5 8 H14.5 M8 1.5 V14.5 M3 4 Q8 6 13 4 M3 12 Q8 10 13 12" stroke="currentColor" stroke-width="1" fill="none"/></svg>
@@ -34,36 +64,6 @@
         </label>
         <select id="party-filter">
           <option value="ALL">All parties</option>
-        </select>
-      </div>
-      <div class="control-row view-row">
-        <label id="view-mode-label">
-          <svg class="glyph" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 13 V3 M2 13 H14" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round"/><rect x="4" y="8" width="2" height="4" fill="currentColor"/><rect x="7" y="5" width="2" height="7" fill="currentColor"/><rect x="10" y="9" width="2" height="3" fill="currentColor"/></svg>
-          View
-        </label>
-        <div class="view-switch" role="tablist" aria-labelledby="view-mode-label">
-          <button type="button" class="view-btn" data-view="strip" role="tab" aria-selected="false" title="Single bar showing the consensus across visible methods">
-            <svg class="vg" viewBox="0 0 18 12" aria-hidden="true"><rect x="1"  y="3" width="3" height="6" fill="#E4003B"/><rect x="4"  y="3" width="2" height="6" fill="#0087DC"/><rect x="6"  y="3" width="3" height="6" fill="#FAA61A"/><rect x="9"  y="3" width="3" height="6" fill="#02A95B"/><rect x="12" y="3" width="4" height="6" fill="#12B6CF"/><rect x="16" y="3" width="1" height="6" fill="#6E6E6E"/></svg>
-            <span class="vlabel">Headline</span>
-          </button>
-          <button type="button" class="view-btn" data-view="dotrows" role="tab" aria-selected="true" title="One row per party, with a dot per method and confidence ranges">
-            <svg class="vg" viewBox="0 0 18 12" aria-hidden="true"><line x1="2" y1="3" x2="14" y2="3" stroke="#D8D4CC" stroke-width="1.5"/><line x1="2" y1="6" x2="14" y2="6" stroke="#D8D4CC" stroke-width="1.5"/><line x1="2" y1="9" x2="14" y2="9" stroke="#D8D4CC" stroke-width="1.5"/><circle cx="5"  cy="3" r="1.6" fill="currentColor"/><circle cx="8"  cy="3" r="1.6" fill="currentColor"/><circle cx="6"  cy="6" r="1.6" fill="currentColor"/><circle cx="10" cy="6" r="1.6" fill="currentColor"/><circle cx="11" cy="9" r="1.6" fill="currentColor"/></svg>
-            <span class="vlabel">Compare methods</span>
-          </button>
-          <button type="button" class="view-btn" data-view="grouped" role="tab" aria-selected="false" title="Grouped bar chart per party">
-            <svg class="vg" viewBox="0 0 18 12" aria-hidden="true"><rect x="2"  y="4" width="2" height="6" fill="currentColor"/><rect x="4"  y="2" width="2" height="8" fill="currentColor" opacity="0.6"/><rect x="8"  y="6" width="2" height="4" fill="currentColor"/><rect x="10" y="3" width="2" height="7" fill="currentColor" opacity="0.6"/><rect x="14" y="5" width="2" height="5" fill="currentColor"/></svg>
-            <span class="vlabel">Side-by-side</span>
-          </button>
-          <button type="button" class="view-btn" data-view="table" role="tab" aria-selected="false" title="Numerical table">
-            <svg class="vg" viewBox="0 0 18 12" aria-hidden="true"><rect x="1.5" y="2" width="15" height="8" fill="none" stroke="currentColor" stroke-width="1"/><line x1="1.5" y1="5" x2="16.5" y2="5" stroke="currentColor" stroke-width="1"/><line x1="6"   y1="2" x2="6"    y2="10" stroke="currentColor" stroke-width="1"/><line x1="11"  y1="2" x2="11"   y2="10" stroke="currentColor" stroke-width="1"/></svg>
-            <span class="vlabel">Numbers</span>
-          </button>
-        </div>
-        <select id="view-mode" class="view-mode-fallback" aria-hidden="true">
-          <option value="strip">Headline</option>
-          <option value="dotrows" selected>Compare methods</option>
-          <option value="grouped">Side-by-side</option>
-          <option value="table">Numbers</option>
         </select>
       </div>
       <div class="control-row toggle">
@@ -105,7 +105,10 @@
     <section class="tab-panel active" data-panel="ranking" role="tabpanel">
       <h2 class="panel-title">Track record across recent local-election cycles</h2>
       <p class="muted-small">Composite 0–100 score: mean absolute seat error per council, council-control hit rate, consistency across cycles.</p>
-      <p class="muted-small caveat"><strong>Read with care.</strong> Track record is a guide to how reliable a method has tended to be — not a guarantee for May 2026. Local elections shift in character (new parties, fragmentation, low turnout), so a method that did well last year can do worse this year. No single number tells you a forecast is "right".</p>
+      <details class="disclosure caveat">
+        <summary><strong>Past performance, not a guarantee for May 2026.</strong> <span class="more-link">More</span></summary>
+        <p>Local elections shift in character (new parties, fragmentation, low turnout), so a method that did well last year can do worse this year. No single number tells you a forecast is "right".</p>
+      </details>
       <div class="table-scroll">
         <table id="ranking-table">
           <thead>

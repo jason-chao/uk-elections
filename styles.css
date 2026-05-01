@@ -86,7 +86,50 @@ section {
 h2 { font-size: 1rem; margin: 0 0 0.5rem; }
 h3 { font-size: 0.95rem; margin: 0 0 0.5rem; }
 .panel-title { font-size: 1rem; margin: 0 0 0.4rem; font-weight: 600; }
-.caveat { background: #FBF7E8; border-left: 3px solid #C97800; padding: 0.5rem 0.7rem; border-radius: 4px; }
+
+/* Collapsible disclosures used for caveats and scope notes */
+.disclosure {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin: 0.4rem 0 0.6rem;
+}
+.disclosure > summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 0.45rem 0.7rem;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: background-color 0.12s ease;
+}
+.disclosure > summary::-webkit-details-marker { display: none; }
+.disclosure > summary::before {
+  content: "▸";
+  font-size: 0.7rem;
+  color: var(--muted);
+  transition: transform 0.12s ease;
+  display: inline-block;
+}
+.disclosure[open] > summary::before { transform: rotate(90deg); }
+.disclosure > summary:hover { background: var(--sand); }
+.disclosure > summary .more-link {
+  color: var(--link);
+  font-size: 0.78rem;
+}
+.disclosure > p {
+  margin: 0.45rem 0 0.2rem 1.4rem;
+  line-height: 1.5;
+}
+.disclosure.caveat {
+  background: #FBF7E8;
+  border-left: 3px solid #C97800;
+  border-radius: 4px;
+  margin-bottom: 0.7rem;
+}
+.disclosure.caveat > summary { padding: 0.55rem 0.7rem; color: var(--ink); }
+.disclosure.caveat > summary strong { color: var(--ink); font-weight: 600; }
+.disclosure.caveat > p { margin: 0.4rem 0.7rem 0.55rem 1.5rem; }
 .muted-small { font-size: 0.82rem; color: var(--muted); margin: 0 0 0.6rem; }
 
 #controls {
@@ -134,7 +177,6 @@ h3 { font-size: 0.95rem; margin: 0 0 0.5rem; }
 .control-row.toggle .glyph { color: var(--muted); }
 
 /* Segmented view-switch — replaces the View dropdown on wide screens */
-.control-row.view-row { flex-grow: 1; }
 .view-switch {
   display: inline-flex;
   align-items: stretch;
