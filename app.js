@@ -250,6 +250,9 @@
     if (state.view === "table") {
       $chart.style.height = "auto";
       renderTable();
+    } else if (state.view === "strip") {
+      $chart.style.height = "auto";
+      buildConsensusStrip();
     } else {
       $chart.style.height = "";
       if (state.view === "dotrows") buildDotRowChart();
@@ -520,6 +523,143 @@
       scrollZoom: false,
       doubleClick: "reset",
     };
+  }
+
+  // ---- View: consensus strip (single horizontal stacked bar) ----------------
+
+  function buildConsensusStrip() {
+    const partiesShown = state.party === "ALL" ? PARTIES : PARTIES.filter(p => p.id === state.party);
+    const methodsShown = METHODS_SORTED.filter(m => state.enabled.has(m.id) && (state.showOutliers || !m.outlier));
+    const nonOutlierMethods = methodsShown.filter(m => !m.outlier);
+    const region = REGIONS.find(r => r.id === state.region);
+    const isNarrow = window.innerWidth < 720;
+
+    if (methodsShown.length === 0) {
+      $chart.innerHTML = `<p class="muted-small" style="padding:1rem">No methods selected. Use the chips above to pick at least one.</p>`;
+      return;
+    }
+
+    // Per-party consensus median (across non-outlier visible methods if we have any,
+    // otherwise across all visible methods so the chart still shows something).
+    const stats = partiesShown.map(party => {
+      const pool = (nonOutlierMethods.length ? nonOutlierMethods : methodsShown);
+      const centrals = pool
+        .map(m => PRED.predictions[m.id][state.region][party.id].central)
+        .sort((a, b) => a - b);
+      const allCentrals = methodsShown
+        .map(m => PRED.predictions[m.id][state.region][party.id].central)
+        .sort((a, b) => a - b);
+      const consensus = quantile(centrals, 0.5);
+      const baseline = PRED.baseline_2022?.[state.region]?.[party.id] ?? null;
+      return {
+        party,
+        consensus,
+        baseline,
+        delta: baseline != null ? consensus - baseline : null,
+        rangeLow:  allCentrals[0],
+        rangeHigh: allCentrals[allCentrals.length - 1],
+      };
+    });
+
+    // Order segments by consensus descending — biggest party first, like the screenshot.
+    const ordered = stats.slice().sort((a, b) => b.consensus - a.consensus);
+
+    // Build the stacked bar (one trace per party so legend hover/click would work,
+    // though we hide the Plotly legend since the per-party rows below act as legend).
+    const traces = ordered.map(s => ({
+      type: "bar",
+      orientation: "h",
+      name: s.party.name,
+      y: ["consensus"],
+      x: [s.consensus],
+      marker: { color: s.party.colour, line: { color: "#FFFFFF", width: 1 } },
+      text: [String(s.consensus)],
+      textposition: "inside",
+      insidetextanchor: "middle",
+      textfont: { color: "#FFFFFF", size: 13, family: "inherit" },
+      hovertemplate:
+        `<b>${escape(s.party.name)}</b><br>` +
+        `Consensus: <b>%{x}</b> seats<br>` +
+        (s.baseline != null ? `From 2022: ${s.baseline} (${s.delta >= 0 ? "+" : ""}${s.delta})<br>` : "") +
+        `Range across ${methodsShown.length} method${methodsShown.length === 1 ? "" : "s"}: ${s.rangeLow}–${s.rangeHigh}` +
+        `<extra></extra>`,
+      showlegend: false,
+    }));
+
+    // Header line above the bar (plain HTML — keeps it clear of the chart geometry).
+    const head = document.createElement("p");
+    head.className = "strip-header muted-small";
+    const consensusN = nonOutlierMethods.length || methodsShown.length;
+    head.textContent = `${region.name} · ${region.total_seats.toLocaleString("en-GB")} seats · consensus across ${consensusN} method${consensusN === 1 ? "" : "s"}`;
+    $chart.appendChild(head);
+
+    const stripHost = document.createElement("div");
+    stripHost.className = "strip-host";
+    $chart.appendChild(stripHost);
+
+    const layout = {
+      barmode: "stack",
+      margin: { l: 8, r: 8, t: 6, b: 6 },
+      xaxis: {
+        range: [0, region.total_seats],
+        showticklabels: false,
+        showgrid: false,
+        zeroline: false,
+        fixedrange: true,
+      },
+      yaxis: {
+        showticklabels: false,
+        showgrid: false,
+        zeroline: false,
+        fixedrange: true,
+      },
+      paper_bgcolor: "#FFFFFF",
+      plot_bgcolor: "#FFFFFF",
+      hovermode: "closest",
+      hoverlabel: { bgcolor: "#14213D", font: { color: "#FFFFFF" } },
+      bargap: 0,
+      height: 72,
+      showlegend: false,
+    };
+
+    Plotly.newPlot(stripHost, traces, layout, {
+      displaylogo: false,
+      responsive: true,
+      displayModeBar: false,
+    });
+
+    // Per-party rows under the strip — one line each, mirroring the screenshot:
+    // colour swatch · name · consensus · "from <baseline>" · ±delta · range
+    const wrap = document.createElement("div");
+    wrap.className = "strip-rows";
+    ordered.forEach(s => {
+      const row = document.createElement("div");
+      row.className = "strip-row";
+      const deltaHtml = (s.delta != null)
+        ? `<span class="strip-delta ${s.delta >= 0 ? "up" : "down"}">${s.delta >= 0 ? "+" : ""}${formatNum(s.delta)}</span>`
+        : "";
+      const baselineHtml = (s.baseline != null) ? `<span class="strip-base">from ${formatNum(s.baseline)}</span>` : "";
+      const spread = s.rangeHigh - s.rangeLow;
+      const rangeHtml = spread > 0
+        ? `<span class="strip-range">range ${formatNum(s.rangeLow)}–${formatNum(s.rangeHigh)} across ${methodsShown.length} method${methodsShown.length === 1 ? "" : "s"}</span>`
+        : `<span class="strip-range">all visible methods agree</span>`;
+      row.innerHTML = `
+        <span class="strip-swatch" style="background:${s.party.colour}"></span>
+        <span class="strip-name">${escape(s.party.name)}</span>
+        <span class="strip-central">${formatNum(s.consensus)}</span>
+        ${baselineHtml}
+        ${deltaHtml}
+        ${rangeHtml}
+      `;
+      wrap.appendChild(row);
+    });
+    $chart.appendChild(wrap);
+
+    // Caption explaining the framing — matches the codebase's honesty about uncertainty.
+    const cap = document.createElement("p");
+    cap.className = "caption muted-small";
+    cap.innerHTML = `<strong>Headline view.</strong> The bar shows the median across visible non-outlier methods. The range under each party shows how much the visible methods disagree. Toggle methods using the chips above; switch to <em>Compare methods</em> to see every method's prediction with confidence bands.`;
+    $chart.appendChild(cap);
   }
 
   // ---- View 3: table -------------------------------------------------------

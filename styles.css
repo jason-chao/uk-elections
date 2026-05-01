@@ -394,6 +394,73 @@ code {
   font-size: 0.85em;
 }
 
+/* Consensus-strip view */
+.strip-header {
+  margin: 0 0 0.4rem;
+}
+.strip-host {
+  width: 100%;
+}
+.strip-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin: 0.85rem 0 0.35rem;
+}
+.strip-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem;
+  padding: 0.45rem 0.55rem;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.92rem;
+}
+.strip-row:last-child { border-bottom: none; }
+.strip-swatch {
+  width: 0.85rem;
+  height: 0.85rem;
+  border-radius: 3px;
+  flex-shrink: 0;
+  align-self: center;
+}
+.strip-name {
+  font-weight: 600;
+  color: var(--ink);
+  min-width: 6.5rem;
+}
+.strip-central {
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--ink);
+}
+.strip-base {
+  font-size: 0.82rem;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+.strip-delta {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  font-size: 0.85rem;
+  padding: 0.05rem 0.35rem;
+  border-radius: 3px;
+}
+.strip-delta.up   { color: #036631; background: rgba(2, 169, 91, 0.12); }
+.strip-delta.down { color: #8B1F1F; background: rgba(192, 64, 64, 0.12); }
+.strip-range {
+  font-size: 0.78rem;
+  color: var(--muted);
+  font-style: italic;
+  margin-left: auto;
+}
+@media (max-width: 720px) {
+  .strip-row { font-size: 0.86rem; gap: 0.4rem; padding: 0.4rem 0.4rem; }
+  .strip-name { min-width: 0; }
+  .strip-range { margin-left: 0; flex-basis: 100%; }
+}
+
 /* Inline legend that replaces the hidden Plotly bottom legend on narrow viewports */
 .chart-mobile-legend {
   margin: 0.4rem 0 0;
