@@ -396,6 +396,34 @@ td.num-cell   { font-variant-numeric: tabular-nums; }
 .method-card p { margin: 0 0 0.3rem; font-size: 0.83rem; }
 .method-card a { font-size: 0.78rem; }
 .method-card.outlier { border-left: 3px solid #C97800; }
+.method-card.flash {
+  animation: method-flash 1.4s ease-out;
+}
+@keyframes method-flash {
+  0%   { background: #FFF1B8; box-shadow: 0 0 0 3px rgba(228, 0, 59, 0.18); }
+  60%  { background: #FFF8DD; box-shadow: 0 0 0 3px rgba(228, 0, 59, 0.05); }
+  100% { background: var(--sand); box-shadow: none; }
+}
+
+/* Track-record method-name button — looks like text, behaves like a link. */
+.method-link {
+  display: block;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  border-radius: 3px;
+  line-height: 1.25;
+}
+.method-link strong { color: var(--ink); transition: color 0.12s ease; }
+.method-link .method-link-author { color: var(--muted); font-size: 0.85em; }
+.method-link:hover strong,
+.method-link:focus-visible strong { color: var(--link); text-decoration: underline; }
+.method-link:focus-visible { outline: 2px solid rgba(11, 79, 156, 0.35); outline-offset: 2px; }
 
 #glossary dl, dl#glossary {
   display: grid;

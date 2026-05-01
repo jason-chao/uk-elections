@@ -91,6 +91,7 @@
   METHODS.forEach(m => {
     const card = document.createElement("div");
     card.className = "method-card" + (m.outlier ? " outlier" : "");
+    card.id = "method-" + m.id;
     card.innerHTML = `
       <h4>${escape(m.name)}</h4>
       <div class="author">${escape(m.author)}</div>
@@ -166,7 +167,7 @@
     const m = methodById[row.method_id] || {};
     tr.innerHTML = `
       <td>${row.rank}</td>
-      <td><strong>${escape(m.name || row.method_id)}</strong><br><span style="color:var(--muted);font-size:0.85em">${escape(m.author || "")}</span></td>
+      <td><button type="button" class="method-link" data-method-id="${escape(row.method_id)}" data-tip="Open in Methods &amp; glossary"><strong>${escape(m.name || row.method_id)}</strong><br><span class="method-link-author">${escape(m.author || "")}</span></button></td>
       <td class="score-cell">${row.score}</td>
       <td class="num-cell">${row.mean_abs_seat_error_per_council.toFixed(1)}</td>
       <td class="num-cell">${(row.control_hit_rate * 100).toFixed(0)}%</td>
@@ -228,17 +229,34 @@
   }
 
   // Tabs
+  function activateTab(target) {
+    document.querySelectorAll(".tab").forEach(b => {
+      const on = b.dataset.tab === target;
+      b.classList.toggle("active", on);
+      b.setAttribute("aria-selected", on ? "true" : "false");
+    });
+    document.querySelectorAll(".tab-panel").forEach(p => {
+      p.classList.toggle("active", p.dataset.panel === target);
+    });
+  }
   document.querySelectorAll(".tab").forEach(btn => {
-    btn.addEventListener("click", () => {
-      const target = btn.dataset.tab;
-      document.querySelectorAll(".tab").forEach(b => {
-        const on = b.dataset.tab === target;
-        b.classList.toggle("active", on);
-        b.setAttribute("aria-selected", on ? "true" : "false");
-      });
-      document.querySelectorAll(".tab-panel").forEach(p => {
-        p.classList.toggle("active", p.dataset.panel === target);
-      });
+    btn.addEventListener("click", () => activateTab(btn.dataset.tab));
+  });
+
+  // Track-record table: method names link through to the Methods & glossary card.
+  // Switches the tab, scrolls the matching card into view, and briefly flashes it.
+  $tableBody.addEventListener("click", e => {
+    const btn = e.target.closest(".method-link");
+    if (!btn) return;
+    const id = btn.dataset.methodId;
+    activateTab("methods");
+    const card = document.getElementById("method-" + id);
+    if (!card) return;
+    // Defer scroll so the panel has actually become visible (display:block has flipped).
+    requestAnimationFrame(() => {
+      card.scrollIntoView({ behavior: "smooth", block: "center" });
+      card.classList.add("flash");
+      setTimeout(() => card.classList.remove("flash"), 1400);
     });
   });
 
