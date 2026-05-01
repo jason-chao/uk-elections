@@ -416,6 +416,23 @@ code {
 }
 .chart-mobile-legend .m-consensus { color: var(--ink); font-weight: 700; }
 .chart-mobile-legend .m-defend { color: var(--ink); font-weight: 700; }
+.chart-mobile-legend .gesture-hint {
+  display: inline-block;
+  margin-top: 0.3rem;
+  font-style: italic;
+  color: var(--muted);
+  font-size: 0.7rem;
+}
+
+/* Persistent modebar on mobile: slim, neutral, no hover-fade */
+@media (max-width: 720px) {
+  #chart .modebar-container {
+    opacity: 1 !important;
+    pointer-events: auto;
+  }
+  #chart .modebar-btn { padding: 4px 6px !important; }
+  #chart .modebar-btn path { fill: var(--ink) !important; }
+}
 
 @media (max-width: 720px) {
   header h1 { font-size: 1.2rem; }

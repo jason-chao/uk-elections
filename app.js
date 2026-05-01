@@ -402,7 +402,9 @@
       yaxis: {
         autorange: "reversed",
         tickfont: { size: isNarrow ? 11 : 12 },
+        fixedrange: isNarrow ? true : undefined,   // categorical — don't let users pan it on mobile
       },
+      dragmode: isNarrow ? "pan" : undefined,
       legend: { orientation: "h", y: -0.15, font: { size: 11 } },
       paper_bgcolor: "#FFFFFF",
       plot_bgcolor: "#FFFFFF",
@@ -419,11 +421,7 @@
         : Math.max(400, 78 * partiesShown.length + 130),
     };
 
-    Plotly.newPlot($chart, traces, layout, {
-      displaylogo: false,
-      responsive: true,
-      modeBarButtonsToRemove: ["lasso2d", "select2d", "autoScale2d"],
-    });
+    Plotly.newPlot($chart, traces, layout, isNarrow ? mobilePlotConfig() : desktopPlotConfig());
 
     // On mobile the bottom Plotly legend is hidden (the chip strip serves as the
     // method legend). Render an inline caption explaining the IQR / consensus /
@@ -431,7 +429,7 @@
     if (isNarrow) {
       const cap = document.createElement("p");
       cap.className = "chart-mobile-legend";
-      cap.innerHTML = `<span class="m-iqr"></span>shaded band = IQR &nbsp; <span class="m-consensus">◆</span> consensus median &nbsp; <span class="m-defend">▶</span> seats defended`;
+      cap.innerHTML = `<span class="m-iqr"></span>shaded band = IQR &nbsp; <span class="m-consensus">◆</span> consensus median &nbsp; <span class="m-defend">▶</span> seats defended<br><span class="gesture-hint">Pinch to zoom · drag to pan · tap a dot for details</span>`;
       $chart.appendChild(cap);
     }
   }
@@ -480,12 +478,14 @@
       xaxis: {
         title: isNarrow ? null : { text: "Party", standoff: 8 },
         tickfont: { size: isNarrow ? 11 : 12 },
+        fixedrange: isNarrow ? true : undefined,    // categorical — lock on mobile
       },
       yaxis: {
         title: isNarrow ? null : { text: "Predicted seats" },
         gridcolor: "#E2E2DC", zerolinecolor: "#C0BCB3",
         tickfont: { size: isNarrow ? 10 : 12 },
       },
+      dragmode: isNarrow ? "pan" : undefined,
       legend: { orientation: "h", y: -0.18, font: { size: 11 } },
       paper_bgcolor: "#FFFFFF",
       plot_bgcolor: "#FFFFFF",
@@ -498,11 +498,28 @@
       }],
       height: isNarrow ? 420 : 540,
     };
-    Plotly.newPlot($chart, traces, layout, {
+    Plotly.newPlot($chart, traces, layout, isNarrow ? mobilePlotConfig() : desktopPlotConfig());
+  }
+
+  // Shared Plotly config — desktop keeps the original modebar trim; mobile gets a
+  // persistent, slimmed modebar (zoom in / out / reset) and pan as the default
+  // drag gesture so a one-finger swipe pans rather than drawing a zoom box.
+  function desktopPlotConfig() {
+    return {
       displaylogo: false,
       responsive: true,
       modeBarButtonsToRemove: ["lasso2d", "select2d", "autoScale2d"],
-    });
+    };
+  }
+  function mobilePlotConfig() {
+    return {
+      displaylogo: false,
+      responsive: true,
+      displayModeBar: true,
+      modeBarButtons: [["zoomIn2d", "zoomOut2d", "resetScale2d"]],
+      scrollZoom: false,
+      doubleClick: "reset",
+    };
   }
 
   // ---- View 3: table -------------------------------------------------------
