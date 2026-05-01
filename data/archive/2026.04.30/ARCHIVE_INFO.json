@@ -1,0 +1,11 @@
+{
+  "archived_at_utc": "2026-05-01T10:00:40Z",
+  "data_version": "2026.04.30",
+  "last_updated": "2026-04-30T00:00:00Z",
+  "polling_window": "Late March to late April 2026",
+  "files": [
+    "predictions.json",
+    "track_record.json",
+    "metadata.json"
+  ]
+}

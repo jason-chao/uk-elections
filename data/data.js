@@ -127,12 +127,12 @@ window.UKE_DATA = {
     },
     "polling_2026": {
       "REF": 26,
-      "CON": 18,
-      "LAB": 18,
+      "CON": 19,
+      "LAB": 19,
       "GRN": 16,
       "LD": 12,
-      "OTH": 10,
-      "average_window": "Late March to late April 2026 (Opinium, Find Out Now, YouGov, More in Common, Techne)"
+      "OTH": 8,
+      "average_window": "Trailing 4 weeks to 1 May 2026 (Find Out Now 29 Apr, YouGov 26–27 Apr, More in Common 24–27 Apr, Opinium 22–24 Apr, Ipsos 9–15 Apr, Freshwater 10–12 Apr)"
     },
     "methods": [
       {
@@ -1875,11 +1875,11 @@ window.UKE_DATA = {
     ]
   },
   "metadata": {
-    "last_updated": "2026-04-30T00:00:00Z",
-    "data_version": "2026.04.30",
+    "last_updated": "2026-05-01T00:00:00Z",
+    "data_version": "2026.05.01",
     "election_date": "2026-05-07",
-    "days_to_election": 7,
-    "polling_window": "Late March to late April 2026",
+    "days_to_election": 6,
+    "polling_window": "Trailing 4 weeks to 1 May 2026",
     "sources": [
       {
         "name": "Elections Etc",
