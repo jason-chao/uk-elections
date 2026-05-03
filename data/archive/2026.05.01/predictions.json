@@ -124,13 +124,13 @@
     }
   },
   "polling_2026": {
-    "REF": 25,
+    "REF": 26,
     "CON": 19,
-    "LAB": 18,
+    "LAB": 19,
     "GRN": 16,
     "LD": 12,
-    "OTH": 10,
-    "average_window": "Trailing 4 weeks to 1 May 2026 (Opinium 29 Apr–1 May, YouGov 26–27 Apr, More in Common 24–27 Apr, Lord Ashcroft 23–27 Apr, Techne 22–24 Apr)"
+    "OTH": 8,
+    "average_window": "Trailing 4 weeks to 1 May 2026 (Find Out Now 29 Apr, YouGov 26–27 Apr, More in Common 24–27 Apr, Opinium 22–24 Apr, Ipsos 9–15 Apr, Freshwater 10–12 Apr)"
   },
   "methods": [
     {

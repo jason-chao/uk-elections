@@ -126,13 +126,13 @@ window.UKE_DATA = {
       }
     },
     "polling_2026": {
-      "REF": 26,
+      "REF": 25,
       "CON": 19,
-      "LAB": 19,
+      "LAB": 18,
       "GRN": 16,
       "LD": 12,
-      "OTH": 8,
-      "average_window": "Trailing 4 weeks to 1 May 2026 (Find Out Now 29 Apr, YouGov 26–27 Apr, More in Common 24–27 Apr, Opinium 22–24 Apr, Ipsos 9–15 Apr, Freshwater 10–12 Apr)"
+      "OTH": 10,
+      "average_window": "Trailing 4 weeks to 1 May 2026 (Opinium 29 Apr–1 May, YouGov 26–27 Apr, More in Common 24–27 Apr, Lord Ashcroft 23–27 Apr, Techne 22–24 Apr)"
     },
     "methods": [
       {
@@ -1875,10 +1875,10 @@ window.UKE_DATA = {
     ]
   },
   "metadata": {
-    "last_updated": "2026-05-01T00:00:00Z",
-    "data_version": "2026.05.01",
+    "last_updated": "2026-05-02T00:00:00Z",
+    "data_version": "2026.05.02",
     "election_date": "2026-05-07",
-    "days_to_election": 6,
+    "days_to_election": 5,
     "polling_window": "Trailing 4 weeks to 1 May 2026",
     "sources": [
       {
