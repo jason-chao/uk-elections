@@ -142,6 +142,8 @@ window.UKE_DATA = {
         "author": "Stephen Fisher (University of Oxford)",
         "source_url": "https://electionsetc.com/2026/03/25/local-election-seat-projections-for-2026/",
         "description": "Per-party regression of historical seat-change against poll-share-change, with bespoke handling for Lib Dems (coalition era), Greens (candidacy growth) and Reform (translating poll-rise to seats at the same rate as 2025).",
+        "interval": "derived",
+        "interval_full": "Source publishes no intervals; range derived as ±15% around the central estimate.",
         "tooltip_terms": [
           "regression"
         ],
@@ -154,6 +156,8 @@ window.UKE_DATA = {
         "author": "PollCheck",
         "source_url": "https://www.pollcheck.co.uk/locals-2026-methodology",
         "description": "Ward-by-ward model. 2022/24 ward results adjusted by national poll movement, demographic sensitivity (Census 2021) and incumbency, then 1,000 Monte Carlo simulations to produce confidence bands.",
+        "interval": "90% MC",
+        "interval_full": "90% confidence interval from 1,000 Monte Carlo simulations.",
         "tooltip_terms": [
           "monte_carlo",
           "confidence_interval"
@@ -167,6 +171,8 @@ window.UKE_DATA = {
         "author": "YouGov",
         "source_url": "https://yougov.com/en-gb/articles/54598-yougovs-mrp-of-the-2026-london-local-elections-shows-close-races-in-many-boroughs",
         "description": "Multilevel Regression with Post-stratification on a large sample, modelling vote choice as a function of demographics and area, then post-stratified onto the small-area census to produce ward-level estimates.",
+        "interval": "95% credible",
+        "interval_full": "95% Bayesian credible interval from the MRP posterior.",
         "tooltip_terms": [
           "mrp"
         ],
@@ -179,6 +185,8 @@ window.UKE_DATA = {
         "author": "Martin Baxter (Electoral Calculus)",
         "source_url": "https://www.electoralcalculus.co.uk/blogs/ec_vipoll_20260423.html",
         "description": "Multiplicative voter-flow model dividing each party's support into 'strong' and 'weak' voters. Avoids negative or >100% projections that plague uniform swing.",
+        "interval": "derived",
+        "interval_full": "Source publishes no local-election intervals; range derived as ±20% around the central estimate.",
         "tooltip_terms": [
           "strong_transition"
         ],
@@ -191,6 +199,8 @@ window.UKE_DATA = {
         "author": "John Curtice & Stephen Fisher",
         "source_url": "https://en.wikipedia.org/wiki/Projected_National_Share",
         "description": "Estimates the GB-wide vote share if local elections were held everywhere. Uses ward-level regression on social/political character (incl. 2016 Leave share) to project to non-voting areas.",
+        "interval": "derived",
+        "interval_full": "BBC publishes no formal intervals; range derived as ±15% around the central estimate.",
         "tooltip_terms": [
           "pns"
         ],
@@ -203,6 +213,8 @@ window.UKE_DATA = {
         "author": "Colin Rallings & Michael Thrasher (Elections Centre)",
         "source_url": "https://www.electionscentre.co.uk/",
         "description": "National Equivalent Vote: re-weights actual ward results to estimate the national share if Con/Lab/LD had stood everywhere. Focuses on changes in vote share rather than levels.",
+        "interval": "derived",
+        "interval_full": "Source publishes aggregate point estimates only; range derived as ±10% around the central estimate.",
         "tooltip_terms": [
           "nev"
         ],
@@ -215,6 +227,8 @@ window.UKE_DATA = {
         "author": "Classical baseline",
         "source_url": "https://en.wikipedia.org/wiki/Swing_(United_Kingdom)",
         "description": "Applies the change in national vote share uniformly to every ward. Simple and transparent but misses differential swing — historically poor when new parties surge or geography matters.",
+        "interval": "derived",
+        "interval_full": "Mechanical baseline with no native uncertainty; range derived as ±35% for large swings, ±20% otherwise.",
         "tooltip_terms": [
           "uns",
           "differential_swing"
@@ -228,6 +242,8 @@ window.UKE_DATA = {
         "author": "Mark Pack (scorecard) / various",
         "source_url": "https://www.markpack.org.uk/174682/council-by-election-results-scorecard-2025-2026/",
         "description": "Extrapolates from net gains and losses in council by-elections held since the last comparable round. Sensitive to small samples and self-selecting wards.",
+        "interval": "derived",
+        "interval_full": "Range derived from observed by-election variance; not a formal confidence interval.",
         "tooltip_terms": [],
         "outlier": true
       }

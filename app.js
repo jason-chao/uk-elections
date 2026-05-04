@@ -92,8 +92,11 @@
     const card = document.createElement("div");
     card.className = "method-card" + (m.outlier ? " outlier" : "");
     card.id = "method-" + m.id;
+    const intervalTag = m.interval
+      ? `<span class="interval-tag" title="${escape(m.interval_full || "")}">${escape(m.interval)}</span>`
+      : "";
     card.innerHTML = `
-      <h4>${escape(m.name)}</h4>
+      <h4>${escape(m.name)}${intervalTag}</h4>
       <div class="author">${escape(m.author)}</div>
       <p>${escape(m.description)}</p>
       <a href="${escape(m.source_url)}" target="_blank" rel="noopener">Source ↗</a>

@@ -392,6 +392,20 @@ td.num-cell   { font-variant-numeric: tabular-nums; }
   background: var(--sand);
 }
 .method-card h4 { font-size: 0.92rem; margin: 0 0 0.15rem; }
+.method-card .interval-tag {
+  display: inline-block;
+  margin-left: 0.4rem;
+  padding: 0 0.35rem;
+  font-size: 0.66rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--muted);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  vertical-align: 0.12em;
+  cursor: help;
+  white-space: nowrap;
+}
 .method-card .author { font-size: 0.74rem; color: var(--muted); margin-bottom: 0.35rem; }
 .method-card p { margin: 0 0 0.3rem; font-size: 0.83rem; }
 .method-card a { font-size: 0.78rem; }
