@@ -1,7 +1,7 @@
 {
   "metric": "Track record of UK local-election forecasting methods",
-  "scoring_notes": "Composite score (0\u2013100) blending mean absolute seat error vs final result, council-control hit rate, and consistency across the last three local-election cycles (2022, 2023, 2024, plus 2025 partial). Higher is better. Sources cited per row.",
-  "as_of": "2026-05-04",
+  "scoring_notes": "Composite score (0–100) blending mean absolute seat error vs final result, council-control hit rate, and consistency across the last three local-election cycles (2022, 2023, 2024, plus 2025 partial). Higher is better. Sources cited per row.",
+  "as_of": "2026-04-28",
   "ranking": [
     {
       "rank": 1,
@@ -10,7 +10,7 @@
       "mean_abs_seat_error_per_council": 3.4,
       "control_hit_rate": 0.72,
       "strengths": "Ward-level granularity; explicit confidence bands; demographically calibrated.",
-      "weaknesses": "Structural undercount of independents (\u2248200 seats/year); Lib Dem overestimate in 2025.",
+      "weaknesses": "Structural undercount of independents (≈200 seats/year); Lib Dem overestimate in 2025.",
       "source": "https://www.pollcheck.co.uk/locals-2026-methodology"
     },
     {
@@ -18,7 +18,7 @@
       "method_id": "YOUGOV_MRP",
       "score": 79,
       "mean_abs_seat_error_per_council": 3.6,
-      "control_hit_rate": 0.7,
+      "control_hit_rate": 0.70,
       "strengths": "Best-in-class at differential swing; large samples; ward-level posteriors.",
       "weaknesses": "Cost-intensive; can exaggerate signals; partial geographic coverage.",
       "source": "https://yougov.com/en-gb/articles/54598-yougovs-mrp-of-the-2026-london-local-elections-shows-close-races-in-many-boroughs"

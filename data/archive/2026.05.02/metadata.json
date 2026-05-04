@@ -1,0 +1,17 @@
+{
+  "last_updated": "2026-05-02T00:00:00Z",
+  "data_version": "2026.05.02",
+  "election_date": "2026-05-07",
+  "days_to_election": 5,
+  "polling_window": "Trailing 4 weeks to 1 May 2026",
+  "sources": [
+    {"name": "Elections Etc",         "url": "https://electionsetc.com/2026/03/25/local-election-seat-projections-for-2026/"},
+    {"name": "PollCheck",             "url": "https://www.pollcheck.co.uk/locals-2026"},
+    {"name": "PollCheck methodology", "url": "https://www.pollcheck.co.uk/locals-2026-methodology"},
+    {"name": "YouGov MRP (London)",   "url": "https://yougov.com/en-gb/articles/54598-yougovs-mrp-of-the-2026-london-local-elections-shows-close-races-in-many-boroughs"},
+    {"name": "Electoral Calculus",    "url": "https://www.electoralcalculus.co.uk/blogs/ec_vipoll_20260423.html"},
+    {"name": "Mark Pack scorecard",   "url": "https://www.markpack.org.uk/174682/council-by-election-results-scorecard-2025-2026/"},
+    {"name": "Mark Pack VI tracker",  "url": "https://www.markpack.org.uk/voting-intention-opinion-poll-scorecard/"},
+    {"name": "Wikipedia summary",     "url": "https://en.wikipedia.org/wiki/2026_United_Kingdom_local_elections"}
+  ]
+}

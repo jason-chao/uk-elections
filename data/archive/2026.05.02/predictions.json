@@ -124,13 +124,13 @@
     }
   },
   "polling_2026": {
-    "REF": 26,
+    "REF": 25,
     "CON": 19,
-    "LAB": 19,
+    "LAB": 18,
     "GRN": 16,
     "LD": 12,
-    "OTH": 8,
-    "average_window": "Trailing 4 weeks to 1 May 2026 (Opinium 29 Apr\u20131 May, BMG 29\u201330 Apr, Find Out Now 29 Apr, YouGov 26\u201327 Apr, More in Common 24\u201327 Apr)"
+    "OTH": 10,
+    "average_window": "Trailing 4 weeks to 1 May 2026 (Opinium 29 Apr–1 May, YouGov 26–27 Apr, More in Common 24–27 Apr, Lord Ashcroft 23–27 Apr, Techne 22–24 Apr)"
   },
   "methods": [
     {
@@ -212,7 +212,7 @@
       "short": "UNS Baseline",
       "author": "Classical baseline",
       "source_url": "https://en.wikipedia.org/wiki/Swing_(United_Kingdom)",
-      "description": "Applies the change in national vote share uniformly to every ward. Simple and transparent but misses differential swing \u2014 historically poor when new parties surge or geography matters.",
+      "description": "Applies the change in national vote share uniformly to every ward. Simple and transparent but misses differential swing — historically poor when new parties surge or geography matters.",
       "tooltip_terms": [
         "uns",
         "differential_swing"
@@ -1010,9 +1010,9 @@
     "BBC_PNS": {
       "NAT": {
         "LAB": {
-          "low": 695,
-          "central": 895,
-          "high": 1115
+          "low": 675,
+          "central": 870,
+          "high": 1085
         },
         "CON": {
           "low": 385,
@@ -1030,21 +1030,21 @@
           "high": 750
         },
         "REF": {
-          "low": 1470,
-          "central": 1785,
-          "high": 2120
+          "low": 1440,
+          "central": 1750,
+          "high": 2080
         },
         "OTH": {
-          "low": 395,
-          "central": 475,
-          "high": 575
+          "low": 440,
+          "central": 526,
+          "high": 640
         }
       },
       "LDN": {
         "LAB": {
-          "low": 495,
-          "central": 595,
-          "high": 700
+          "low": 480,
+          "central": 580,
+          "high": 680
         },
         "CON": {
           "low": 210,
@@ -1062,21 +1062,21 @@
           "high": 420
         },
         "REF": {
-          "low": 215,
-          "central": 290,
-          "high": 375
+          "low": 210,
+          "central": 285,
+          "high": 370
         },
         "OTH": {
-          "low": 120,
-          "central": 145,
-          "high": 175
+          "low": 135,
+          "central": 160,
+          "high": 195
         }
       },
       "STH": {
         "LAB": {
           "low": 18,
-          "central": 31,
-          "high": 46
+          "central": 30,
+          "high": 45
         },
         "CON": {
           "low": 55,
@@ -1094,21 +1094,21 @@
           "high": 75
         },
         "REF": {
-          "low": 97,
+          "low": 95,
           "central": 120,
-          "high": 155
+          "high": 150
         },
         "OTH": {
-          "low": 4,
-          "central": 10,
-          "high": 18
+          "low": 5,
+          "central": 11,
+          "high": 20
         }
       },
       "MID": {
         "LAB": {
-          "low": 36,
-          "central": 57,
-          "high": 82
+          "low": 35,
+          "central": 55,
+          "high": 80
         },
         "CON": {
           "low": 40,
@@ -1126,21 +1126,21 @@
           "high": 85
         },
         "REF": {
-          "low": 305,
-          "central": 365,
-          "high": 435
+          "low": 300,
+          "central": 360,
+          "high": 425
         },
         "OTH": {
-          "low": 54,
-          "central": 63,
-          "high": 76
+          "low": 60,
+          "central": 70,
+          "high": 85
         }
       },
       "NTH": {
         "LAB": {
-          "low": 115,
-          "central": 165,
-          "high": 220
+          "low": 110,
+          "central": 160,
+          "high": 215
         },
         "CON": {
           "low": 55,
@@ -1158,21 +1158,21 @@
           "high": 140
         },
         "REF": {
-          "low": 440,
-          "central": 520,
-          "high": 605
+          "low": 430,
+          "central": 510,
+          "high": 595
         },
         "OTH": {
-          "low": 175,
-          "central": 200,
-          "high": 235
+          "low": 195,
+          "central": 225,
+          "high": 260
         }
       },
       "EST": {
         "LAB": {
           "low": 18,
-          "central": 31,
-          "high": 51
+          "central": 30,
+          "high": 50
         },
         "CON": {
           "low": 40,
@@ -1190,23 +1190,23 @@
           "high": 60
         },
         "REF": {
-          "low": 390,
-          "central": 455,
-          "high": 520
+          "low": 380,
+          "central": 445,
+          "high": 510
         },
         "OTH": {
-          "low": 32,
-          "central": 45,
-          "high": 63
+          "low": 35,
+          "central": 50,
+          "high": 70
         }
       }
     },
     "RT_NEV": {
       "NAT": {
         "LAB": {
-          "low": 770,
-          "central": 985,
-          "high": 1220
+          "low": 750,
+          "central": 960,
+          "high": 1185
         },
         "CON": {
           "low": 405,
@@ -1224,21 +1224,21 @@
           "high": 725
         },
         "REF": {
-          "low": 1365,
-          "central": 1695,
-          "high": 2025
+          "low": 1340,
+          "central": 1660,
+          "high": 1985
         },
         "OTH": {
-          "low": 405,
-          "central": 485,
-          "high": 595
+          "low": 450,
+          "central": 540,
+          "high": 660
         }
       },
       "LDN": {
         "LAB": {
-          "low": 535,
-          "central": 635,
-          "high": 740
+          "low": 520,
+          "central": 620,
+          "high": 720
         },
         "CON": {
           "low": 220,
@@ -1256,21 +1256,21 @@
           "high": 400
         },
         "REF": {
-          "low": 195,
-          "central": 270,
-          "high": 345
+          "low": 190,
+          "central": 265,
+          "high": 340
         },
         "OTH": {
-          "low": 110,
-          "central": 130,
-          "high": 160
+          "low": 120,
+          "central": 145,
+          "high": 175
         }
       },
       "STH": {
         "LAB": {
           "low": 18,
-          "central": 31,
-          "high": 46
+          "central": 30,
+          "high": 45
         },
         "CON": {
           "low": 55,
@@ -1288,21 +1288,21 @@
           "high": 70
         },
         "REF": {
-          "low": 87,
+          "low": 85,
           "central": 115,
-          "high": 150
+          "high": 145
         },
         "OTH": {
-          "low": 14,
-          "central": 19,
-          "high": 27
+          "low": 15,
+          "central": 21,
+          "high": 30
         }
       },
       "MID": {
         "LAB": {
-          "low": 41,
-          "central": 67,
-          "high": 92
+          "low": 40,
+          "central": 65,
+          "high": 90
         },
         "CON": {
           "low": 40,
@@ -1320,21 +1320,21 @@
           "high": 80
         },
         "REF": {
-          "low": 295,
-          "central": 360,
-          "high": 430
+          "low": 290,
+          "central": 355,
+          "high": 420
         },
         "OTH": {
-          "low": 54,
-          "central": 68,
-          "high": 86
+          "low": 60,
+          "central": 75,
+          "high": 95
         }
       },
       "NTH": {
         "LAB": {
-          "low": 145,
-          "central": 200,
-          "high": 265
+          "low": 140,
+          "central": 195,
+          "high": 260
         },
         "CON": {
           "low": 60,
@@ -1352,21 +1352,21 @@
           "high": 140
         },
         "REF": {
-          "low": 410,
-          "central": 490,
-          "high": 575
+          "low": 400,
+          "central": 480,
+          "high": 565
         },
         "OTH": {
-          "low": 175,
-          "central": 200,
-          "high": 240
+          "low": 195,
+          "central": 225,
+          "high": 265
         }
       },
       "EST": {
         "LAB": {
-          "low": 21,
-          "central": 36,
-          "high": 57
+          "low": 20,
+          "central": 35,
+          "high": 55
         },
         "CON": {
           "low": 40,
@@ -1384,23 +1384,23 @@
           "high": 60
         },
         "REF": {
-          "low": 360,
-          "central": 430,
-          "high": 495
+          "low": 355,
+          "central": 420,
+          "high": 485
         },
         "OTH": {
-          "low": 45,
-          "central": 58,
-          "high": 76
+          "low": 50,
+          "central": 65,
+          "high": 85
         }
       }
     },
     "UNS": {
       "NAT": {
         "LAB": {
-          "low": 1135,
-          "central": 1630,
-          "high": 2170
+          "low": 1075,
+          "central": 1545,
+          "high": 2055
         },
         "CON": {
           "low": 470,
@@ -1418,21 +1418,21 @@
           "high": 680
         },
         "REF": {
-          "low": 425,
-          "central": 650,
-          "high": 930
+          "low": 410,
+          "central": 625,
+          "high": 895
         },
         "OTH": {
-          "low": 740,
-          "central": 1020,
-          "high": 1350
+          "low": 925,
+          "central": 1276,
+          "high": 1685
         }
       },
       "LDN": {
         "LAB": {
-          "low": 685,
-          "central": 960,
-          "high": 1235
+          "low": 650,
+          "central": 910,
+          "high": 1170
         },
         "CON": {
           "low": 150,
@@ -1450,21 +1450,21 @@
           "high": 280
         },
         "REF": {
-          "low": 52,
-          "central": 88,
-          "high": 145
+          "low": 50,
+          "central": 85,
+          "high": 140
         },
         "OTH": {
-          "low": 170,
-          "central": 240,
-          "high": 320
+          "low": 210,
+          "central": 300,
+          "high": 400
         }
       },
       "STH": {
         "LAB": {
-          "low": 37,
-          "central": 63,
-          "high": 100
+          "low": 35,
+          "central": 60,
+          "high": 95
         },
         "CON": {
           "low": 75,
@@ -1482,21 +1482,21 @@
           "high": 75
         },
         "REF": {
-          "low": 42,
-          "central": 62,
-          "high": 88
+          "low": 40,
+          "central": 60,
+          "high": 85
         },
         "OTH": {
-          "low": 64,
-          "central": 89,
-          "high": 120
+          "low": 80,
+          "central": 111,
+          "high": 150
         }
       },
       "MID": {
         "LAB": {
-          "low": 115,
-          "central": 170,
-          "high": 230
+          "low": 110,
+          "central": 160,
+          "high": 220
         },
         "CON": {
           "low": 75,
@@ -1514,21 +1514,21 @@
           "high": 120
         },
         "REF": {
-          "low": 83,
-          "central": 125,
-          "high": 175
+          "low": 80,
+          "central": 120,
+          "high": 170
         },
         "OTH": {
-          "low": 110,
-          "central": 165,
-          "high": 225
+          "low": 140,
+          "central": 205,
+          "high": 280
         }
       },
       "NTH": {
         "LAB": {
-          "low": 245,
-          "central": 360,
-          "high": 485
+          "low": 230,
+          "central": 340,
+          "high": 460
         },
         "CON": {
           "low": 110,
@@ -1546,21 +1546,21 @@
           "high": 170
         },
         "REF": {
-          "low": 145,
-          "central": 220,
-          "high": 300
+          "low": 140,
+          "central": 210,
+          "high": 290
         },
         "OTH": {
-          "low": 185,
-          "central": 255,
-          "high": 335
+          "low": 230,
+          "central": 320,
+          "high": 420
         }
       },
       "EST": {
         "LAB": {
-          "low": 32,
-          "central": 53,
-          "high": 84
+          "low": 30,
+          "central": 50,
+          "high": 80
         },
         "CON": {
           "low": 75,
@@ -1578,22 +1578,22 @@
           "high": 60
         },
         "REF": {
-          "low": 83,
-          "central": 125,
-          "high": 175
+          "low": 80,
+          "central": 120,
+          "high": 170
         },
         "OTH": {
-          "low": 200,
-          "central": 255,
-          "high": 330
+          "low": 250,
+          "central": 320,
+          "high": 410
         }
       }
     },
     "BY_ELECTION": {
       "NAT": {
         "LAB": {
-          "low": 510,
-          "central": 750,
+          "low": 512,
+          "central": 752,
           "high": 1050
         },
         "CON": {
@@ -1612,14 +1612,14 @@
           "high": 640
         },
         "REF": {
-          "low": 1090,
-          "central": 1425,
-          "high": 1805
+          "low": 1070,
+          "central": 1395,
+          "high": 1770
         },
         "OTH": {
-          "low": 655,
-          "central": 800,
-          "high": 990
+          "low": 688,
+          "central": 844,
+          "high": 1040
         }
       },
       "LDN": {
@@ -1644,14 +1644,14 @@
           "high": 330
         },
         "REF": {
-          "low": 145,
-          "central": 215,
-          "high": 305
+          "low": 140,
+          "central": 210,
+          "high": 300
         },
         "OTH": {
-          "low": 265,
-          "central": 330,
-          "high": 400
+          "low": 280,
+          "central": 345,
+          "high": 420
         }
       },
       "STH": {
@@ -1676,14 +1676,14 @@
           "high": 60
         },
         "REF": {
-          "low": 71,
-          "central": 97,
-          "high": 135
+          "low": 70,
+          "central": 95,
+          "high": 130
         },
         "OTH": {
           "low": 3,
-          "central": 13,
-          "high": 28
+          "central": 14,
+          "high": 30
         }
       },
       "MID": {
@@ -1708,14 +1708,14 @@
           "high": 75
         },
         "REF": {
-          "low": 235,
-          "central": 295,
-          "high": 365
+          "low": 230,
+          "central": 290,
+          "high": 360
         },
         "OTH": {
-          "low": 86,
-          "central": 110,
-          "high": 140
+          "low": 90,
+          "central": 115,
+          "high": 145
         }
       },
       "NTH": {
@@ -1740,14 +1740,14 @@
           "high": 120
         },
         "REF": {
-          "low": 345,
-          "central": 440,
-          "high": 540
+          "low": 340,
+          "central": 430,
+          "high": 530
         },
         "OTH": {
-          "low": 225,
-          "central": 255,
-          "high": 305
+          "low": 235,
+          "central": 270,
+          "high": 320
         }
       },
       "EST": {
@@ -1772,14 +1772,14 @@
           "high": 55
         },
         "REF": {
-          "low": 295,
-          "central": 375,
-          "high": 460
+          "low": 290,
+          "central": 370,
+          "high": 450
         },
         "OTH": {
-          "low": 76,
-          "central": 95,
-          "high": 120
+          "low": 80,
+          "central": 100,
+          "high": 125
         }
       }
     }
