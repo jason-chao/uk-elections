@@ -3,7 +3,7 @@
   "data_version": "2026.05.04",
   "election_date": "2026-05-07",
   "days_to_election": 3,
-  "polling_window": "Trailing 4 weeks to 4 May 2026",
+  "polling_window": "Trailing 4 weeks to 1 May 2026",
   "sources": [
     {
       "name": "Elections Etc",

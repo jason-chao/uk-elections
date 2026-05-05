@@ -132,7 +132,7 @@ window.UKE_DATA = {
       "GRN": 16,
       "LD": 12,
       "OTH": 8,
-      "average_window": "Trailing 4 weeks to 1 May 2026 (Opinium 29 Apr–1 May, BMG 29–30 Apr, Find Out Now 29 Apr, YouGov 26–27 Apr, More in Common 24–27 Apr)"
+      "average_window": "Trailing 4 weeks to 4 May 2026 (More in Common 1–4 May, Opinium 29 Apr–1 May, BMG 29–30 Apr, Find Out Now 29 Apr, YouGov 26–27 Apr)"
     },
     "methods": [
       {
@@ -1895,7 +1895,7 @@ window.UKE_DATA = {
     "data_version": "2026.05.04",
     "election_date": "2026-05-07",
     "days_to_election": 3,
-    "polling_window": "Trailing 4 weeks to 1 May 2026",
+    "polling_window": "Trailing 4 weeks to 4 May 2026",
     "sources": [
       {
         "name": "Elections Etc",
