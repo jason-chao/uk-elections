@@ -1,6 +1,6 @@
 # UK Local Elections 2026 — Forecast Comparator
 
-A static, interactive site that compares the headline forecasts for the **United Kingdom local elections on 7 May 2026**. Eight established forecasting methods, side-by-side, with confidence ranges, outlier flags, and a track record.
+A static, interactive site that compares eight forecasts of the **United Kingdom local elections on 7 May 2026** against the actual results. Each view shows the truth alongside every method's prediction; the *Numbers* view and the *Track record* tab quantify each method's error.
 
 🌐 **Live version: <https://uk-elections.jasontc.net>**
 
@@ -30,8 +30,8 @@ Out of scope: the 6 directly-elected English mayoralties, the 2 Welsh council by
 
 ## What it shows
 
-- **Forecast comparison** — four views: *At a glance* (default — single bar with the consensus seat count per party), *Method spread* (dot per method per party row, with confidence ranges and IQR band), *Bars per party* (grouped bars), *Numbers* (table). Outliers stay visible but at reduced opacity. Method chips default to the **3 with the best track record**; toggle individuals or use the **Show methods: All / Best 3 / Worst 3** presets.
-- **Track record** — composite score per method (mean absolute seat error, council-control hit rate, consistency across recent cycles). Click a method's name in the table to jump to its full methodology card. A guide to past reliability, not a guarantee for May 2026.
+- **Forecast vs result, four views** — *At a glance* (default — actual seats above a consensus bar), *Method spread* (one row per party with a star marker for the actual result and a dot per method), *Bars per party* (an actual reference bar in each party group, every method beside it), *Numbers* (table with an Actual row, per-cell errors, and a per-method MAE column). Outliers stay visible but at reduced opacity. Method chips default to the **3 with the best track record**; toggle individuals or use the **Show methods: All / Best 3 / Worst 3** presets.
+- **Track record** — composite score per method (mean absolute seat error, council-control hit rate, consistency across recent cycles), plus a **May 2026 MAE** column showing this round's outturn. Click a method's name to jump to its full methodology card.
 - **Method cards** — one-paragraph summary, author, and link to each forecaster's published methodology.
 - **Region slice** — pivot any view to National (England) or one of the five English regions.
 - **Glossary & tooltips** — hover stats terms (`MRP`, `Monte Carlo`, `confidence interval`, `differential swing`) for plain-English definitions.
@@ -144,8 +144,9 @@ uk-elections-2026/
 - **`polling_2026`** — current voting-intention polling average per party.
 - **`methods`** — `id`, `name`, `short`, `author`, `description`, `source_url`, `outlier`.
 - **`predictions`** — `method_id → region_id → party_id → { low, central, high }`.
+- **`actuals_2026`** *(present after the vote)* — `region_id → party_id → seats won`, with a `source` and `note` describing provenance and any residuals absorbed into Others.
 
-`data/track_record.json` ranks methods with composite `score`, `mean_abs_seat_error_per_council`, `control_hit_rate`, and one-line `strengths` / `weaknesses`.
+`data/track_record.json` ranks methods with composite `score`, `mean_abs_seat_error_per_council`, `control_hit_rate`, one-line `strengths` / `weaknesses`, and (after the vote) `cycle_2026_mae` — the mean absolute error across the six parties at the national level vs the published results.
 
 `data/metadata.json` carries `data_version` (`YYYY.MM.DD`), `last_updated` (ISO), `polling_window`, and the sources list.
 

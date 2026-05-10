@@ -44,6 +44,12 @@
 
   // State ---------------------------------------------------------------------
 
+  // Actual final results, when published. Returns { LAB, CON, ... } or null.
+  function actualsFor(regionId) {
+    return PRED.actuals_2026?.[regionId] || null;
+  }
+  const HAS_ACTUALS_NAT = !!actualsFor("NAT");
+
   const TOP_N_DEFAULT = 3;
   const top3MethodIds = ACC.ranking.slice().sort((a, b) => a.rank - b.rank).slice(0, TOP_N_DEFAULT).map(r => r.method_id);
 
@@ -168,12 +174,14 @@
   ACC.ranking.forEach(row => {
     const tr = document.createElement("tr");
     const m = methodById[row.method_id] || {};
+    const cyc = (typeof row.cycle_2026_mae === "number") ? row.cycle_2026_mae.toFixed(1) : "—";
     tr.innerHTML = `
       <td>${row.rank}</td>
       <td><button type="button" class="method-link" data-method-id="${escape(row.method_id)}" data-tip="Open in Methods &amp; glossary"><strong>${escape(m.name || row.method_id)}</strong><br><span class="method-link-author">${escape(m.author || "")}</span></button></td>
       <td class="score-cell">${row.score}</td>
       <td class="num-cell">${row.mean_abs_seat_error_per_council.toFixed(1)}</td>
       <td class="num-cell">${(row.control_hit_rate * 100).toFixed(0)}%</td>
+      <td class="num-cell cycle-mae">${cyc}</td>
       <td class="col-strengths">${escape(row.strengths)}</td>
       <td class="col-weaknesses">${escape(row.weaknesses)}</td>
     `;
@@ -211,11 +219,10 @@
     const electionLabel = electionDate.toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
 
     let label;
-    if (d > 1)       label = `${d} days until ${electionLabel}`;
-    else if (d === 1) label = `Tomorrow · ${electionLabel}`;
-    else if (d === 0) label = `Polling day · ${electionLabel}`;
-    else if (d === -1) label = `Polled yesterday · ${electionLabel}`;
-    else              label = `${-d} days since polling · ${electionLabel}`;
+    if (d > 1)         label = `${d} days until ${electionLabel}`;
+    else if (d === 1)  label = `Tomorrow · ${electionLabel}`;
+    else if (d === 0)  label = `Polling day · ${electionLabel}`;
+    else               label = `Results · ${electionLabel}`;
 
     $countdown.textContent = label;
     $countdown.classList.toggle("post-election", d < 0);
@@ -411,6 +418,28 @@
           hovertemplate: `<b>${escape(party.name)}</b><br>Seats defended (last comparable round): ${baseline}<extra></extra>`,
         });
       }
+
+      // 5. Actual result marker — filled party-colour star when published.
+      const actualsForRegion = actualsFor(state.region);
+      const actual = actualsForRegion ? actualsForRegion[party.id] : null;
+      if (actual != null) {
+        traces.push({
+          type: "scatter",
+          mode: "markers",
+          name: "Actual result",
+          legendgroup: "actual",
+          showlegend: !isNarrow && rowIdx === 0,
+          x: [actual],
+          y: [yVal],
+          marker: {
+            symbol: "star",
+            size: isNarrow ? 18 : 17,
+            color: party.colour,
+            line: { color: "#FFFFFF", width: 1.5 },
+          },
+          hovertemplate: `<b>${escape(party.name)}</b><br>Actual result: <b>${actual}</b> seats<extra></extra>`,
+        });
+      }
     });
 
     const region = REGIONS.find(r => r.id === state.region);
@@ -467,8 +496,27 @@
     const partiesToShow = state.party === "ALL" ? PARTIES : PARTIES.filter(p => p.id === state.party);
     const methodsShown = METHODS_SORTED.filter(m => state.enabled.has(m.id) && (state.showOutliers || !m.outlier));
     const isNarrow = window.innerWidth < 720;
+    const actuals = actualsFor(state.region);
 
     const traces = [];
+
+    // "Actual" bar first so it sits at the leftmost slot in each group.
+    if (actuals) {
+      traces.push({
+        type: "bar",
+        name: "Actual",
+        x: partiesToShow.map(p => isNarrow ? p.id : p.name),
+        y: partiesToShow.map(p => actuals[p.id]),
+        marker: {
+          color: partiesToShow.map(p => p.colour),
+          line: { color: "#14213D", width: 1.5 },
+          pattern: { shape: "/", size: 5, fgopacity: 0.35, fgcolor: "#FFFFFF" },
+        },
+        hovertemplate: `<b>%{x}</b><br>Actual result: <b>%{y}</b> seats<extra></extra>`,
+        showlegend: !isNarrow,
+      });
+    }
+
     methodsShown.forEach(method => {
       const byParty = PRED.predictions[method.id][state.region];
       const x = partiesToShow.map(p => isNarrow ? p.id : p.name);
@@ -557,14 +605,13 @@
     const nonOutlierMethods = methodsShown.filter(m => !m.outlier);
     const region = REGIONS.find(r => r.id === state.region);
     const isNarrow = window.innerWidth < 720;
+    const actuals = actualsFor(state.region);
 
     if (methodsShown.length === 0) {
       $chart.innerHTML = `<p class="muted-small" style="padding:1rem">No methods selected. Use the chips above to pick at least one.</p>`;
       return;
     }
 
-    // Per-party consensus median (across non-outlier visible methods if we have any,
-    // otherwise across all visible methods so the chart still shows something).
     const stats = partiesShown.map(party => {
       const pool = (nonOutlierMethods.length ? nonOutlierMethods : methodsShown);
       const centrals = pool
@@ -575,49 +622,95 @@
         .sort((a, b) => a - b);
       const consensus = quantile(centrals, 0.5);
       const baseline = PRED.baseline_2022?.[state.region]?.[party.id] ?? null;
+      const actual = actuals ? actuals[party.id] : null;
       return {
-        party,
-        consensus,
-        baseline,
-        delta: baseline != null ? consensus - baseline : null,
+        party, consensus, baseline,
+        delta:    baseline != null ? consensus - baseline : null,
         rangeLow:  allCentrals[0],
         rangeHigh: allCentrals[allCentrals.length - 1],
+        actual,
+        actualDelta: (actual != null) ? consensus - actual : null,
       };
     });
 
-    // Order segments by consensus descending — biggest party first, like the screenshot.
-    const ordered = stats.slice().sort((a, b) => b.consensus - a.consensus);
+    // Per-party medians don't sum to the region total — the visual bar would end
+    // short of the actual. Rescale so the bar fills the full width; the per-party
+    // text below still shows the un-rescaled consensus + delta-vs-actual.
+    if (state.party === "ALL") {
+      const consSum = stats.reduce((a, s) => a + s.consensus, 0);
+      const scale = consSum > 0 ? region.total_seats / consSum : 1;
+      stats.forEach(s => { s.consensusBarWidth = Math.round(s.consensus * scale); });
+    } else {
+      stats.forEach(s => { s.consensusBarWidth = s.consensus; });
+    }
 
-    // Build the stacked bar (one trace per party so legend hover/click would work,
-    // though we hide the Plotly legend since the per-party rows below act as legend).
-    const traces = ordered.map(s => ({
-      type: "bar",
-      orientation: "h",
-      name: s.party.name,
-      y: ["consensus"],
-      x: [s.consensus],
-      marker: { color: s.party.colour, line: { color: "#FFFFFF", width: 1 } },
-      text: [String(s.consensus)],
-      textposition: "inside",
-      insidetextanchor: "middle",
-      textfont: { color: "#FFFFFF", size: 13, family: "inherit" },
-      hovertemplate:
-        `<b>${escape(s.party.name)}</b><br>` +
-        `Consensus: <b>%{x}</b> seats<br>` +
-        (s.baseline != null ? `From 2022: ${s.baseline} (${s.delta >= 0 ? "+" : ""}${s.delta})<br>` : "") +
-        `Range across ${methodsShown.length} method${methodsShown.length === 1 ? "" : "s"}: ${s.rangeLow}–${s.rangeHigh}` +
-        `<extra></extra>`,
-      showlegend: false,
-    }));
+    // Order by actual where we have it (final-state truth), otherwise by consensus.
+    const orderKey = actuals ? (s => s.actual ?? 0) : (s => s.consensus);
+    const ordered = stats.slice().sort((a, b) => orderKey(b) - orderKey(a));
 
-    // Header line above the bar (plain HTML — keeps it clear of the chart geometry).
+    // One stacked bar per series: "Actual" (if known, full saturation) above,
+    // "Consensus" below (lighter shade so the truth reads as the truth).
+    const series = [];
+    if (actuals) {
+      series.push({
+        y: "Actual",
+        widthOf: s => s.actual,
+        labelOf: s => s.actual,
+        label: "Actual",
+        opacity: 1.0,
+        textColour: "#FFFFFF",
+      });
+    }
+    series.push({
+      y: "Consensus",
+      widthOf: s => s.consensusBarWidth,
+      labelOf: s => s.consensus,           // show the un-rescaled value as the segment label
+      label: "Consensus",
+      opacity: 0.55,
+      textColour: "#14213D",                // dark text on lighter fill reads better
+    });
+
+    const traces = [];
+    series.forEach(ser => {
+      ordered.forEach(s => {
+        const w = ser.widthOf(s);
+        if (w == null) return;
+        traces.push({
+          type: "bar",
+          orientation: "h",
+          name: s.party.name,
+          y: [ser.y],
+          x: [w],
+          marker: {
+            color: s.party.colour,
+            opacity: ser.opacity,
+            line: { color: "#FFFFFF", width: 1 },
+          },
+          text: [String(ser.labelOf(s))],
+          textposition: "inside",
+          insidetextanchor: "middle",
+          textfont: { color: ser.textColour, size: 12, family: "inherit" },
+          hovertemplate:
+            `<b>${escape(s.party.name)}</b> · ${ser.label}<br>` +
+            `<b>${ser.labelOf(s)}</b> seats<extra></extra>`,
+          showlegend: false,
+        });
+      });
+    });
+
+    // Header line above the bar.
     const head = document.createElement("p");
     head.className = "strip-header muted-small";
     const consensusN = nonOutlierMethods.length || methodsShown.length;
+    const headTip = actuals
+      ? `Top bar: actual seats won. Bottom bar: median across the ${consensusN} non-outlier method${consensusN === 1 ? "" : "s"} you have toggled on. Per-party rows below show actual, consensus, and the consensus error vs actual.`
+      : `The bar shows the median seat estimate across the methods you have toggled on (excluding outliers). The range under each party shows how much they disagree. Switch to Method spread to see every method's prediction with confidence bands.`;
     head.innerHTML =
       `${escape(region.name)} · ${region.total_seats.toLocaleString("en-GB")} seats · ` +
-      `consensus across ${consensusN} method${consensusN === 1 ? "" : "s"} ` +
-      `<span class="info" data-tip="The bar shows the median seat estimate across the methods you have toggled on (excluding outliers). The range under each party shows how much they disagree. Switch to Method spread to see every method's prediction with confidence bands.">i</span>`;
+      (actuals
+        ? `actual results vs consensus across ${consensusN} method${consensusN === 1 ? "" : "s"} `
+        : `consensus across ${consensusN} method${consensusN === 1 ? "" : "s"} `) +
+      `<span class="info" data-tip="${escape(headTip)}">i</span>`;
     $chart.appendChild(head);
 
     const stripHost = document.createElement("div");
@@ -626,7 +719,7 @@
 
     const layout = {
       barmode: "stack",
-      margin: { l: 8, r: 8, t: 6, b: 6 },
+      margin: { l: actuals ? 70 : 8, r: 8, t: 6, b: 6 },
       xaxis: {
         range: [0, region.total_seats],
         showticklabels: false,
@@ -635,17 +728,19 @@
         fixedrange: true,
       },
       yaxis: {
-        showticklabels: false,
+        showticklabels: !!actuals,
+        tickfont: { size: 11, color: "#5A5A5A" },
         showgrid: false,
         zeroline: false,
         fixedrange: true,
+        autorange: "reversed",
       },
       paper_bgcolor: "#FFFFFF",
       plot_bgcolor: "#FFFFFF",
       hovermode: "closest",
       hoverlabel: { bgcolor: "#14213D", font: { color: "#FFFFFF" } },
-      bargap: 0,
-      height: 72,
+      bargap: 0.15,
+      height: actuals ? 110 : 72,
       showlegend: false,
     };
 
@@ -655,33 +750,42 @@
       displayModeBar: false,
     });
 
-    // Per-party rows under the strip — one line each, mirroring the screenshot:
-    // colour swatch · name · consensus · "from <baseline>" · ±delta · range
+    // Per-party rows under the strip.
     const wrap = document.createElement("div");
     wrap.className = "strip-rows";
     ordered.forEach(s => {
       const row = document.createElement("div");
       row.className = "strip-row";
-      const deltaHtml = (s.delta != null)
-        ? `<span class="strip-delta ${s.delta >= 0 ? "up" : "down"}">${s.delta >= 0 ? "+" : ""}${formatNum(s.delta)}</span>`
-        : "";
-      const baselineHtml = (s.baseline != null) ? `<span class="strip-base">from ${formatNum(s.baseline)}</span>` : "";
-      const spread = s.rangeHigh - s.rangeLow;
-      const rangeHtml = spread > 0
-        ? `<span class="strip-range">range ${formatNum(s.rangeLow)}–${formatNum(s.rangeHigh)} across ${methodsShown.length} method${methodsShown.length === 1 ? "" : "s"}</span>`
-        : `<span class="strip-range">all visible methods agree</span>`;
-      row.innerHTML = `
-        <span class="strip-swatch" style="background:${s.party.colour}"></span>
-        <span class="strip-name">${escape(s.party.name)}</span>
-        <span class="strip-central">${formatNum(s.consensus)}</span>
-        ${baselineHtml}
-        ${deltaHtml}
-        ${rangeHtml}
-      `;
+      let html = `<span class="strip-swatch" style="background:${s.party.colour}"></span>` +
+                 `<span class="strip-name">${escape(s.party.name)}</span>`;
+
+      if (s.actual != null) {
+        // Post-vote: actual is the lead figure, consensus is shown with its error vs actual.
+        const errAbs = Math.abs(s.actualDelta);
+        const errSign = s.actualDelta > 0 ? "+" : (s.actualDelta < 0 ? "−" : "");
+        const errClass = s.actualDelta > 0 ? "down" : (s.actualDelta < 0 ? "up" : "");
+        html += `<span class="strip-central">${formatNum(s.actual)}</span>` +
+                `<span class="strip-base">consensus ${formatNum(s.consensus)}</span>` +
+                (s.actualDelta !== 0
+                  ? `<span class="strip-delta ${errClass}">off by ${errSign}${formatNum(errAbs)}</span>`
+                  : `<span class="strip-delta">spot on</span>`);
+      } else {
+        // Pre-vote: consensus is the lead figure.
+        const deltaHtml = (s.delta != null)
+          ? `<span class="strip-delta ${s.delta >= 0 ? "up" : "down"}">${s.delta >= 0 ? "+" : ""}${formatNum(s.delta)}</span>`
+          : "";
+        const baselineHtml = (s.baseline != null) ? `<span class="strip-base">from ${formatNum(s.baseline)}</span>` : "";
+        const spread = s.rangeHigh - s.rangeLow;
+        const rangeHtml = spread > 0
+          ? `<span class="strip-range">range ${formatNum(s.rangeLow)}–${formatNum(s.rangeHigh)} across ${methodsShown.length} method${methodsShown.length === 1 ? "" : "s"}</span>`
+          : `<span class="strip-range">all visible methods agree</span>`;
+        html += `<span class="strip-central">${formatNum(s.consensus)}</span>` +
+                baselineHtml + deltaHtml + rangeHtml;
+      }
+      row.innerHTML = html;
       wrap.appendChild(row);
     });
     $chart.appendChild(wrap);
-
   }
 
   // ---- View 3: table -------------------------------------------------------
@@ -689,6 +793,7 @@
   function renderTable() {
     const partiesShown = state.party === "ALL" ? PARTIES : PARTIES.filter(p => p.id === state.party);
     const methodsShown = METHODS_SORTED.filter(m => state.enabled.has(m.id) && (state.showOutliers || !m.outlier));
+    const actuals = actualsFor(state.region);
 
     const tbl = document.createElement("table");
     tbl.className = "predictions";
@@ -702,10 +807,26 @@
       cell.style.color = p.colour;
       trh.appendChild(cell);
     });
+    if (actuals) trh.appendChild(th("MAE"));    // mean absolute error per method
     thead.appendChild(trh);
     tbl.appendChild(thead);
 
     const tbody = document.createElement("tbody");
+
+    // Actual row (when published) — sits above Defending so the truth is the first reference.
+    if (actuals) {
+      const trAct = document.createElement("tr");
+      trAct.className = "actual-row";
+      trAct.appendChild(td("Actual", "row-label", "<small>final result</small>"));
+      partiesShown.forEach(p => {
+        const cell = td(formatNum(actuals[p.id]), "num");
+        cell.style.color = p.colour;
+        cell.style.fontWeight = "700";
+        trAct.appendChild(cell);
+      });
+      trAct.appendChild(td("—", "num"));
+      tbody.appendChild(trAct);
+    }
 
     // Defending row
     const trDef = document.createElement("tr");
@@ -715,6 +836,7 @@
       const v = PRED.baseline_2022?.[state.region]?.[p.id];
       trDef.appendChild(td(v != null ? formatNum(v) : "—", "num"));
     });
+    if (actuals) trDef.appendChild(td("—", "num"));
     tbody.appendChild(trDef);
 
     // Per-method rows + per-party highest/lowest tracking
@@ -730,17 +852,29 @@
       const labelCell = td("", "row-label", labelHtml);
       tr.appendChild(labelCell);
 
+      let absErrSum = 0, errCount = 0;
       partiesShown.forEach(p => {
         const band = PRED.predictions[m.id][state.region][p.id];
-        const cellHtml =
-          `<span class="central">${formatNum(band.central)}</span>` +
-          `<span class="range">${formatNum(band.low)}–${formatNum(band.high)}</span>`;
+        let cellHtml = `<span class="central">${formatNum(band.central)}</span>` +
+                       `<span class="range">${formatNum(band.low)}–${formatNum(band.high)}</span>`;
+        if (actuals) {
+          const err = band.central - actuals[p.id];
+          absErrSum += Math.abs(err);
+          errCount++;
+          const sign = err > 0 ? "+" : (err < 0 ? "−" : "");
+          const cls  = err > 0 ? "err-over" : (err < 0 ? "err-under" : "err-zero");
+          cellHtml += `<span class="cell-err ${cls}">${sign}${formatNum(Math.abs(err))}</span>`;
+        }
         const cell = td("", "num", cellHtml);
         cell.dataset.party = p.id;
         cell.dataset.value = band.central;
         tr.appendChild(cell);
         if (!m.outlier) centralByParty[p.id].push({ methodId: m.id, value: band.central, cell });
       });
+      if (actuals) {
+        const mae = errCount ? (absErrSum / errCount) : 0;
+        tr.appendChild(td(mae.toFixed(1), "num cycle-mae"));
+      }
       tbody.appendChild(tr);
     });
 
@@ -759,13 +893,13 @@
     // Summary rows
     const stats = computeStatsByParty(partiesShown, methodsShown);
 
-    pushSummaryRow(tbody, "Minimum",       partiesShown, p => formatNum(stats[p.id].min));
-    pushSummaryRow(tbody, "Maximum",       partiesShown, p => formatNum(stats[p.id].max));
-    pushSummaryRow(tbody, "Range (max−min)",partiesShown, p => formatNum(stats[p.id].max - stats[p.id].min));
+    pushSummaryRow(tbody, "Minimum",       partiesShown, p => formatNum(stats[p.id].min), null, !!actuals);
+    pushSummaryRow(tbody, "Maximum",       partiesShown, p => formatNum(stats[p.id].max), null, !!actuals);
+    pushSummaryRow(tbody, "Range (max−min)",partiesShown, p => formatNum(stats[p.id].max - stats[p.id].min), null, !!actuals);
     pushSummaryRow(tbody, "Range as % of consensus", partiesShown, p => {
       const c = stats[p.id].consensus;
       return c > 0 ? Math.round(100 * (stats[p.id].max - stats[p.id].min) / c) + "%" : "—";
-    });
+    }, null, !!actuals);
 
     const trCons = document.createElement("tr");
     trCons.className = "consensus-row";
@@ -777,11 +911,18 @@
       cell.style.fontWeight = "700";
       trCons.appendChild(cell);
     });
+    if (actuals) {
+      // Consensus's own MAE vs actuals
+      let s = 0, n = 0;
+      partiesShown.forEach(p => { s += Math.abs(stats[p.id].consensus - actuals[p.id]); n++; });
+      const consMae = n ? (s / n).toFixed(1) : "—";
+      trCons.appendChild(td(consMae, "num cycle-mae"));
+    }
     tbody.appendChild(trCons);
 
     pushSummaryRow(tbody, "80% interval", partiesShown, p =>
       `${formatNum(stats[p.id].q10)}–${formatNum(stats[p.id].q90)}`,
-      "<small>10th–90th percentile</small>");
+      "<small>10th–90th percentile</small>", !!actuals);
 
     tbl.appendChild(tbody);
 
@@ -797,7 +938,9 @@
     // Reading-the-table caption
     const cap = document.createElement("p");
     cap.className = "caption";
-    cap.innerHTML = `<strong>Reading:</strong> the central figure is each method's headline; the small range below is its low–high. Green-edged cells are the highest prediction for that party across non-outlier methods; red-edged are the lowest.`;
+    cap.innerHTML = actuals
+      ? `<strong>Reading:</strong> bold central figure is each method's prediction; small range below is its low–high; <em>±N</em> is the per-party error vs the actual result. <strong>MAE</strong> column is the mean absolute error across the six parties — lower is closer to the truth.`
+      : `<strong>Reading:</strong> the central figure is each method's headline; the small range below is its low–high. Green-edged cells are the highest prediction for that party across non-outlier methods; red-edged are the lowest.`;
     $chart.appendChild(cap);
   }
 
@@ -813,11 +956,12 @@
     else el.textContent = text;
     return el;
   }
-  function pushSummaryRow(tbody, label, parties, valueFn, sublabel) {
+  function pushSummaryRow(tbody, label, parties, valueFn, sublabel, padForMae) {
     const tr = document.createElement("tr");
     tr.className = "summary-row";
     tr.appendChild(td(label, "row-label", sublabel || ""));
     parties.forEach(p => tr.appendChild(td(valueFn(p), "num")));
+    if (padForMae) tr.appendChild(td("—", "num"));
     tbody.appendChild(tr);
   }
 

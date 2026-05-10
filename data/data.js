@@ -134,6 +134,18 @@ window.UKE_DATA = {
       "OTH": 8,
       "average_window": "Trailing 4 weeks to 4 May 2026 (More in Common 1–4 May, Opinium 29 Apr–1 May, BMG 29–30 Apr, Find Out Now 29 Apr, YouGov 26–27 Apr)"
     },
+    "actuals_2026": {
+      "NAT": {
+        "LAB": 1068,
+        "CON": 801,
+        "LD": 844,
+        "GRN": 587,
+        "REF": 1453,
+        "OTH": 313
+      },
+      "source": "Wikipedia summary of 7 May 2026 UK local elections (https://en.wikipedia.org/wiki/2026_United_Kingdom_local_elections).",
+      "note": "Headline national totals. Wikipedia's per-party summary sums to 4,965 of 5,066 contested seats; the 101-seat residual (smaller parties / minor contests not in the headline summary) is absorbed into Others/Independents so per-region totals reconcile. Regional breakdowns not yet available."
+    },
     "methods": [
       {
         "id": "ELECTIONS_ETC",
@@ -1805,8 +1817,8 @@ window.UKE_DATA = {
   },
   "track_record": {
     "metric": "Track record of UK local-election forecasting methods",
-    "scoring_notes": "Composite score (0–100) blending mean absolute seat error vs final result, council-control hit rate, and consistency across the last three local-election cycles (2022, 2023, 2024, plus 2025 partial). Higher is better. Sources cited per row.",
-    "as_of": "2026-05-04",
+    "scoring_notes": "Composite score (0–100) blends mean absolute seat error, council-control hit rate and consistency across the last three local-election cycles (2022, 2023, 2024, plus 2025 partial). Higher is better. The 'May 2026 MAE' column is this round's outturn (mean absolute seat error across the six parties at the national level vs the actual results).",
+    "as_of": "2026-05-08",
     "ranking": [
       {
         "rank": 1,
@@ -1816,7 +1828,8 @@ window.UKE_DATA = {
         "control_hit_rate": 0.72,
         "strengths": "Ward-level granularity; explicit confidence bands; demographically calibrated.",
         "weaknesses": "Structural undercount of independents (≈200 seats/year); Lib Dem overestimate in 2025.",
-        "source": "https://www.pollcheck.co.uk/locals-2026-methodology"
+        "source": "https://www.pollcheck.co.uk/locals-2026-methodology",
+        "cycle_2026_mae": 181.7
       },
       {
         "rank": 2,
@@ -1826,7 +1839,8 @@ window.UKE_DATA = {
         "control_hit_rate": 0.7,
         "strengths": "Best-in-class at differential swing; large samples; ward-level posteriors.",
         "weaknesses": "Cost-intensive; can exaggerate signals; partial geographic coverage.",
-        "source": "https://yougov.com/en-gb/articles/54598-yougovs-mrp-of-the-2026-london-local-elections-shows-close-races-in-many-boroughs"
+        "source": "https://yougov.com/en-gb/articles/54598-yougovs-mrp-of-the-2026-london-local-elections-shows-close-races-in-many-boroughs",
+        "cycle_2026_mae": 171.0
       },
       {
         "rank": 3,
@@ -1836,7 +1850,8 @@ window.UKE_DATA = {
         "control_hit_rate": 0.66,
         "strengths": "45 years of consistent methodology; published by Sunday Times; tracks change-on-change.",
         "weaknesses": "Aggregate only; no native ward-level seat output; less useful for new parties.",
-        "source": "https://www.electionscentre.co.uk/"
+        "source": "https://www.electionscentre.co.uk/",
+        "cycle_2026_mae": 136.5
       },
       {
         "rank": 4,
@@ -1846,7 +1861,8 @@ window.UKE_DATA = {
         "control_hit_rate": 0.65,
         "strengths": "Statistically rigorous regression; BBC editorial standards; long time-series.",
         "weaknesses": "Heavy reliance on 2016 Leave covariate; aggregate level; no published intervals.",
-        "source": "https://en.wikipedia.org/wiki/Projected_National_Share"
+        "source": "https://en.wikipedia.org/wiki/Projected_National_Share",
+        "cycle_2026_mae": 163.2
       },
       {
         "rank": 5,
@@ -1856,7 +1872,8 @@ window.UKE_DATA = {
         "control_hit_rate": 0.63,
         "strengths": "Mathematically robust; never produces impossible vote shares; transparent.",
         "weaknesses": "Built primarily for Westminster seats; local-elections application is secondary.",
-        "source": "https://www.electoralcalculus.co.uk/aboutus.html"
+        "source": "https://www.electoralcalculus.co.uk/aboutus.html",
+        "cycle_2026_mae": 92.3
       },
       {
         "rank": 6,
@@ -1866,7 +1883,8 @@ window.UKE_DATA = {
         "control_hit_rate": 0.61,
         "strengths": "Per-party bespoke models; published methodology; reasonable 2025 hit rate.",
         "weaknesses": "Lacks confidence intervals; sensitive to party-by-party assumptions.",
-        "source": "https://electionsetc.com/2026/03/25/local-election-seat-projections-for-2026/"
+        "source": "https://electionsetc.com/2026/03/25/local-election-seat-projections-for-2026/",
+        "cycle_2026_mae": 269.7
       },
       {
         "rank": 7,
@@ -1876,7 +1894,8 @@ window.UKE_DATA = {
         "control_hit_rate": 0.51,
         "strengths": "Real-vote signal; useful for spotting late-emerging swings.",
         "weaknesses": "Self-selecting sample; small N per ward; high variance month-to-month.",
-        "source": "https://www.markpack.org.uk/174682/council-by-election-results-scorecard-2025-2026/"
+        "source": "https://www.markpack.org.uk/174682/council-by-election-results-scorecard-2025-2026/",
+        "cycle_2026_mae": 190.3
       },
       {
         "rank": 8,
@@ -1886,17 +1905,23 @@ window.UKE_DATA = {
         "control_hit_rate": 0.38,
         "strengths": "Maximally transparent; useful baseline.",
         "weaknesses": "Misses differential swing; structurally biased in fragmented multi-party 2026 environment; underestimates Reform surge.",
-        "source": "https://en.wikipedia.org/wiki/Swing_(United_Kingdom)"
+        "source": "https://en.wikipedia.org/wiki/Swing_(United_Kingdom)",
+        "cycle_2026_mae": 444.8
       }
     ]
   },
   "metadata": {
-    "last_updated": "2026-05-04T13:56:02Z",
-    "data_version": "2026.05.04",
+    "last_updated": "2026-05-08T00:00:00Z",
+    "data_version": "2026.05.08",
     "election_date": "2026-05-07",
-    "days_to_election": 3,
+    "days_to_election": -1,
     "polling_window": "Trailing 4 weeks to 4 May 2026",
+    "results_published": true,
     "sources": [
+      {
+        "name": "Wikipedia results",
+        "url": "https://en.wikipedia.org/wiki/2026_United_Kingdom_local_elections"
+      },
       {
         "name": "Elections Etc",
         "url": "https://electionsetc.com/2026/03/25/local-election-seat-projections-for-2026/"
@@ -1924,10 +1949,6 @@ window.UKE_DATA = {
       {
         "name": "Mark Pack VI tracker",
         "url": "https://www.markpack.org.uk/voting-intention-opinion-poll-scorecard/"
-      },
-      {
-        "name": "Wikipedia summary",
-        "url": "https://en.wikipedia.org/wiki/2026_United_Kingdom_local_elections"
       }
     ]
   }

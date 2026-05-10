@@ -376,8 +376,32 @@ td.num-cell   { font-variant-numeric: tabular-nums; }
   background: #EEF2FA; border-top: 1px solid var(--line);
 }
 #chart-section table.predictions tr.defending-row td { background: #FBF7E8; }
+#chart-section table.predictions tr.actual-row td { background: #EAF6EE; border-bottom: 2px solid var(--hi-edge); }
+#chart-section table.predictions tr.actual-row td.row-label { font-weight: 700; }
 #chart-section table.predictions td.cell-hi { box-shadow: inset 3px 0 0 var(--hi-edge); background: var(--hi-tint); }
 #chart-section table.predictions td.cell-lo { box-shadow: inset 3px 0 0 var(--lo-edge); background: var(--lo-tint); }
+
+/* Per-cell error chip in the Numbers view (when actuals are known) */
+#chart-section table.predictions td.num .cell-err {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 600;
+  margin-top: 0.1rem;
+  font-variant-numeric: tabular-nums;
+}
+#chart-section table.predictions td.num .cell-err.err-over  { color: var(--lo-edge); }
+#chart-section table.predictions td.num .cell-err.err-under { color: var(--link); }
+#chart-section table.predictions td.num .cell-err.err-zero  { color: var(--hi-edge); }
+#chart-section table.predictions td.cycle-mae {
+  font-weight: 700;
+  background: rgba(20, 33, 61, 0.04);
+}
+
+/* Track-record table: highlight the May 2026 MAE column */
+#ranking-table td.cycle-mae,
+#ranking-table th:nth-child(6) {
+  background: rgba(20, 33, 61, 0.04);
+}
 
 /* Method cards (compact) */
 #methods-cards {

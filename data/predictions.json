@@ -132,6 +132,11 @@
     "OTH": 8,
     "average_window": "Trailing 4 weeks to 4 May 2026 (More in Common 1\u20134 May, Opinium 29 Apr\u20131 May, BMG 29\u201330 Apr, Find Out Now 29 Apr, YouGov 26\u201327 Apr)"
   },
+  "actuals_2026": {
+    "NAT": {"LAB": 1068, "CON": 801, "LD": 844, "GRN": 587, "REF": 1453, "OTH": 313},
+    "source": "Wikipedia summary of 7 May 2026 UK local elections (https://en.wikipedia.org/wiki/2026_United_Kingdom_local_elections).",
+    "note": "Headline national totals. Wikipedia's per-party summary sums to 4,965 of 5,066 contested seats; the 101-seat residual (smaller parties / minor contests not in the headline summary) is absorbed into Others/Independents so per-region totals reconcile. Regional breakdowns not yet available."
+  },
   "methods": [
     {
       "id": "ELECTIONS_ETC",
